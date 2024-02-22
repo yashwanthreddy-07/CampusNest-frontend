@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import campuslogo from "../assets/campusnestlogo.png";
 import StudenLogin from "../Auth/StudenLogin";
 import OwnerLogin from "../Auth/OwnerLogin";
+import OwnerRegistration from "../Auth/OwnerRegistration";
+import StudentRegistration from "../Auth/StudentRegistration";
 
 function Header() {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
@@ -248,6 +250,8 @@ function Header() {
       </nav>
       {dialogs.sl && <StudenLogin close={setDialogs}/>}
       {dialogs.ol && <OwnerLogin close={setDialogs}/>}
+      {dialogs.or && <OwnerRegistration close={setDialogs}/>}
+      {dialogs.sr && <StudentRegistration close={setDialogs}/>}
     </>
   );
 }
