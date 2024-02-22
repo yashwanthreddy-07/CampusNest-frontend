@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import campuslogo from "../assets/campusnestlogo.png";
 import StudenLogin from "../Auth/StudenLogin";
+import OwnerLogin from "../Auth/OwnerLogin";
+
 function Header() {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
@@ -34,7 +36,7 @@ function Header() {
   const handlemenu = () => {
     SetMenu(!menu);
   };
-
+ 
   return (
     <>
       <nav className="hidden md:flex bg-gray-50 w-full justify-between items-center px-24 py-3 border-b-2 border-gray-200 transition-all  ease-out sticky top-0 z-10 ">
@@ -44,11 +46,11 @@ function Header() {
         >
           CampusNest
         </Link>
-
+         
         <p className="hidden text-orange-700 text-[20px] lg:inline  font-serif ">
           Experience new way of Finding Homes
         </p>
-        <div className="flex gap-8 text-[18px] font-medium">
+        <div className="flex items-center  gap-8 text-[18px] font-medium">
           <div className="flex gap-8">
             <div
               onMouseEnter={handleSignIn}
@@ -71,6 +73,7 @@ function Header() {
                       });
                     }}
                   >
+                   
                     Sign In As Student
                   </button>
                   <p
@@ -161,12 +164,12 @@ function Header() {
             <Link to="/">CampusNest</Link>
           </div>
           <div>
-            <span
-              onClick={handlemenu}
-              className="material-symbols-outlined mr-2 cursor-pointer"
-            >
-              menu
-            </span>
+              <span
+                onClick={handlemenu}
+                className="material-symbols-outlined mr-2 cursor-pointer"
+              >
+                menu
+              </span>
           </div>
         </div>
 
@@ -243,7 +246,8 @@ function Header() {
           </Link>
         </div>
       </nav>
-      {dialogs.sl && <StudenLogin />}
+      {dialogs.sl && <StudenLogin close={setDialogs}/>}
+      {dialogs.ol && <OwnerLogin close={setDialogs}/>}
     </>
   );
 }
