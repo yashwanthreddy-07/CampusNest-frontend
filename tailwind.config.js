@@ -13,7 +13,13 @@ export default {
         "gray-600": "#717171", // Using the gray color palette
         "dblue":"#100e47"
       },
+      backgroundImage:{
+        home1: "url('./assets/home1.jpeg')",
+        home2: "url('./assets/home2.jpeg')",
+      }
     },
+
   },
-  plugins: [],
+  plugins: [    require('tailwind-scrollbar-hide')
+],
 };

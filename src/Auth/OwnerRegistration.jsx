@@ -8,11 +8,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { signupOwner } from "../Apis/apicalls";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-function OwnerRegistration() {
-  const navigate = useNavigate();
+function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="left" ref={ref} {...props} />;
+  });
+  const [open, setOpen] = useState(true);
   // const [loading, setLoading]=useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -48,10 +51,18 @@ function OwnerRegistration() {
     const response = await signupOwner(formData);
     if (response.success) {
       localStorage.setItem("owner-token", response.authToken);
-      navigate("/");
+      toast.success("Registered succesfully", {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setIsLoggedIn(true);
+      setOpen(false);
     } else {
       setLoading(false);
-      toast.warn(response.errors[0].msg, {
+      toast.error(response.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
@@ -60,26 +71,28 @@ function OwnerRegistration() {
     }
   };
 
-  const [open, setOpen] = useState(true);
-
   const handleClose = () => {
     setOpen(false);
+    setDialogs((prev) => {
+      return { ...prev, or: false };
+    });
   };
 
   return (
     <Dialog
       open={open}
+      TransitionComponent={Transition}
       onClose={handleClose}
       fullScreen={true}
       hideBackdrop={true}
-      className="m-20 backdrop-blur"
+      className="md:w-[51%] md:flex md:ml-auto "
     >
       <DialogTitle className="flex items-center border-b-2 border-gray-200">
         <span
           className="material-symbols-outlined cursor-pointer"
           onClick={handleClose}
         >
-          close
+          arrow_forward_ios
         </span>
         <p className="mx-auto font-semibold text-orange-600">
           Owner Registration
@@ -88,9 +101,9 @@ function OwnerRegistration() {
       <DialogContent>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-wrap pl-5 pt-2 gap-x-16 gap-y-8 text-[18px] font-medium"
+          className="flex flex-wrap pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] font-medium"
         >
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Name</p>
             <TextField
               required={true}
@@ -103,24 +116,24 @@ function OwnerRegistration() {
               value={formData.name}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Date of Birth</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="dob"
               variant="outlined"
               type="date"
               onChange={handleChange}
               value={formData.dob}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Email</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="email"
               variant="outlined"
               type="email"
               label="Mail"
@@ -128,12 +141,12 @@ function OwnerRegistration() {
               value={formData.email}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Password</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="password"
               variant="outlined"
               type="password"
               label="Password"
@@ -141,12 +154,12 @@ function OwnerRegistration() {
               value={formData.password}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Phone Number</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="phno"
               variant="outlined"
               type="text"
               label="Mobile Number"
@@ -154,12 +167,12 @@ function OwnerRegistration() {
               value={formData.phno}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Gender</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="gender"
               variant="outlined"
               type="text"
               label="M/F/other"
@@ -167,12 +180,12 @@ function OwnerRegistration() {
               value={formData.gender}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>OwnerShip Type</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="ownership"
               variant="outlined"
               type="text"
               label="Owner/Agent"
@@ -180,12 +193,12 @@ function OwnerRegistration() {
               value={formData.ownership}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Unique ID</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="uin"
               variant="outlined"
               type="text"
               label="Unique id given government"
@@ -196,9 +209,9 @@ function OwnerRegistration() {
           <div className="flex gap-5 items-center">
             <p>Address</p>
             <TextField
-              required={true}
+              // required={true}
               size="small"
-              name="name"
+              name="area"
               variant="outlined"
               type="text"
               label="Area"
@@ -208,7 +221,7 @@ function OwnerRegistration() {
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="state"
               variant="outlined"
               type="text"
               label="State"
@@ -218,7 +231,7 @@ function OwnerRegistration() {
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="country"
               variant="outlined"
               type="text"
               label="Coutry"
@@ -228,7 +241,7 @@ function OwnerRegistration() {
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="pincode"
               variant="outlined"
               type="text"
               label="PinCode"
@@ -236,7 +249,7 @@ function OwnerRegistration() {
               value={formData.pincode}
             />
           </div>
-          <div className="flex flex-col  ">
+          <div className="flex flex-col ">
             <p>Profile Photo</p>
             <TextField
               size="small"
@@ -248,13 +261,14 @@ function OwnerRegistration() {
               //   value={formData.photo}
             />
           </div>
+          <button
+            type="submit"
+            className="w-36 mb-10 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105"
+          >
+            Submit
+          </button>
         </form>
       </DialogContent>
-      <DialogActions className="mr-24 mb-10">
-        <button className="w-36 border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105">
-          Submit
-        </button>
-      </DialogActions>
     </Dialog>
   );
 }

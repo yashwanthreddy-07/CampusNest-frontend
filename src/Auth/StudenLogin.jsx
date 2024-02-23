@@ -5,15 +5,15 @@ import { FcGoogle } from "react-icons/fc";
 import { loginStudent } from "../Apis/apicalls";
 import { Bounce, toast } from "react-toastify";
 
-function StudenLogin({ setDialogs }) {
+function StudenLogin({ setDialogs, setIsLoggedIn }) {
   const [open, setOpen] = useState(true);
   const handleClose = () => {
     setOpen(false);
-    // setDialogs((prev) => {
-    //   return { ...prev, sl: false };
-    // });
+    setDialogs((prev) => {
+      return { ...prev, sl: false };
+    });
   };
-  const navigate = useNavigate();
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -30,27 +30,31 @@ function StudenLogin({ setDialogs }) {
   };
   const handleSubmit = async (e) => {
     setLoading(true);
+    
     e.preventDefault();
-    const response = await loginStudent(formData);
+    const response = await  loginStudent(formData);
+   
     if (response.success) {
+      setOpen(false);
       localStorage.setItem("user-token", response.authToken);
-      
-      toast.success('Login Successfull', {
+      toast.success("login successfull",
+      {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
         transition: Bounce,
-        });
-      navigate("/");
+      })
+      setIsLoggedIn(true);
     } else {
-      setLoading(false);
-      toast.warn(response.errors[0].msg, {
+      toast.error(response.errors[0].msg,{
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
         transition: Bounce,
-      });
+      })
+      setLoading(false);  
     }
+    
   };
   return (
     <Dialog
@@ -121,7 +125,6 @@ function StudenLogin({ setDialogs }) {
           <p className="flex mx-auto font-semibold">Continue With Google</p>
         </button>
       </DialogContent>
-      
     </Dialog>
   );
 }

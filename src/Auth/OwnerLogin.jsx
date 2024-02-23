@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginOwner } from "../Apis/apicalls";
-import { toast } from "react-toastify";
-function OwnerLogin({ setDialogs }) {
+import { Bounce, toast } from "react-toastify";
+function OwnerLogin({ setDialogs, setIsLoggedIn }) {
   const [open, setOpen] = useState(true);
   const handleClose = () => {
     setOpen(false);
-    // setDialogs((prev) => {
-    //   return { ...prev, sl: false };
-    // });
+    setDialogs((prev) => {
+      return { ...prev, ol: false };
+    });
   };
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -32,24 +32,23 @@ function OwnerLogin({ setDialogs }) {
     e.preventDefault();
     const response = await loginOwner(formData);
     if (response.success) {
+      setOpen(false);
       localStorage.setItem("owner-token", response.authToken);
-
-      navigate("/owner/dashboard/notifications");
-      toast.success('🦄 Wow so easy!', {
+      toast.success("Login Successfull", {
         position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
+        autoClose: 2000,
         closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
         theme: "dark",
         transition: Bounce,
-        });
+      });
+      setIsLoggedIn(true);
     } else {
       setLoading(false);
       toast.warn(response.errors[0].msg, {
-        autoClose: 1000,
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
       });
     }
   };

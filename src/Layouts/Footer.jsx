@@ -27,12 +27,12 @@ function Footer() {
                 document.getElementById("contact").classList.add("hidden");
               }}
             >
-              <p className="relative cursor-pointer hover:underline hover:scale-105">
+              <p className=" cursor-pointer hover:underline hover:scale-105">
                 Contact
               </p>
               <div
                 id="contact"
-                className="hidden absolute max-w-[200px] z-10 bg-gray-200 p-2 text-[16px] text-gray-600 border-2 rounded-md"
+                className="hidden absolute max-w-[200px]  bg-gray-200 p-2 text-[16px] text-gray-600 border-2 rounded-md"
               >
                 <p>
                   Contact us at : <br />
@@ -116,11 +116,10 @@ function Footer() {
             onClick={() => {
               document.getElementById("contactsm").classList.toggle("hidden");
             }}
-            className="relative"
           >
-            <p className=" cursor-pointer hover:underline hover:scale-105">
+            <Link className=" cursor-pointer hover:underline hover:scale-105">
               Contact
-            </p>
+            </Link>
             <div
               id="contactsm"
               className="hidden -mt-28 ml-[70px] absolute max-w-[200px]  bg-gray-200 p-2 text-[16px] text-gray-600 border-2 rounded-md"

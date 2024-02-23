@@ -6,7 +6,7 @@ import OwnerLogin from "../Auth/OwnerLogin";
 import OwnerRegistration from "../Auth/OwnerRegistration";
 import StudentRegistration from "../Auth/StudentRegistration";
 
-function Header() {
+function Header({ setIsLoggedIn }) {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
   const [menu, SetMenu] = useState(false);
@@ -38,7 +38,7 @@ function Header() {
   const handlemenu = () => {
     SetMenu(!menu);
   };
- 
+
   return (
     <>
       <nav className="hidden md:flex bg-gray-50 w-full justify-between items-center px-24 py-3 border-b-2 border-gray-200 transition-all  ease-out sticky top-0 z-10 ">
@@ -48,7 +48,7 @@ function Header() {
         >
           CampusNest
         </Link>
-         
+
         <p className="hidden text-orange-700 text-[20px] lg:inline  font-serif ">
           Experience new way of Finding Homes
         </p>
@@ -75,7 +75,6 @@ function Header() {
                       });
                     }}
                   >
-                   
                     Sign In As Student
                   </button>
                   <p
@@ -160,24 +159,24 @@ function Header() {
           </div>
         </div>
       </nav>
-      <nav className="sticky top-0   w-full md:hidden  ">
-        <div className="px-5 flex justify-between  items-center h-[50px] bg-gray-50 border-b-2 border-gray-200">
+      <nav className="sticky z-10 top-0   w-full bg-gray-50 md:hidden  ">
+        <div className="px-5 flex justify-between  items-center h-[50px]  border-b-2 border-gray-200">
           <div className="font-bold text-dblue text-[20px]">
             <Link to="/">CampusNest</Link>
           </div>
           <div>
-              <span
-                onClick={handlemenu}
-                className="material-symbols-outlined mr-2 cursor-pointer"
-              >
-                menu
-              </span>
+            <span
+              onClick={handlemenu}
+              className="material-symbols-outlined mr-2 cursor-pointer"
+            >
+              menu
+            </span>
           </div>
         </div>
 
         <div
           id="menu"
-          className={`z-10 w-full fixed  bg-gray-50 h-full  text-[20px]  rounded-md flex flex-1 flex-col gap-3  px-10 py-5 text-gray-600 transition-transform duration-700 transform ${
+          className={` w-full fixed text-3xl font-medium bg-gray-50 h-full  text-[20px]   flex flex-1 flex-col gap-3  px-10 py-5 text-gray-600 transition-transform duration-700 transform ${
             menu ? "translate-x-0" : "translate-x-[1000px]"
           }`}
         >
@@ -195,10 +194,24 @@ function Header() {
               Sign In
             </p>
             <div id="signin" className="hidden text-[16px] gap-2 ">
-              <p className=" hover:cursor-pointer hover:underline">
+              <p
+                onClick={() => {
+                  setDialogs((prev) => {
+                    return { ...prev, sl: true };
+                  });
+                }}
+                className=" hover:cursor-pointer hover:underline"
+              >
                 Login As Student
               </p>
-              <p className="hover:cursor-pointer hover:underline">
+              <p
+                onClick={() => {
+                  setDialogs((prev) => {
+                    return { ...prev, ol: true };
+                  });
+                }}
+                className="hover:cursor-pointer hover:underline"
+              >
                 Login As Owner
               </p>
             </div>
@@ -215,10 +228,24 @@ function Header() {
               Register
             </p>
             <div id="register" className=" hidden text-[16px]  gap-2">
-              <p className="hover:cursor-pointer hover:underline">
+              <p
+                onClick={() => {
+                  setDialogs((prev) => {
+                    return { ...prev, sr: true };
+                  });
+                }}
+                className="hover:cursor-pointer hover:underline"
+              >
                 Register As Student
               </p>
-              <p className="hover:cursor-pointer hover:underline">
+              <p
+                onClick={() => {
+                  setDialogs((prev) => {
+                    return { ...prev, or: true };
+                  });
+                }}
+                className="hover:cursor-pointer hover:underline"
+              >
                 Register As Owner
               </p>
             </div>
@@ -248,10 +275,24 @@ function Header() {
           </Link>
         </div>
       </nav>
-      {dialogs.sl && <StudenLogin close={setDialogs}/>}
-      {dialogs.ol && <OwnerLogin close={setDialogs}/>}
-      {dialogs.or && <OwnerRegistration close={setDialogs}/>}
-      {dialogs.sr && <StudentRegistration close={setDialogs}/>}
+      {dialogs.sl && (
+        <StudenLogin setDialogs={setDialogs} setIsLoggedIn={setIsLoggedIn} />
+      )}
+      {dialogs.ol && (
+        <OwnerLogin setDialogs={setDialogs} setIsLoggedIn={setIsLoggedIn} />
+      )}
+      {dialogs.or && (
+        <OwnerRegistration
+          setDialogs={setDialogs}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      )}
+      {dialogs.sr && (
+        <StudentRegistration
+          setDialogs={setDialogs}
+          setIsLoggedIn={setIsLoggedIn}
+        />
+      )}
     </>
   );
 }

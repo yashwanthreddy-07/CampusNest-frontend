@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import HeaderLogin from "./HeaderLogin";
 
 function Layouts({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,12 +13,9 @@ function Layouts({ children }) {
   }, []);
   return (
     <>
-      <Header />
-      <main>{children}</main>
-      <Footer />
-      {/* {isLoggedIn ? <HeaderUser setIsLoggedIn={setIsLoggedIn} /> : <Header setIsLoggedIn={setIsLoggedIn} />}
+      {isLoggedIn ? <HeaderLogin setIsLoggedIn={setIsLoggedIn} /> : <Header setIsLoggedIn={setIsLoggedIn} />}
        <main>{children}</main>
-       <Footer /> */}
+       <Footer />
     </>
   );
 }

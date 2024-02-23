@@ -8,12 +8,13 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { signupStudent } from "../Apis/apicalls";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-function StudentRegistration() {
-  const navigate = useNavigate();
-  // const [loading, setLoading] = useState(false);
+function StudentRegistration({ setDialogs }) {
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="left" ref={ref} {...props} />;
+  });
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -40,21 +41,22 @@ function StudentRegistration() {
   };
 
   const handleSubmit = async (e) => {
-    setLoading(true);
-    toast.success("Registration successfull", {
-      autoClose: 2000,
-      closeOnClick: true,
-      theme: "dark",
-      transition: Bounce,
-    });
     e.preventDefault();
     const response = await signupStudent(formData);
+    console.log(response);
     if (response.success) {
       localStorage.setItem("user-token", response.authToken);
-      navigate("/");
+      toast.success("Registered succesfully", {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setIsLoggedIn(true);
+      setOpen(false);
     } else {
-      setLoading(false);
-      toast.warn(response.errors[0].msg, {
+      toast.error(response.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
@@ -66,22 +68,26 @@ function StudentRegistration() {
 
   const handleClose = () => {
     setOpen(false);
+    setDialogs((prev) => {
+      return { ...prev, sr: false };
+    });
   };
 
   return (
     <Dialog
       open={open}
+      TransitionComponent={Transition}
       onClose={handleClose}
       fullScreen={true}
       hideBackdrop={true}
-      className="mx-14 mt-6 mb-[58px]"
+      className="md:w-[51%] md:flex md:ml-auto "
     >
-      <DialogTitle className="flex items-center border-b-2 border-gray-200">
+      <DialogTitle className="flex  items-center border-b-2 border-gray-200">
         <span
-          className="material-symbols-outlined cursor-pointer"
+          className="material-symbols-outlined cursor-pointer pl-2"
           onClick={handleClose}
         >
-          close
+          arrow_forward_ios
         </span>
         <p className="mx-auto font-semibold text-orange-600">
           Student Registration
@@ -90,9 +96,9 @@ function StudentRegistration() {
       <DialogContent>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-wrap pl-5 pt-2 gap-x-16 gap-y-8 text-[18px] font-medium"
+          className="flex flex-wrap pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] font-medium"
         >
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Name</p>
             <TextField
               required={true}
@@ -105,24 +111,24 @@ function StudentRegistration() {
               value={formData.name}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Date of Birth</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="dob"
               variant="outlined"
               type="date"
               onChange={handleChange}
               value={formData.dob}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Email</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="email"
               variant="outlined"
               type="email"
               label="Mail"
@@ -130,12 +136,12 @@ function StudentRegistration() {
               value={formData.email}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Password</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="password"
               variant="outlined"
               type="password"
               label="Password"
@@ -143,12 +149,12 @@ function StudentRegistration() {
               value={formData.password}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Phone Number</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="phno"
               variant="outlined"
               type="text"
               label="Mobile Number"
@@ -156,12 +162,12 @@ function StudentRegistration() {
               value={formData.phno}
             />
           </div>
-          <div className="flex flex-col w-1/4">
+          <div className="flex flex-col ">
             <p>College Name</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="college_name"
               variant="outlined"
               type="text"
               label="College Name"
@@ -169,12 +175,12 @@ function StudentRegistration() {
               value={formData.college_name}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col">
             <p>Pursuing Course</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="course"
               variant="outlined"
               type="text"
               label="Course Name"
@@ -182,12 +188,12 @@ function StudentRegistration() {
               value={formData.course}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Highest Qualification</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="degree"
               variant="outlined"
               type="text"
               label="Qualification"
@@ -195,12 +201,12 @@ function StudentRegistration() {
               value={formData.degree}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Hobbies</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="hobbies"
               variant="outlined"
               type="text"
               label="Your Hobbies"
@@ -208,12 +214,12 @@ function StudentRegistration() {
               value={formData.hobbies}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Intrests</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="interests"
               variant="outlined"
               type="text"
               label="Your Intrests"
@@ -221,12 +227,12 @@ function StudentRegistration() {
               value={formData.interests}
             />
           </div>
-          <div className="flex flex-col w-1/5">
+          <div className="flex flex-col ">
             <p>Gender</p>
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="gender"
               variant="outlined"
               type="text"
               label="M/F/other"
@@ -237,9 +243,9 @@ function StudentRegistration() {
           <div className="flex gap-5 items-center">
             <p>Address</p>
             <TextField
-              required={true}
+              // required={true}
               size="small"
-              name="name"
+              name="area"
               variant="outlined"
               type="text"
               label="Area"
@@ -250,7 +256,7 @@ function StudentRegistration() {
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="state"
               variant="outlined"
               type="text"
               label="State"
@@ -260,7 +266,7 @@ function StudentRegistration() {
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="country"
               variant="outlined"
               type="text"
               label="Coutry"
@@ -270,7 +276,7 @@ function StudentRegistration() {
             <TextField
               required={true}
               size="small"
-              name="name"
+              name="pincode"
               variant="outlined"
               type="text"
               label="PinCode"
@@ -278,11 +284,11 @@ function StudentRegistration() {
               value={formData.pincode}
             />
           </div>
-          <div className="flex flex-col  ">
+          <div className="flex flex-col ">
             <p>Profile Photo</p>
             <TextField
               size="small"
-              name="name"
+              name="photo"
               type="file"
               variant="standard"
               className="flex items-center"
@@ -290,13 +296,14 @@ function StudentRegistration() {
               //   value={formData.photo}
             />
           </div>
+          <button
+            type="submit"
+            className="w-36 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105"
+          >
+            Submit
+          </button>
         </form>
       </DialogContent>
-      <DialogActions className="mr-24 mb-10">
-        <button className="w-36 border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105">
-          Submit
-        </button>
-      </DialogActions>
     </Dialog>
   );
 }
