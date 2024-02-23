@@ -64,7 +64,7 @@ function Header({ setIsLoggedIn }) {
               {isOpenSignIn && (
                 <div
                   id="SignIn"
-                  className="absolute bg-gray-100 font-normal p-3 flex flex-col items-start gap-2   text-gray-600 border-4 rounded-md hover:scale-105"
+                  className="absolute bg-gray-100 font-normal p-3 flex flex-col items-start gap-2   text-gray-600 border-4 rounded-md hover:scale-105 transition-transform duration-300 hover"
                 >
                   <button
                     id="studentsignin"
@@ -103,7 +103,7 @@ function Header({ setIsLoggedIn }) {
             {isOpenSignUp && (
               <div
                 id="SignIn"
-                className="absolute   p-3 flex flex-col bg-gray-100 items-start gap-2  font-normal text-gray-600 border-4 rounded-md hover:scale-105"
+                className="absolute   p-3 flex flex-col bg-gray-100 items-start gap-2  font-normal text-gray-600 border-4 rounded-md hover:scale-105 transition-transform duration-300 hover"
               >
                 <button
                   id="studentsignup"
@@ -138,7 +138,7 @@ function Header({ setIsLoggedIn }) {
               contact_support
             </span>
             {support && (
-              <div className="border-2 rounded-md bg-g  text-gray-600 bg-gray-100 text-[15px] hover:scale-105 text-wrap p-3 max-w-[200px] absolute flex flex-col gap-2 -ml-48">
+              <div className="border-2 rounded-md bg-g  text-gray-600 bg-gray-100 text-[15px] hover:scale-105 transition-transform duration-300 hover text-wrap p-3 max-w-[200px] absolute flex flex-col gap-2 -ml-48">
                 <Link to="/policy" className="hover:underline cursor-pointer">
                   Our policy
                 </Link>

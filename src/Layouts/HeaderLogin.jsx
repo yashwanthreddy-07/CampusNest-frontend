@@ -30,20 +30,20 @@ function HeaderLogin({ setIsLoggedIn }) {
         </p>
         <div className="flex items-center  gap-8 text-[18px] font-medium">
           <p
-            className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue"
+            className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
             id="SignIn"
           >
             Rooms
           </p>
 
-          <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue">
+          <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
             DashBoard
           </p>
-          <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue">
+          <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
             Profile
           </p>
           <p
-            className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue"
+            className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
             onClick={() => {
               localStorage.clear();
               navigate("/");
@@ -67,7 +67,7 @@ function HeaderLogin({ setIsLoggedIn }) {
               contact_support
             </span>
             {support && (
-              <div className="border-2 rounded-md bg-g  text-gray-600 bg-gray-100 text-[15px] hover:scale-105 text-wrap p-3 max-w-[200px] absolute flex flex-col gap-2 -ml-44">
+              <div className="border-2 rounded-md bg-g  text-gray-600 bg-gray-100 text-[15px] hover:scale-105 transition-transform duration-300 hover text-wrap p-3 max-w-[200px] absolute flex flex-col gap-2 -ml-44">
                 <Link to="/policy" className="hover:underline cursor-pointer">
                   Our policy
                 </Link>

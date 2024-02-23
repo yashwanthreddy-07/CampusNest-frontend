@@ -13,10 +13,10 @@ function Footer() {
       <footer className="hidden py-7 border-t-2 bg-gray-50 border-gray-300 text-[18px] md:flex  justify-center md:gap-20  lg:gap-x-44 ">
         <div className="flex flex-col gap-5 items-center">
           <div className="flex gap-5">
-            <Link to="/" className="hover:underline hover:scale-105">
+            <Link to="/" className="hover:underline hover:scale-105 transition-transform duration-300 hover">
               Home
             </Link>
-            <Link to="/policy" className="hover:underline hover:scale-105">
+            <Link to="/policy" className="hover:underline hover:scale-105 transition-transform duration-300 hover">
               Privacy
             </Link>
             <div
@@ -27,7 +27,7 @@ function Footer() {
                 document.getElementById("contact").classList.add("hidden");
               }}
             >
-              <p className=" cursor-pointer hover:underline hover:scale-105">
+              <p className="transition-transform duration-300 hover cursor-pointer hover:underline hover:scale-105">
                 Contact
               </p>
               <div
@@ -48,43 +48,43 @@ function Footer() {
                 </p>
               </div>
             </div>
-            <p className="hover:underline hover:scale-105 cursor-pointer">
+            <p className="hover:underline hover:scale-105 cursor-pointer transition-transform duration-300 hover">
               Reviews
             </p>
           </div>
           <div className="flex justify-center">
             <NavLink
               to="/github"
-              className="m-2  hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2 "
+              className="m-2 transition-transform duration-300 hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2 "
             >
               <AiFillGithub className="w-6 h-6" />
             </NavLink>
             <NavLink
               to="/linkedin"
-              className="m-2  hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
+              className="m-2 transition-transform duration-300 hover hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
             >
               <TiSocialLinkedin className="w-6 h-6" />
             </NavLink>
             <NavLink
               to="/twitter"
-              className="m-2  hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
+              className="m-2  transition-transform duration-300 hover hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
             >
               <AiFillTwitterCircle className="w-6 h-6" />
             </NavLink>
             <NavLink
               to="/instagram"
-              className="m-2  hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
+              className="m-2 transition-transform duration-300 hover hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
             >
               <AiFillInstagram className="w-6 h-6" />
             </NavLink>
             <NavLink
               to="/gmail"
-              className="m-2 hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
+              className="m-2 transition-transform duration-300 hover hover:scale-125 hover:ring-2 hover:ring-dblue rounded-full shadow-2xl border-gray-400 border-2"
             >
               <AiFillGooglePlusCircle className="w-6 h-6" />
             </NavLink>
           </div>
-          <div className="hover:scale-105 hover:text-dblue font-medium">
+          <div className="hover:scale-105 hover:text-dblue font-medium transition-transform duration-300 hover">
             <p> Copyrights reserved &copy; CampusNest 2024</p>
           </div>
         </div>
@@ -106,10 +106,10 @@ function Footer() {
       </footer>
       <div className="md:hidden  flex flex-col  items-center justify-between px-10 py-5  font-medium  text-dblue  bg-gray-50 border-t-2 border-gray-300 ">
         <div className="flex gap-2 items-center">
-          <Link to="/" className="hover:underline hover:scale-105">
+          <Link to="/" className="hover:underline hover:scale-105 transition-transform duration-300 hover">
             Home
           </Link>
-          <Link to="/policy" className="hover:underline hover:scale-105">
+          <Link to="/policy" className="hover:underline hover:scale-105 transition-transform duration-300 hover">
             Privacy
           </Link>
           <div
@@ -117,7 +117,7 @@ function Footer() {
               document.getElementById("contactsm").classList.toggle("hidden");
             }}
           >
-            <Link className=" cursor-pointer hover:underline hover:scale-105">
+            <Link className=" cursor-pointer hover:underline hover:scale-105 transition-transform duration-300 hover">
               Contact
             </Link>
             <div
@@ -138,7 +138,7 @@ function Footer() {
               </p>
             </div>
           </div>
-          <p className="hover:underline hover:scale-105 cursor-pointer">
+          <p className="hover:underline hover:scale-105 transition-transform duration-300 hover cursor-pointer">
             Reviews
           </p>
         </div>

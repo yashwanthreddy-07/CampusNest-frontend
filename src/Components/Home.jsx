@@ -364,7 +364,7 @@ function Home() {
           </span>
           <button
             onClick={() => setOpen(true)}
-            className="border-2 rounde-md px-2 py-1 border-dblue text-orange-700 font-bold hover:scale-110"
+            className="border-2 rounde-md px-2 py-1 border-dblue text-orange-700 font-bold hover:scale-110 transition-transform duration-300 hover"
           >
             Feedback
           </button>
@@ -388,7 +388,7 @@ function Home() {
         </DialogContent>
         <button
           onClick={handlefeedback}
-          className="flex items-center gap-3 border-2 w-24 ml-auto mr-5 mb-5  px-2 py-1 bg-dblue text-white hover:scale-110 rounded-md"
+          className="flex items-center gap-3 border-2 w-24 ml-auto mr-5 mb-5  px-2 py-1 bg-dblue text-white hover:scale-110 rounded-md transition-transform duration-300 hover"
         >
           {" "}
           Send <span className="text-md material-symbols-outlined">send</span>
