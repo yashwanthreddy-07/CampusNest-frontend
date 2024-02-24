@@ -12,6 +12,8 @@ import UpdateStudent from "./Profiles/Student/UpdateStudent";
 import UpdateOwner from "./Profiles/Owner/UpdateOwner";
 import StudentSecurity from "./Profiles/Student/StudentSecurity";
 import OwnerSecurity from "./Profiles/Owner/Ownersecurity";
+import StudentNotification from "./Dashboards/Student/StudentNotification";
+import OwnerNotification from "./Dashboards/Owner/OwnerNotification";
 
 function App() {
   return (
@@ -25,6 +27,10 @@ function App() {
           <Route path="/profile" element={<OwnerProfile />} />
           <Route path="/updateprofile" element={<UpdateOwner />} />
           <Route path="/security" element={<OwnerSecurity />} />
+          <Route
+            path="/dashboard/notification"
+            element={<OwnerNotification />}
+          />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

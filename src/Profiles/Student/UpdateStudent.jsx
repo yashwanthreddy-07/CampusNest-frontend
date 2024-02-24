@@ -96,18 +96,18 @@ function UpdateStudent() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-            <Link to="/profile" className="flex gap-2  items-center">
+            <Link to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
             <NavLink
               to="/updateprofile"
-              className="flex gap-2 font-semibold text-dblue items-center"
+              className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center">
+            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
@@ -121,17 +121,17 @@ function UpdateStudent() {
             <p>Student Name</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
-            <NavLink to="/profile" className="flex gap-2  items-center">
+            <NavLink to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
               to="/updateprofile"
-              className="flex gap-2 font-semibold text-dblue items-center"
+              className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center">
+            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
@@ -306,7 +306,7 @@ function UpdateStudent() {
             </div>
             <button
               type="submit"
-              className="w-36 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105"
+              className="w-36 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105  transition-transform duration-300"
             >
               Update
             </button>
