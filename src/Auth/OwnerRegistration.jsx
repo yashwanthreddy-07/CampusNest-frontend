@@ -6,14 +6,15 @@ import {
   Slide,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signupOwner } from "../Apis/apicalls";
 import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="left" ref={ref} {...props} />;
+  useEffect(() => {
+    Aos.init();
   });
   const [open, setOpen] = useState(true);
   // const [loading, setLoading]=useState(false);
@@ -81,7 +82,8 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
   return (
     <Dialog
       open={open}
-      TransitionComponent={Transition}
+      data-aos="fade-left"
+      data-aos-duration="500"
       onClose={handleClose}
       fullScreen={true}
       hideBackdrop={true}

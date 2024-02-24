@@ -6,8 +6,11 @@ import { Link, NavLink } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { getAllRooms } from "../Apis/apicalls";
+import { useNavigate } from "react-router-dom";
 function Property() {
   const [open, setOpen] = useState(false);
+  const [allRooms, setAllRooms] = useState([]);
   const [requestOpen, setRequestOpen] = useState(false);
   const handleclose = () => {
     setOpen(false);
@@ -18,9 +21,24 @@ function Property() {
   const handlerequestClose = () => {
     setRequestOpen(false);
   };
+    useEffect(() => {
+      Aos.init();
+    });
+    
+  const getRooms = async () => {
+    const res = await getAllRooms();
+    setAllRooms(res.rooms);
+    const initialIndices = res.rooms.reduce((acc, room, index) => {
+      acc[index] = 0;
+      return acc;
+    }, {});
+    setCurrentImageIndices(initialIndices);
+  };
+
   useEffect(() => {
-    Aos.init();
-  });
+    getRooms();
+  }, []);
+
   return (
     <Layouts>
       <div className="md:mx-24 md:my-10 m-5 2xl:mx-56">

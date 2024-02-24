@@ -25,23 +25,27 @@ function HeaderLogin({ setIsLoggedIn }) {
           CampusNest
         </Link>
 
-        <p className="hidden text-orange-700 text-[20px] lg:inline  font-serif ">
+        <p className="hidden text-orange-700 text-[20px] xl:inline  font-serif ">
           Experience new way of Finding Homes
         </p>
         <div className="flex items-center  gap-8 text-[18px] font-medium">
-          <p
+          <Link
+            to="/searchproperty"
             className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
             id="SignIn"
           >
             Rooms
-          </p>
+          </Link>
 
           <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
             DashBoard
           </p>
-          <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
+          <Link
+            to="/profile"
+            className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
+          >
             Profile
-          </p>
+          </Link>
           <p
             className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
             onClick={() => {
@@ -54,7 +58,7 @@ function HeaderLogin({ setIsLoggedIn }) {
                 theme: "dark",
                 transition: Bounce,
               });
-              setIsLoggedIn(false)
+              setIsLoggedIn(false);
             }}
           >
             LogOut
@@ -105,14 +109,20 @@ function HeaderLogin({ setIsLoggedIn }) {
 
         <div
           id="menu"
-          className={`z-10 w-full fixed  bg-gray-50 h-full  text-[20px]  rounded-md flex flex-1 flex-col gap-3  px-10 py-5 text-gray-600 transition-transform duration-700 transform ${
+          className={` w-full fixed text-gray-700 bg-gray-50 font-medium h-full   text-[20px]  rounded-md flex flex-1 flex-col gap-3  px-10 py-5  transition-transform duration-700 transform ${
             menu ? "translate-x-0" : "translate-x-[1000px]"
-          }`}
+          } `}
         >
           <Link to="/">Home</Link>
 
-          <p className="cursor-pointer"> Rooms</p>
-
+          <Link to="/searchproperty" className="cursor-pointer">
+            {" "}
+            Rooms
+          </Link>
+          <Link to="/profile" className="cursor-pointer">
+            {" "}
+            Profile
+          </Link>
           <p onClick={() => {}} className="cursor-pointer">
             DashBoard
           </p>
@@ -150,7 +160,7 @@ function HeaderLogin({ setIsLoggedIn }) {
                 theme: "dark",
                 transition: Bounce,
               });
-              setIsLoggedIn(false)
+              setIsLoggedIn(false);
             }}
           >
             LogOut

@@ -5,21 +5,29 @@ import Policy from "./Components/Policy";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Property from "./Components/Property";
-
+import SearchProperty from "./Components/SearchProperty";
+import StudentDetails from "./Profiles/Student/StudentDetails";
+import OwnerProfile from "./Profiles/Owner/OwnerProfile";
+import UpdateStudent from "./Profiles/Student/UpdateStudent";
+import UpdateOwner from "./Profiles/Owner/UpdateOwner";
+import StudentSecurity from "./Profiles/Student/StudentSecurity";
+import OwnerSecurity from "./Profiles/Owner/Ownersecurity";
 
 function App() {
   return (
     <>
-     
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/policy" element={<Policy />} />
           <Route path="/property" element={<Property />} />
+          <Route path="/searchproperty" element={<SearchProperty />} />
+          <Route path="/profile" element={<OwnerProfile />} />
+          <Route path="/updateprofile" element={<UpdateOwner />} />
+          <Route path="/security" element={<OwnerSecurity />} />
         </Routes>
-        <ToastContainer/>
+        <ToastContainer />
       </BrowserRouter>
-  
     </>
   );
 }
