@@ -15,6 +15,7 @@ import OwnerSecurity from "./Profiles/Owner/Ownersecurity";
 import StudentNotification from "./Dashboards/Student/StudentNotification";
 import OwnerNotification from "./Dashboards/Owner/OwnerNotification";
 import MyProperty from "./Dashboards/Owner/MyProperty";
+import CreateProperty from "./Dashboards/Owner/CreateProperty";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           />
            <Route path="/dashboard/myproperty" element={<MyProperty/>}
         />  
+        <Route path="/dashboard/createproperty" element={<CreateProperty/>}></Route>
         </Routes>
        
         <ToastContainer />
