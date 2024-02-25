@@ -74,7 +74,7 @@ function StudentDetails() {
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
@@ -84,21 +84,21 @@ function StudentDetails() {
       <div className="mx-20 2xl:justify-center flex">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50  items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
-            <img src={userlogo} className="w-[100px]" />
-            <p>Student Name</p>
+            <img src={userData.profile_image} className="w-[100px]" />
+            <p>{userData.name}</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
             <NavLink
-              to="/profile"
+              to="/user/profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
-            <NavLink to="/updateprofile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/update-profile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
@@ -110,85 +110,81 @@ function StudentDetails() {
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Name</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300">
-              Student name
+              {userData.name}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Age</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300">
-              21
+              {userData.age}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Date of Birth</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              07/11/2002
+              {userData.dob}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Email</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              student@gmail.com
+              {userData.email}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Phone Number</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              789456123
+              {userData.phno}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg"> Gender</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              M
+              {userData.gender}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">College</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              Abc College
+              {userData.college_name}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Course</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              efg Course
+              {userData.course}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">degree</p>
-            <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              Degree
+            <p className="font-medium text-md text-gray-8p00 border-2 p-1 border-gray-300 ">
+              {userData.degree}
             </p>
           </div>
 
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Address</p>
             <div className="flex gap-5 border-2 p-1 border-gray-300">
-              <p className="font-medium text-md text-gray-800 ">Area</p>
-              <p className="font-medium text-md text-gray-800 ">state</p>
-              <p className="font-medium text-md text-gray-800 ">COuntry</p>
+              <p className="font-medium text-md text-gray-800 ">{userData.address}</p>
+              <p className="font-medium text-md text-gray-800 ">{userData.district}</p>
+              <p className="font-medium text-md text-gray-800 ">{userData.pincode}</p>
+              <p className="font-medium text-md text-gray-800 ">{userData.state}</p>
+              <p className="font-medium text-md text-gray-800 ">{userData.country}</p>
             </div>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Hobbies</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              Hobbies
+              {userData.hobbies}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Intrests</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              Intrests
+              {userData.interests}
             </p>
           </div>
-          <div className="flex flex-col gap-y-1 ">
-            <p className="font-serif font-semibold text-lg">Documents</p>
-            <div>
-              <p>doc1</p>
-              <p>doc2</p>
-            </div>
-          </div>
+          
         </div>
       </div>
     </Layouts>

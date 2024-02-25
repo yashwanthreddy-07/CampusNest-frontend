@@ -7,7 +7,7 @@ function HeaderLogin({ setIsLoggedIn }) {
   const [support, setSupport] = useState(false);
   const navigate = useNavigate();
   // const dropdownRef = useRef(null);
-
+  const loginUserRole = localStorage.getItem("user-token") ? "user" : "owner";
   const handlemenu = () => {
     SetMenu(!menu);
   };
@@ -37,11 +37,14 @@ function HeaderLogin({ setIsLoggedIn }) {
             Rooms
           </Link>
 
-          <Link to="/dashboard/notification" className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
+          <Link
+            to={`/${loginUserRole}/dashboard/notification`}
+            className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
+          >
             DashBoard
           </Link>
           <Link
-            to="/profile"
+            to={`/${loginUserRole}/profile`}
             className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
           >
             Profile

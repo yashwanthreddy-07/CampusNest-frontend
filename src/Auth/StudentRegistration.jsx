@@ -16,6 +16,7 @@ function StudentRegistration({ setDialogs }) {
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
   });
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -27,6 +28,7 @@ function StudentRegistration({ setDialogs }) {
     course: "",
     degree: "",
     state: "",
+    address: "",
     country: "",
     pincode: "",
     hobbies: "",
@@ -43,8 +45,39 @@ function StudentRegistration({ setDialogs }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await signupStudent(formData);
-    console.log(response);
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("password", formData.password);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("dob", formData.dob);
+    formDataToSend.append("phno", formData.phno);
+    formDataToSend.append("gender", formData.gender);
+    formDataToSend.append("college_name", formData.college_name);
+    formDataToSend.append("course", formData.course);
+    formDataToSend.append("degree", formData.degree);
+    formDataToSend.append("state", formData.state);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append("country", formData.country);
+    formDataToSend.append("pincode", formData.pincode);
+    formDataToSend.append("hobbies", formData.hobbies);
+    formDataToSend.append("interests", formData.interests);
+    formDataToSend.append("image", image);
+
+    const response = await fetch("http://localhost:5000/auth/student-signup", {
+      method: "POST",
+      body: formDataToSend,
+    });
+    const data = await response.json();
+    if (data.success) {
+      toast.success("Room created Successfully");
+
+      navigate("/owner/dashboard/properties");
+      setShow("properties");
+    } else {
+      toast.warn(data.errors);
+      console.error("Error:", data);
+    }
+
     if (response.success) {
       localStorage.setItem("user-token", response.authToken);
       toast.success("Registered succesfully", {
@@ -247,14 +280,14 @@ function StudentRegistration({ setDialogs }) {
           <div className="flex gap-5 items-center">
             <p>Address</p>
             <TextField
-              // required={true}
+              required={true}
               size="small"
               name="area"
               variant="outlined"
               type="text"
               label="Area"
               onChange={handleChange}
-              //   value={formData.area}
+                value={formData.address}
             />
 
             <TextField
@@ -296,8 +329,10 @@ function StudentRegistration({ setDialogs }) {
               type="file"
               variant="standard"
               className="flex items-center"
-              onChange={handleChange}
-              //   value={formData.photo}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+              }}
+              
             />
           </div>
           <button
