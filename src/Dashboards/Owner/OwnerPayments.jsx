@@ -47,14 +47,14 @@ function OwnerPayments() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
-              to="/dashboard/notification"
+              to="/owner/dashboard/notification"
               className="flex   items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
               Notifications
             </Link>
             <Link
-              to="/dashboard/myproperty"
+              to="/owner/dashboard/myproperty"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">
@@ -63,7 +63,7 @@ function OwnerPayments() {
               My Properties
             </Link>
             <Link
-              to="/dashboard/createproperty"
+              to="/owner/dashboard/createproperty"
               className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">edit</span>
@@ -88,28 +88,28 @@ function OwnerPayments() {
       <div className="mx-10 md:ml-24 2xl:justify-center flex h-[70vh]  gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
-            to="/dashboard/notification"
+            to="/owner/dashboard/notification"
             className=" items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
             Notifications
           </Link>
           <Link
-            to="/dashboard/myproperty"
+            to="/owner/dashboard/myproperty"
             className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">real_estate_agent</span>
             My Properties
           </Link>
           <Link
-            to="/dashboard/createproperty"
+            to="/owner/dashboard/createproperty"
             className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">edit</span>Create
             Property
           </Link>
           <Link
-            to="/dashboard/payments"
+            to="/owner/dashboard/payments"
             className="items-center text-dblue flex font-bold   gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>

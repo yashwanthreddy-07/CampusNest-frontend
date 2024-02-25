@@ -18,30 +18,45 @@ import MyProperty from "./Dashboards/Owner/MyProperty";
 import CreateProperty from "./Dashboards/Owner/CreateProperty";
 import OwnerPayments from "./Dashboards/Owner/OwnerPayments";
 import OwnerChat from "./Dashboards/Owner/Ownerchat";
+import StudentLayout from "./Profiles/Student/StudentLayout";
+import OwnerLayout from "./Profiles/Owner/OwnerLayout";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/user" element={<StudentLayout />}>
+            <Route path="profile" element={<StudentDetails />} />
+            <Route path="update-profile" element={<UpdateStudent />} />
+            <Route path="security" element={<StudentSecurity />} />
+          </Route>
+
+          <Route path="/owner" element={<OwnerLayout />}>
+            <Route path="profile" element={<OwnerProfile />} />
+            <Route path="update-profile" element={<UpdateOwner />} />
+            <Route path="security" element={<OwnerSecurity />} />
+            <Route
+              path="dashboard/notification"
+              element={<OwnerNotification />}
+            />
+            <Route path="dashboard/myproperty" element={<MyProperty />} />
+            <Route
+              path="dashboard/createproperty"
+              element={<CreateProperty />}
+            ></Route>
+            <Route path="dashboard/payments" element={<OwnerPayments />} />
+            <Route path="chat" element={<OwnerChat />} />
+          </Route>
+
+          {/* <Route path="/admin" element={<AdminLayout />}>
+            <Route path="dashboard/:tab" element={<AdminDashboard />} />
+            <Route path="profile/:tab" element={<OwnerProfile />} />
+          </Route> */}
+
           <Route path="/" element={<Home />} />
           <Route path="/policy" element={<Policy />} />
-          <Route path="/property" element={<Property />} />
           <Route path="/searchproperty" element={<SearchProperty />} />
-          <Route path="/profile" element={<OwnerProfile />} />
-          <Route path="/updateprofile" element={<UpdateOwner />} />
-          <Route path="/security" element={<OwnerSecurity />} />
-          <Route
-            path="/dashboard/notification"
-            element={<OwnerNotification />}
-          />
-          <Route path="/dashboard/myproperty" element={<MyProperty />} />
-          <Route
-            path="/dashboard/createproperty"
-            element={<CreateProperty />}
-          ></Route>
-          <Route path="/dashboard/payments" element={<OwnerPayments />} />
-          <Route path="/chat" element={<OwnerChat />} />
         </Routes>
 
         <ToastContainer />

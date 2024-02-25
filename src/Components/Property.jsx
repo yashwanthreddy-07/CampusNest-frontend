@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import Layouts from "../Layouts/Layouts";
 import home1 from "../assets/home1.jpeg";
 import home2 from "../assets/home2.jpeg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { getAllRooms } from "../Apis/apicalls";
 import { useNavigate } from "react-router-dom";
 function Property() {
+   const { id } = useParams();
+  const [room, setRoom] = useState({});
   const [open, setOpen] = useState(false);
   const [allRooms, setAllRooms] = useState([]);
   const [requestOpen, setRequestOpen] = useState(false);

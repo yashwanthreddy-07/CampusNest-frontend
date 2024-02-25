@@ -1,10 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import userlogo from "../../assets/userlogo.jpg";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { getUserDetails } from "../../Apis/apicalls";
+import { Bounce, toast } from "react-toastify";
 // import { signupStudent } from "../Apis/apicalls";
 function UpdateStudent() {
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const getUser = async () => {
+    const userdetails = await getUserDetails();
+    setUserData(userdetails.user);
+    setFormData({
+      name: userdetails.user.name,
+      password: "",
+      email: userdetails.user.email,
+      dob: userdetails.user.dob,
+      phno: userdetails.user.phno,
+      gender: userdetails.user.gender,
+      college_name: userdetails.user.college_name,
+      course: userdetails.user.course,
+      degree: userdetails.user.degree,
+      address: userdetails.user.address,
+      state: userdetails.user.state,
+      country: userdetails.user.country,
+      pincode: userdetails.user.pincode,
+      hobbies: userdetails.user.hobbies.join(","),
+      interests: userdetails.user.interests.join(","),
+      image: userdetails.user.profile_image,
+    });
+  };
+  
+
+  useEffect(() => {
+    getUser();
+  }, []);
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -15,11 +47,13 @@ function UpdateStudent() {
     college_name: "",
     course: "",
     degree: "",
+    address: "",
     state: "",
     country: "",
     pincode: "",
     hobbies: "",
     interests: "",
+    image: "",
   });
 
   const handleChange = (e) => {
@@ -32,10 +66,35 @@ function UpdateStudent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await signupStudent(formData);
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("password", formData.password);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("dob", formData.dob);
+    formDataToSend.append("phno", formData.phno);
+    formDataToSend.append("gender", formData.gender);
+    formDataToSend.append("college_name", formData.college_name);
+    formDataToSend.append("course", formData.course);
+    formDataToSend.append("degree", formData.degree);
+    formDataToSend.append("state", formData.state);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append("country", formData.country);
+    formDataToSend.append("pincode", formData.pincode);
+    formDataToSend.append("hobbies", formData.hobbies);
+    formDataToSend.append("interests", formData.interests);
+    formDataToSend.append("image", image);
+
+    const response = await fetch("http://localhost:5000/get/update-profile", {
+      headers: {
+      "x-auth-token": localStorage.getItem("user-token"),
+    },
+      method: "PUT",
+      body: formDataToSend,
+    });
+    const data = await response.json();
     console.log(response);
-    if (response.success) {
-      localStorage.setItem("user-token", response.authToken);
+    debugger
+    if (data.success) {
       toast.success("Registered succesfully", {
         position: "top-right",
         autoClose: 2000,
@@ -43,7 +102,7 @@ function UpdateStudent() {
         theme: "dark",
         transition: Bounce,
       });
-      setIsLoggedIn(true);
+      navigate('/user/profile')
       setOpen(false);
     } else {
       toast.error(response.errors[0].msg, {
@@ -96,18 +155,24 @@ function UpdateStudent() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-            <Link to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <Link
+              to="/user/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
             <NavLink
-              to="/updateprofile"
+              to="/user/update-profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/security"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
@@ -117,21 +182,27 @@ function UpdateStudent() {
       <div className="mx-20 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
-            <img src={userlogo} className="w-[100px]" />
-            <p>Student Name</p>
+            <img src={formData.image} className="w-[100px]" />
+            <p>{formData.name}</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
-            <NavLink to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/updateprofile"
+              to="/user/update-profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/security"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
@@ -140,24 +211,26 @@ function UpdateStudent() {
 
         <div className="flex flex-wrap w-[750px]">
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className="flex flex-wrap pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] font-medium"
           >
             <div className="flex flex-col ">
               <p>Name</p>
               <TextField
+                required={true}
                 size="small"
                 name="name"
                 variant="outlined"
                 type="text"
                 label="Enter Your Name"
-                // onChange={handleChange}
+                onChange={handleChange}
                 value={formData.name}
               />
             </div>
             <div className="flex flex-col">
               <p>Date of Birth</p>
               <TextField
+                required={true}
                 size="small"
                 name="dob"
                 variant="outlined"
@@ -170,6 +243,7 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Phone Number</p>
               <TextField
+                required={true}
                 size="small"
                 name="phno"
                 variant="outlined"
@@ -182,6 +256,7 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>College Name</p>
               <TextField
+                required={true}
                 size="small"
                 name="college_name"
                 variant="outlined"
@@ -194,6 +269,7 @@ function UpdateStudent() {
             <div className="flex flex-col">
               <p>Pursuing Course</p>
               <TextField
+                required={true}
                 size="small"
                 name="course"
                 variant="outlined"
@@ -206,6 +282,7 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Highest Qualification</p>
               <TextField
+                required={true}
                 size="small"
                 name="degree"
                 variant="outlined"
@@ -218,6 +295,7 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Hobbies</p>
               <TextField
+                required={true}
                 size="small"
                 name="hobbies"
                 variant="outlined"
@@ -230,6 +308,7 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Intrests</p>
               <TextField
+                required={true}
                 size="small"
                 name="interests"
                 variant="outlined"
@@ -242,6 +321,7 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Gender</p>
               <TextField
+                required={true}
                 size="small"
                 name="gender"
                 variant="outlined"
@@ -254,17 +334,18 @@ function UpdateStudent() {
             <div className="flex gap-5 items-center flex-wrap">
               <p>Address</p>
               <TextField
-                // required={true}
+                required={true}
                 size="small"
-                name="area"
+                name="address"
                 variant="outlined"
                 type="text"
                 label="Area"
                 onChange={handleChange}
-                //   value={formData.area}
+                value={formData.address}
               />
 
               <TextField
+                required={true}
                 size="small"
                 name="state"
                 variant="outlined"
@@ -274,6 +355,7 @@ function UpdateStudent() {
                 value={formData.state}
               />
               <TextField
+                required={true}
                 size="small"
                 name="country"
                 variant="outlined"
@@ -283,6 +365,7 @@ function UpdateStudent() {
                 value={formData.country}
               />
               <TextField
+                required={true}
                 size="small"
                 name="pincode"
                 variant="outlined"
@@ -295,13 +378,15 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Profile Photo</p>
               <TextField
+                required={true}
                 size="small"
                 name="photo"
                 type="file"
                 variant="standard"
                 className="flex items-center"
-                onChange={handleChange}
-                //   value={formData.photo}
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                }}
               />
             </div>
             <button

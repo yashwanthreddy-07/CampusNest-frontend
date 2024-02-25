@@ -1,4 +1,4 @@
-const BASE_URL = "https://campusnest-jwlf.onrender.com";
+const BASE_URL = "http://localhost:5000";
 
 const callApi = async (endpoint, method, body, token) => {
   try {
