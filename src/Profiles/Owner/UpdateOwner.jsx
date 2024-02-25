@@ -101,7 +101,10 @@ function UpdateOwner() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-            <Link to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <Link
+              to="/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
@@ -112,21 +115,27 @@ function UpdateOwner() {
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/security"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 xl:justify-center flex flex-shrink">
+      <div className="mx-20 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={userlogo} className="w-[100px]" />
             <p>Student Name</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
-            <NavLink to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
@@ -136,7 +145,10 @@ function UpdateOwner() {
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/security"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>

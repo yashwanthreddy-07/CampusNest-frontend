@@ -30,7 +30,7 @@ function StudentNotification() {
           onClick={() => {
             setOpen(true);
           }}
-          className="flex items-center p-2 border-b-2 text-lg font-medium justify-center cursor-pointer"
+          className="flex items-center p-2 border-b-2 text-lg font-medium 2xl:justify-center cursor-pointer"
         >
           <span className="material-symbols-outlined">dashboard</span>Dashboard
         </p>
@@ -88,7 +88,7 @@ function StudentNotification() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-10 md:ml-24 flex h-[70vh] justify-center gap-10">
+      <div className="mx-10 md:ml-24 flex h-[70vh] 2xl:justify-center gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
             to="/dashboard/notification"

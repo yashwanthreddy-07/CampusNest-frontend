@@ -14,6 +14,7 @@ import StudentSecurity from "./Profiles/Student/StudentSecurity";
 import OwnerSecurity from "./Profiles/Owner/Ownersecurity";
 import StudentNotification from "./Dashboards/Student/StudentNotification";
 import OwnerNotification from "./Dashboards/Owner/OwnerNotification";
+import MyProperty from "./Dashboards/Owner/MyProperty";
 
 function App() {
   return (
@@ -31,7 +32,10 @@ function App() {
             path="/dashboard/notification"
             element={<OwnerNotification />}
           />
+           <Route path="/dashboard/myproperty" element={<MyProperty/>}
+        />  
         </Routes>
+       
         <ToastContainer />
       </BrowserRouter>
     </>

@@ -81,7 +81,7 @@ function StudentDetails() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 xl:justify-center flex">
+      <div className="mx-20 2xl:justify-center flex">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50  items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={userlogo} className="w-[100px]" />

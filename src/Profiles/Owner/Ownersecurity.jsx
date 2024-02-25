@@ -7,60 +7,60 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 // import { owner } from "../Apis/apicalls";
 function OwnerSecurity() {
-    const [formData, setFormData] = useState({
-        name: "",
-        password: "",
-        email: "",
-        dob: "",
-        phno: "",
-        gender: "",
-        uin: "",
-        state: "",
-        country: "",
-        pincode: "",
-        ownership: "",
+  const [formData, setFormData] = useState({
+    name: "",
+    password: "",
+    email: "",
+    dob: "",
+    phno: "",
+    gender: "",
+    uin: "",
+    state: "",
+    country: "",
+    pincode: "",
+    ownership: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    //   setLoading(true)
+    toast.success("Registration successfull", {
+      autoClose: 2000,
+      closeOnClick: true,
+      theme: "dark",
+      transition: Bounce,
+    });
+    const response = await signupOwner(formData);
+    if (response.success) {
+      localStorage.setItem("owner-token", response.authToken);
+      toast.success("Registered succesfully", {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
       });
-    
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: value,
-        }));
-      };
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        //   setLoading(true)
-        toast.success("Registration successfull", {
-          autoClose: 2000,
-          closeOnClick: true,
-          theme: "dark",
-          transition: Bounce,
-        });
-        const response = await signupOwner(formData);
-        if (response.success) {
-          localStorage.setItem("owner-token", response.authToken);
-          toast.success("Registered succesfully", {
-            position: "top-right",
-            autoClose: 2000,
-            closeOnClick: true,
-            theme: "dark",
-            transition: Bounce,
-          });
-          setIsLoggedIn(true);
-          setOpen(false);
-        } else {
-          setLoading(false);
-          toast.error(response.errors[0].msg, {
-            autoClose: 2000,
-            closeOnClick: true,
-            theme: "dark",
-            transition: Bounce,
-          });
-        }
-      };
-    
+      setIsLoggedIn(true);
+      setOpen(false);
+    } else {
+      setLoading(false);
+      toast.error(response.errors[0].msg, {
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
+
   useEffect(() => {
     Aos.init();
   });
@@ -108,11 +108,17 @@ function OwnerSecurity() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-            <Link to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <Link
+              to="/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
-            <NavLink to="/updateprofile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/updateprofile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
@@ -126,17 +132,23 @@ function OwnerSecurity() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 xl:justify-center flex flex-shrink">
+      <div className="mx-20 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={userlogo} className="w-[100px]" />
             <p>Student Name</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
-            <NavLink to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
-            <NavLink to="/updateprofile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/updateprofile"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
@@ -153,7 +165,7 @@ function OwnerSecurity() {
         <div className="flex flex-wrap mt-24 justify-between items-center w-[750px]">
           <form
             // onSubmit={handleSubmit}
-            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] w-full font-medium"
+            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] md:w-1/2 w-full font-medium"
           >
             <p>Want to change email?</p>
             <div className="flex flex-col ">
@@ -192,7 +204,7 @@ function OwnerSecurity() {
           </form>
           <form
             // onSubmit={handleSubmit}
-            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 w-full text-[18px] font-medium"
+            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 md:w-1/2 w-full text-[18px] font-medium"
           >
             <p>Want to change Password?</p>
             <div className="flex flex-col">
