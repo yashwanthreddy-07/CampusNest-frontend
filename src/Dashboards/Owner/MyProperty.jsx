@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
 import { Link } from "react-router-dom";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  TextareaAutosize,
+} from "@mui/material";
 import Aos from "aos";
 import home1 from "../../assets/home1.jpeg";
 import "aos/dist/aos.css";
@@ -31,6 +37,11 @@ function MyProperty() {
   const handleCloseUpdate = () => {
     setUpdate(false);
   };
+  const [selectedPhotos, setSelectedPhotos] = useState([]);
+  const handlePhotoChange = (e) => {
+    setSelectedPhotos([...selectedPhotos, ...e.target.files]);
+  };
+
   return (
     <Layouts>
       <div className="md:hidden">
@@ -200,7 +211,13 @@ function MyProperty() {
           </div>
         </div>
       </div>
-      <Dialog open={update} onClose={handleCloseUpdate} hideBackdrop>
+      <Dialog
+        open={update}
+        onClose={handleCloseUpdate}
+        hideBackdrop
+        fullScreen
+        className="my-16 w-[800px] mx-auto "
+      >
         <DialogTitle className="flex items-center">
           <span
             onClick={handleCloseUpdate}
@@ -210,7 +227,94 @@ function MyProperty() {
           </span>
           <p className="mx-auto">Update Your Property</p>
         </DialogTitle>
-        <DialogContent></DialogContent>
+        <DialogContent>
+          <div className="flex-wrap  h-0 flex  gap-5 ">
+            <div className="flex flex-col md:w-1/3 ">
+              <p className="font-medium text-lg">Title</p>
+
+              <TextField
+                type="text"
+                size="small"
+                label="suitable title for your property"
+                margin="none"
+              />
+            </div>
+            <div className="flex flex-col md:w-1/3">
+              <p className="font-medium text-lg">Description</p>
+              <TextareaAutosize
+                size="small"
+                label="suitable title for your property"
+                className="p-2 border-gray-400 outline-none border-2 "
+                minRows={1}
+              />
+            </div>
+            <div className="flex flex-col md:w-1/3">
+              <p className="font-medium text-lg">People allowed to stay</p>
+              <TextField
+                type="number"
+                size="small"
+                label="number of people allowed"
+              />
+            </div>
+            <div className="flex flex-col">
+              <p className="font-medium text-lg">No of bedrooms</p>
+              <TextField type="number" size="small" label="Bedrooms" />
+            </div>
+            <div className="flex flex-col">
+              <p className="font-medium text-lg">No of bathrooms</p>
+              <TextField type="number" size="small" label="Bathrooms" />
+            </div>
+            <div className="flex flex-col   w-full">
+              Address
+              <div className="flex gap-x-5 flex-wrap gap-3">
+                <TextField type="text" label="Area" size="small" />
+                <TextField type="text" label="State" size="small" />
+                <TextField type="text" label="Country" size="small" />
+                <TextField type="text" label="Pin Code" size="small" />
+                <TextField
+                  type="url"
+                  label="location url from gmaps"
+                  size="small"
+                />
+              </div>
+            </div>
+            <div className=" pb-2">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                multiple
+                className="hidden"
+                id="photoInput"
+              />
+              <label id="imginput" htmlFor="photoInput" className="">
+                Click here to upload photos
+              </label>
+              <div className="flex gap-2 flex-wrap items-center">
+                {selectedPhotos.map((photo, index) => (
+                  <img
+                    key={index}
+                    src={URL.createObjectURL(photo)}
+                    alt={`Photo ${index + 1}`}
+                    className="w-[70px] mt-4 h-[70px]"
+                  />
+                ))}
+                <span
+                  id="imgplus"
+                  onClick={() => {
+                    document.getElementById("imginput").click();
+                  }}
+                  className="cursor-pointer border-2 border-gray-400 p-5 text-[28px] material-symbols-outlined "
+                >
+                  add
+                </span>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+        <button className="px-4  py-2 font-medium rounded-md  border-2 mb-3 mx-auto border-gray-400 hover:scale-105 transition-transform duration-300">
+          Update
+        </button>
       </Dialog>
     </Layouts>
   );

@@ -84,7 +84,7 @@ function CreateProperty() {
               Create Property
             </Link>
             <Link
-              to="/chat"
+              to="/payments"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
@@ -123,7 +123,7 @@ function CreateProperty() {
             Property
           </Link>
           <Link
-            to="/dashboard/createproperty"
+            to="/dashboard/payments"
             className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>

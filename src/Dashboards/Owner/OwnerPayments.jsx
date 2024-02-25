@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
 import { Link } from "react-router-dom";
-import { getNotifications } from "../../Apis/apicalls";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
-function OwnerNotification() {
-  const [notifications, setNotifications] = useState([]);
-
-  const getNotifs = async () => {
-    const res = await getNotifications({ role: "owner" });
-    setNotifications(res.notifications);
-  };
-
-  useEffect(() => {
-    getNotifs();
-  }, []);
+function OwnerPayments() {
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
-  useEffect(() => {
-    Aos.init();
-  });
+
   return (
     <Layouts>
       <div className="md:hidden">
@@ -61,7 +48,7 @@ function OwnerNotification() {
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
               to="/dashboard/notification"
-              className="text-dblue flex font-bold  items-center gap-2 hover:scale-110 transition-transform duration-300 "
+              className="flex   items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
               Notifications
@@ -84,7 +71,7 @@ function OwnerNotification() {
             </Link>
             <Link
               to="/payments"
-              className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
+              className="flex items-center text-dblue  font-bold  gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
               Payments
@@ -102,7 +89,7 @@ function OwnerNotification() {
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
             to="/dashboard/notification"
-            className="text-dblue flex font-bold  items-center gap-2 hover:scale-110 transition-transform duration-300"
+            className=" items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
             Notifications
@@ -123,7 +110,7 @@ function OwnerNotification() {
           </Link>
           <Link
             to="/dashboard/payments"
-            className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
+            className="items-center text-dblue flex font-bold   gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>
             Payments
@@ -135,27 +122,12 @@ function OwnerNotification() {
             <span className="material-symbols-outlined">chat</span>Chat
           </Link>
         </div>
-        <div className="mt-10 flex flex-col gap-y-3 w-[700px]">
-          <p className="text-xl font-medium">Notifications</p>
-          <p className="p-1 text-lg text-gray-700 line-clamp-1">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate
-            totam perspiciatis quia unde molestiae fugiat consequatur nisi ad,
-            voluptates molestias architecto necessitatibus harum sapiente
-            accusantium?
-          </p>
-          {notifications.map((notif) => {
-            return (
-              <>
-                <p className="p-1 text-lg text-gray-700 line-clamp-1">
-                  {notif.body}
-                </p>
-              </>
-            );
-          })}
+        <div className="mt-14 flex flex-col gap-y-3 w-[700px] h-screen">
+          <p className="font-bold text-xl">Payments Information</p>
         </div>
       </div>
     </Layouts>
   );
 }
 
-export default OwnerNotification;
+export default OwnerPayments;

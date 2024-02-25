@@ -16,6 +16,8 @@ import StudentNotification from "./Dashboards/Student/StudentNotification";
 import OwnerNotification from "./Dashboards/Owner/OwnerNotification";
 import MyProperty from "./Dashboards/Owner/MyProperty";
 import CreateProperty from "./Dashboards/Owner/CreateProperty";
+import OwnerPayments from "./Dashboards/Owner/OwnerPayments";
+import OwnerChat from "./Dashboards/Owner/Ownerchat";
 
 function App() {
   return (
@@ -33,11 +35,15 @@ function App() {
             path="/dashboard/notification"
             element={<OwnerNotification />}
           />
-           <Route path="/dashboard/myproperty" element={<MyProperty/>}
-        />  
-        <Route path="/dashboard/createproperty" element={<CreateProperty/>}></Route>
+          <Route path="/dashboard/myproperty" element={<MyProperty />} />
+          <Route
+            path="/dashboard/createproperty"
+            element={<CreateProperty />}
+          ></Route>
+          <Route path="/dashboard/payments" element={<OwnerPayments />} />
+          <Route path="/chat" element={<OwnerChat />} />
         </Routes>
-       
+
         <ToastContainer />
       </BrowserRouter>
     </>
