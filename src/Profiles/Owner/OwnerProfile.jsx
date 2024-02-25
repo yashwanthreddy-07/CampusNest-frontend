@@ -2,25 +2,20 @@ import React, { useEffect, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
 import { Link, NavLink } from "react-router-dom";
 import userlogo from "../../assets/userlogo.jpg";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import { getOwnerDetails } from "../../Apis/apicalls";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-function OwnerProfile() {
-  const [userData, setUserData] = useState({});
 
-  const getUser = async () => {
+function OwnerProfile() {
+  const [ownerData, setOwnerData] = useState({});
+
+  const getOwner = async () => {
     const ownerdetails = await getOwnerDetails();
-    setUserData(ownerdetails.user);
+    setOwnerData(ownerdetails.owner);
   };
 
   useEffect(() => {
-    getUser();
+    getOwner();
   }, []);
-  useEffect(() => {
-    Aos.init();
-  });
-
   const [profile, setProfile] = useState(false);
   const handleprofile = () => {
     setProfile(true);
@@ -120,9 +115,9 @@ function OwnerProfile() {
         <div className=" ml-10   md:ml-24  flex-col gap-y-3 w-[750px]">
           <p className="font-bold text-xl my-5 ">Personal Details</p>
           <div className="flex flex-col gap-y-1 ">
-            <p className="font-serif font-semibold text-lg">Name</p>
+            <p className="font-serif font-semibold text-lg">Owner Name</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300">
-              Owner name
+              {ownerData.name}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">

@@ -37,9 +37,9 @@ function HeaderLogin({ setIsLoggedIn }) {
             Rooms
           </Link>
 
-          <p className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
+          <Link to="/dashboard/notification" className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover">
             DashBoard
-          </p>
+          </Link>
           <Link
             to="/profile"
             className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
@@ -123,9 +123,9 @@ function HeaderLogin({ setIsLoggedIn }) {
             {" "}
             Profile
           </Link>
-          <p onClick={() => {}} className="cursor-pointer">
+          <Link to="/dashboard/notification" className="cursor-pointer">
             DashBoard
-          </p>
+          </Link>
 
           <div>
             <p
