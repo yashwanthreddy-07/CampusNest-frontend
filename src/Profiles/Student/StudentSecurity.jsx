@@ -102,16 +102,16 @@ function StudentSecurity() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-            <Link to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <Link to="/user/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
-            <NavLink to="/updateprofile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/update-profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/user/security"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -127,15 +127,15 @@ function StudentSecurity() {
             <p>Student Name</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
-            <NavLink to="/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
-            <NavLink to="/updateprofile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/update-profile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/user/security"
               className="flex gap-2 font-semibold text-dblue  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>

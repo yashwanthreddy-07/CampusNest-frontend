@@ -122,11 +122,11 @@ function HeaderLogin({ setIsLoggedIn }) {
             {" "}
             Rooms
           </Link>
-          <Link to="/profile" className="cursor-pointer">
+          <Link to={`/${loginUserRole}/profile`} className="cursor-pointer">
             {" "}
             Profile
           </Link>
-          <Link to="/dashboard/notification" className="cursor-pointer">
+          <Link to={`/${loginUserRole}/dashboard/notification`} className="cursor-pointer">
             DashBoard
           </Link>
 

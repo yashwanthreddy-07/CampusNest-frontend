@@ -1,10 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
 import { Link, NavLink } from "react-router-dom";
 import userlogo from "../../assets/userlogo.jpg";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
-// import { updateowner } from "../Apis/apicalls";
+import { getOwnerDetails } from "../../Apis/apicalls";
+// import { appendFile } from "fs";
 function UpdateOwner() {
+  const [ownerData, setOwnerData] = useState({});
+  const getOwner = async () => {
+    const ownerdetails = await getOwnerDetails();
+    setOwnerData(ownerdetails.owner);
+    setFormData({
+      name: ownerData.owner.name,
+      password: "",
+      email: ownerData.owner.email,
+      dob: ownerData.owner.dob,
+      phnno: ownerData.owner.phno,
+      gender: ownerData.owner.gender,
+      uin: ownerData.owner.uin,
+      ownership: ownerData.owner.ownership,
+      address: userdetails.user.address,
+      state: userdetails.user.state,
+      country: userdetails.user.country,
+      pincode: userdetails.user.pincode,
+      image: userdetails.user.profile_image,
+    });
+  };
+  useEffect(() => {
+    getOwner();
+  }, []);
+  const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     password: "",
@@ -13,10 +38,12 @@ function UpdateOwner() {
     phno: "",
     gender: "",
     uin: "",
+    address: "",
     state: "",
     country: "",
     pincode: "",
     ownership: "",
+    image: "",
   });
 
   const handleChange = (e) => {
@@ -29,16 +56,32 @@ function UpdateOwner() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //   setLoading(true)
-    toast.success("Registration successfull", {
-      autoClose: 2000,
-      closeOnClick: true,
-      theme: "dark",
-      transition: Bounce,
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("dob", formData.dob);
+    formDataToSend.append("phno", formData.phnno);
+    formDataToSend.append("gender", formData.gender);
+    formDataToSend.append("state", formData.state);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append("country", formData.country);
+    formDataToSend.append("pincode", formData.pincode);
+    formDataToSend.append("uin", formData.uin);
+    formDataToSend, append("ownership", formData.ownership);
+    formDataToSend.append("image", image);
+
+    const response = await fetch("http://localhost:5000/get/update-profile", {
+      header: {
+        "x-auth-token": localStorage.getItem("owner-token"),
+      },
+      method: "PUT",
+      body: formDataToSend,
     });
-    const response = await signupOwner(formData);
-    if (response.success) {
-      localStorage.setItem("owner-token", response.authToken);
+
+    const data = await response.json();
+    console.log(response);
+    if (data.success) {
       toast.success("Registered succesfully", {
         position: "top-right",
         autoClose: 2000,
@@ -46,10 +89,9 @@ function UpdateOwner() {
         theme: "dark",
         transition: Bounce,
       });
-      setIsLoggedIn(true);
+      navigate("/user/profile");
       setOpen(false);
     } else {
-      setLoading(false);
       toast.error(response.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
@@ -102,21 +144,21 @@ function UpdateOwner() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
             <Link
-              to="/profile"
+              to="/owner/profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
             <NavLink
-              to="/updateprofile"
+              to="/owner/updateprofile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/owner/security"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -133,20 +175,20 @@ function UpdateOwner() {
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
             <NavLink
-              to="/profile"
+              to="/owner/profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/updateprofile"
+              to="/owner/updateprofile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/owner/security"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -235,14 +277,14 @@ function UpdateOwner() {
             <div className="flex gap-5 items-center flex-wrap">
               <p>Address</p>
               <TextField
-                // required={true}
+                required={true}
                 size="small"
                 name="area"
                 variant="outlined"
                 type="text"
                 label="Area"
                 onChange={handleChange}
-                //   value={formData.area}
+                value={formData.area}
               />
               <TextField
                 size="small"
@@ -280,8 +322,9 @@ function UpdateOwner() {
                 type="file"
                 variant="standard"
                 className="flex items-center"
-                onChange={handleChange}
-                //   value={formData.photo}
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                }}
               />
             </div>
             <button

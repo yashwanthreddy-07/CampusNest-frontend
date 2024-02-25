@@ -13,9 +13,6 @@ import { useNavigate } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
 function StudentRegistration({ setDialogs }) {
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="left" ref={ref} {...props} />;
-  });
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -69,12 +66,12 @@ function StudentRegistration({ setDialogs }) {
     });
     const data = await response.json();
     if (data.success) {
-      toast.success("Room created Successfully");
+      toast.success("Registration Successfully");
 
-      navigate("/owner/dashboard/properties");
+      navigate("/");
       setShow("properties");
     } else {
-      toast.warn(data.errors);
+      toast.error(data.errors);
       console.error("Error:", data);
     }
 
@@ -277,19 +274,18 @@ function StudentRegistration({ setDialogs }) {
               value={formData.gender}
             />
           </div>
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-5 flex-wrap items-center">
             <p>Address</p>
             <TextField
               required={true}
               size="small"
-              name="area"
+              name="address"
               variant="outlined"
               type="text"
               label="Area"
               onChange={handleChange}
-                value={formData.address}
+              value={formData.address}
             />
-
             <TextField
               required={true}
               size="small"
@@ -332,7 +328,6 @@ function StudentRegistration({ setDialogs }) {
               onChange={(e) => {
                 setImage(e.target.files[0]);
               }}
-              
             />
           </div>
           <button

@@ -1,14 +1,9 @@
-import { Spinner } from '@material-tailwind/react'
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 function StudentLayout() {
-    const studenttoken=localStorage.getItem('user-token')
-  return (
-    <>
-      {studenttoken ? <Outlet/>: <Spinner/>}
-    </>
-  )
+  const studenttoken = localStorage.getItem("user-token");
+  return <>{studenttoken ? <Outlet /> : "Login in to account"}</>;
 }
 
-export default StudentLayout
+export default StudentLayout;

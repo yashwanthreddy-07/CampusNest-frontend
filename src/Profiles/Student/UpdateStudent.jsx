@@ -31,7 +31,6 @@ function UpdateStudent() {
       image: userdetails.user.profile_image,
     });
   };
-  
 
   useEffect(() => {
     getUser();
@@ -86,14 +85,14 @@ function UpdateStudent() {
 
     const response = await fetch("http://localhost:5000/get/update-profile", {
       headers: {
-      "x-auth-token": localStorage.getItem("user-token"),
-    },
+        "x-auth-token": localStorage.getItem("user-token"),
+      },
       method: "PUT",
       body: formDataToSend,
     });
     const data = await response.json();
     console.log(response);
-    debugger
+    debugger;
     if (data.success) {
       toast.success("Registered succesfully", {
         position: "top-right",
@@ -102,7 +101,7 @@ function UpdateStudent() {
         theme: "dark",
         transition: Bounce,
       });
-      navigate('/user/profile')
+      navigate("/user/profile");
       setOpen(false);
     } else {
       toast.error(response.errors[0].msg, {
@@ -378,7 +377,6 @@ function UpdateStudent() {
             <div className="flex flex-col ">
               <p>Profile Photo</p>
               <TextField
-                required={true}
                 size="small"
                 name="photo"
                 type="file"

@@ -59,21 +59,21 @@ function OwnerProfile() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
             <Link
-              to="/profile"
+              to="/owner/profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
             <NavLink
-              to="/updateprofile"
+              to="/owner/updateprofile"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/owner/security"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -85,25 +85,25 @@ function OwnerProfile() {
       <div className="mx-20 2xl:justify-center flex">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50  items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
-            <img src={userlogo} className="w-[100px]" />
-            <p>Owner Name</p>
+            <img src={ownerData.profile_image} className="w-[100px]" />
+            <p>{ownerData.name}</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
             <NavLink
-              to="/profile"
+              to="/owner/profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/updateprofile"
+              to="/owner/updateprofile"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/owner/security"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -123,55 +123,50 @@ function OwnerProfile() {
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Age</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300">
-              21
+              {ownerData.age}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Date of Birth</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              07/11/2002
+              {ownerData.dob}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Email</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              student@gmail.com
+              {ownerData.email}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Phone Number</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              789456123
+              {ownerData.phno}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Gender</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              M
+              {ownerData.gender}
             </p>
           </div>
-          <div className="flex flex-col gap-y-1 ">
-            <p className="font-serif font-semibold text-lg">Course</p>
-            <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              efg Course
-            </p>
-          </div>
+          
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Ownership Type</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              Owner
+              {ownerData.owner}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Unique ID</p>
-            <p className="font-medium text-md text-gray-800 ">789654123321</p>
+            <p className="font-medium text-md text-gray-800 ">{ownerData.uin}</p>
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Address</p>
             <div className="flex gap-5 border-2 p-1 border-gray-300">
-              <p className="font-medium text-md text-gray-800 ">Area</p>
-              <p className="font-medium text-md text-gray-800 ">state</p>
-              <p className="font-medium text-md text-gray-800 ">COuntry</p>
+              <p className="font-medium text-md text-gray-800 ">{ownerData.address}</p>
+              <p className="font-medium text-md text-gray-800 ">{ownerData.state}</p>
+              <p className="font-medium text-md text-gray-800 ">{ownerData.country}</p>
             </div>
           </div>
           <div className="flex flex-col gap-y-1 ">

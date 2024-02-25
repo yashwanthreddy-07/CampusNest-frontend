@@ -17,6 +17,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     Aos.init();
   });
   const [open, setOpen] = useState(true);
+  const [image, setImage] = useState(null);
   // const [loading, setLoading]=useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -26,6 +27,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     phno: "",
     gender: "",
     uin: "",
+    address: "",
     state: "",
     country: "",
     pincode: "",
@@ -42,14 +44,39 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //   setLoading(true)
-    toast.success("Registration successfull", {
-      autoClose: 2000,
-      closeOnClick: true,
-      theme: "dark",
-      transition: Bounce,
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("dob", formData.dob);
+    formDataToSend.append("phno", formData.phnno);
+    formDataToSend.append("gender", formData.gender);
+    formDataToSend.append("state", formData.state);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append("country", formData.country);
+    formDataToSend.append("pincode", formData.pincode);
+    formDataToSend.append("uin", formData.uin);
+    formDataToSend.append("ownership", formData.ownership);
+    formDataToSend.append("image", image);
+
+    const response = await fetch("http://localhost:5000/auth/owner-signup", {
+      method: "POST",
+      body: formDataToSend,
     });
-    const response = await signupOwner(formData);
+    const data = await response.json();
+    if (data.success) {
+      toast.success("Registration successfull", {
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+      Navigate("/");
+    } else {
+      toast.error(data.error);
+      console.log(data.error);
+    }
+
     if (response.success) {
       localStorage.setItem("owner-token", response.authToken);
       toast.success("Registered succesfully", {
@@ -62,7 +89,6 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
       setIsLoggedIn(true);
       setOpen(false);
     } else {
-      setLoading(false);
       toast.error(response.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
@@ -208,17 +234,17 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
               value={formData.uin}
             />
           </div>
-          <div className="flex gap-5 items-center">
+          <div className="flex gap-5 flex-wrap items-center">
             <p>Address</p>
             <TextField
-              // required={true}
+              required={true}
               size="small"
               name="area"
               variant="outlined"
               type="text"
               label="Area"
               onChange={handleChange}
-              //   value={formData.area}
+              value={formData.area}
             />
             <TextField
               required={true}
@@ -255,12 +281,13 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
             <p>Profile Photo</p>
             <TextField
               size="small"
-              name="name"
+              name="photo"
               type="file"
               variant="standard"
               className="flex items-center"
-              onChange={handleChange}
-              //   value={formData.photo}
+              onChange={() => {
+                setImage(e.target.files[0]);
+              }}
             />
           </div>
           <button
