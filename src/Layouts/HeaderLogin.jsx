@@ -38,7 +38,7 @@ function HeaderLogin({ setIsLoggedIn }) {
           </Link>
 
           <Link
-            to={`/${loginUserRole}/dashboard/notification`}
+            to={`/${loginUserRole}/dashboard/notifications`}
             className="relative cursor-pointer hover:scale-105 hover:underline hover:text-dblue transition-transform duration-300 hover"
           >
             DashBoard
@@ -95,7 +95,7 @@ function HeaderLogin({ setIsLoggedIn }) {
           </div>
         </div>
       </nav>
-      <nav className="sticky top-0  w-full md:hidden  ">
+      <nav className="sticky top-0 z-10 w-full md:hidden  ">
         <div className="px-5 flex justify-between  items-center h-[50px] bg-gray-50 border-b-2 border-gray-200">
           <div className="font-bold text-dblue text-[20px]">
             <Link to="/">CampusNest</Link>
@@ -126,7 +126,7 @@ function HeaderLogin({ setIsLoggedIn }) {
             {" "}
             Profile
           </Link>
-          <Link to={`/${loginUserRole}/dashboard/notification`} className="cursor-pointer">
+          <Link to={`/${loginUserRole}/dashboard/notifications`} className="cursor-pointer">
             DashBoard
           </Link>
 

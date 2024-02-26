@@ -35,7 +35,7 @@ function Home() {
     <Layouts>
       <div className="">
         <div className="bg-home2 bg-cover bg-bottom  max-w-[1550px] h-[400px] flex flex-col justify-end items-center  ">
-          <p className="mb-20 px-16  md:mb-28 text-center w-[450px] md:w-[750px]  text-orange-600 md:text-orange-900 md:brightness-200 text-opacity-100  font-bold text-lg md:text-2xl">
+          <p className="mb-20 px-16  md:mb-28 text-center w-[400px] md:w-[750px]  text-orange-600 md:text-orange-900 md:brightness-200 text-opacity-100  font-bold text-[16px] md:text-2xl">
             {" "}
             From Campus to Cozy: Your Roommate-Matchmaker Starts Now!
           </p>
@@ -251,7 +251,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="relative my-14  md:w-full">
+        <div className="relative mt-14  md:w-full">
           <p
             id="leftbutton"
             onClick={handleleft}
@@ -264,7 +264,7 @@ function Home() {
             className="flex overflow-auto mx-2 md:mx-20  scroll-smooth scrollbar-hide "
           >
             <div className="flex gap-x-10 md:mx-10 md:ml-5">
-              <div className="border-2 text-[18px] w-[400px]  py-3 rounded-xl bg-gray-50">
+              <div className="border-2 text-[18px] w-[390px] md:w-[400px] py-3 rounded-xl bg-gray-50">
                 <div className="flex items-center font-medium  gap-3 border-b-2 px-10 py-2">
                   <img src={home1} className="w-14 h-14 rounded-full" />
                   <p>Username</p>
@@ -357,7 +357,10 @@ function Home() {
             chevron_right
           </span>
         </div>
-        <div className="flex  items-center justify-end mb-10 mr-24">
+        <span className="flex justify-center mb-14 material-symbols-outlined md:hidden">
+          steppers
+        </span>
+        <div className="flex  items-center  justify-center md:justify-end mb-10 md:mr-24">
           <p>Your feedback means a lot</p>
           <span className="material-symbols-outlined mr-5">
             arrow_right_alt

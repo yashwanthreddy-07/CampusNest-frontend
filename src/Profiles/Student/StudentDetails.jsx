@@ -44,7 +44,7 @@ function StudentDetails() {
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px] "
+          className="mt-[50px]"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">
@@ -63,6 +63,10 @@ function StudentDetails() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
+          <div className="font-bold text-dblue text-xl flex flex-col items-center">
+            <img src={userData.profile_image} className="w-[100px]" />
+            <p>{userData.name}</p>
+          </div>
             <Link
               to="/user/profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
@@ -70,18 +74,24 @@ function StudentDetails() {
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
-            <NavLink to="/user/updateprofile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/update-profile"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/user/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/security"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 2xl:justify-center flex">
+      <div className="md:mx-14 mx-2 2xl:justify-center flex">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50  items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={userData.profile_image} className="w-[100px]" />
@@ -94,18 +104,24 @@ function StudentDetails() {
             >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
-            <NavLink to="/user/update-profile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/update-profile"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
-            <NavLink to="/user/security" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/security"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">lock</span>
               security
             </NavLink>
           </div>
         </div>
 
-        <div className=" ml-10   md:ml-24  flex-col gap-y-3 w-[750px]">
+        <div className="md:ml-24 mb-10 flex-col gap-y-3 w md:w-[750px]">
           <p className="font-bold text-xl my-5 ">Personal Details</p>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Name</p>
@@ -162,14 +178,24 @@ function StudentDetails() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-y-1 ">
+          <div className="flex  flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Address</p>
-            <div className="flex gap-5 border-2 p-1 border-gray-300">
-              <p className="font-medium text-md text-gray-800 ">{userData.address}</p>
-              <p className="font-medium text-md text-gray-800 ">{userData.district}</p>
-              <p className="font-medium text-md text-gray-800 ">{userData.pincode}</p>
-              <p className="font-medium text-md text-gray-800 ">{userData.state}</p>
-              <p className="font-medium text-md text-gray-800 ">{userData.country}</p>
+            <div className="flex flex-wrap gap-5 border-2 p-1 border-gray-300">
+              <p className="font-medium text-md text-gray-800 ">
+                {userData.address}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {userData.district}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {userData.state}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {userData.country}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {userData.pincode}
+              </p>
             </div>
           </div>
           <div className="flex flex-col gap-y-1 ">
@@ -184,7 +210,6 @@ function StudentDetails() {
               {userData.interests}
             </p>
           </div>
-          
         </div>
       </div>
     </Layouts>

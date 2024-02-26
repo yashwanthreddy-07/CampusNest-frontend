@@ -33,7 +33,7 @@ function StudentBooking() {
           onClick={() => {
             setOpen(true);
           }}
-          className="flex items-center p-2 border-b-2 text-lg font-medium 2xl:justify-center cursor-pointer"
+          className="flex items-center p-2 border-b-2 text-lg font-medium 2xl:  justify-center cursor-pointer"
         >
           <span className="material-symbols-outlined">dashboard</span>Dashboard
         </p>
@@ -63,27 +63,27 @@ function StudentBooking() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
-              to="/dashboard/notification"
-              className="text-dblue  font-bold flex items-center gap-2 hover:scale-110 transition-transform duration-300 "
+              to="/user/dashboard/notifications"
+              className="flex items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
               Notifications
             </Link>
             <Link
-              to="/dashboard/bookings"
+              to="/user/dashboard/bookings"
               className="flex text-dblue  font-bold items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">bed</span>Bookings
             </Link>
             <Link
-              to="/dashboard/payments"
+              to="/user/dashboard/payments"
               className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
               payments
             </Link>
             <Link
-              to="/chat"
+              to="/user/chat"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">chat</span>Chat
@@ -94,26 +94,26 @@ function StudentBooking() {
       <div className="mx-10 md:ml-24 flex h-[100vh] overflow-y-auto 2xl:justify-center gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
-            to="/dashboard/notification"
+            to="/user/dashboard/notifications"
             className="flex  items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
             Notifications
           </Link>
           <Link
-            to="/dashboard/bookings"
+            to="/user/dashboard/bookings"
             className="flex items-center text-dblue  font-bold gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">bed</span>Bookings
           </Link>
           <Link
-            to="/dashboard/payments"
+            to="/user/dashboard/payments"
             className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>payments
           </Link>
           <Link
-            to="/chat"
+            to="/user/chat"
             className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">chat</span>Chat
