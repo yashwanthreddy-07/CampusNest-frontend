@@ -1,30 +1,33 @@
 import React, { useEffect, useState } from "react";
 import Layouts from "../../Layouts/Layouts";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import userlogo from "../../assets/userlogo.jpg";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import { getOwnerDetails } from "../../Apis/apicalls";
+import { Bounce, toast } from "react-toastify";
 // import { appendFile } from "fs";
 function UpdateOwner() {
   const [ownerData, setOwnerData] = useState({});
+  const navigate=useNavigate()
   const getOwner = async () => {
     const ownerdetails = await getOwnerDetails();
     setOwnerData(ownerdetails.owner);
     setFormData({
-      name: ownerData.owner.name,
+      name: ownerdetails.owner.name,
       password: "",
-      email: ownerData.owner.email,
-      dob: ownerData.owner.dob,
-      phnno: ownerData.owner.phno,
-      gender: ownerData.owner.gender,
-      uin: ownerData.owner.uin,
-      ownership: ownerData.owner.ownership,
-      address: userdetails.user.address,
-      state: userdetails.user.state,
-      country: userdetails.user.country,
-      pincode: userdetails.user.pincode,
-      image: userdetails.user.profile_image,
+      email: ownerdetails.owner.email,
+      dob: ownerdetails.owner.dob,
+      phno: ownerdetails.owner.phno,
+      gender: ownerdetails.owner.gender,
+      uin: ownerdetails.owner.uin,
+      ownership: ownerdetails.owner.ownership,
+      address: ownerdetails.owner.address,
+      state: ownerdetails.owner.state,
+      country: ownerdetails.owner.country,
+      pincode: ownerdetails.owner.pincode,
+      image: ownerdetails.owner.profile_image,
     });
+    setImage(ownerdetails.owner.profile_image)
   };
   useEffect(() => {
     getOwner();
@@ -61,18 +64,18 @@ function UpdateOwner() {
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
     formDataToSend.append("dob", formData.dob);
-    formDataToSend.append("phno", formData.phnno);
+    formDataToSend.append("phno", formData.phno);
     formDataToSend.append("gender", formData.gender);
     formDataToSend.append("state", formData.state);
     formDataToSend.append("address", formData.address);
     formDataToSend.append("country", formData.country);
     formDataToSend.append("pincode", formData.pincode);
     formDataToSend.append("uin", formData.uin);
-    formDataToSend, append("ownership", formData.ownership);
+    formDataToSend.append("ownership", formData.ownership);
     formDataToSend.append("image", image);
-
-    const response = await fetch("http://localhost:5000/get/update-profile", {
-      header: {
+console.log(localStorage.getItem("owner-token"), "slddf")
+    const response = await fetch("http://localhost:5000/get/update-owner-profile", {
+      headers: {
         "x-auth-token": localStorage.getItem("owner-token"),
       },
       method: "PUT",
@@ -89,7 +92,7 @@ function UpdateOwner() {
         theme: "dark",
         transition: Bounce,
       });
-      navigate("/user/profile");
+      navigate("/owner/profile");
       setOpen(false);
     } else {
       toast.error(response.errors[0].msg, {
@@ -151,7 +154,7 @@ function UpdateOwner() {
               Personal
             </Link>
             <NavLink
-              to="/owner/updateprofile"
+              to="/owner/update-profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
@@ -170,8 +173,8 @@ function UpdateOwner() {
       <div className="mx-20 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
-            <img src={userlogo} className="w-[100px]" />
-            <p>Student Name</p>
+            <img src={image} className="w-[100px]" />
+            <p>{formData.name}</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
             <NavLink
@@ -181,7 +184,7 @@ function UpdateOwner() {
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/owner/updateprofile"
+              to="/owner/update-profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
@@ -279,14 +282,15 @@ function UpdateOwner() {
               <TextField
                 required={true}
                 size="small"
-                name="area"
+                name="address"
                 variant="outlined"
                 type="text"
-                label="Area"
+                label="Address"
                 onChange={handleChange}
-                value={formData.area}
+                value={formData.address}
               />
               <TextField
+                
                 size="small"
                 name="state"
                 variant="outlined"
@@ -317,6 +321,8 @@ function UpdateOwner() {
             <div className="flex flex-col ">
               <p>Profile Photo</p>
               <TextField
+                required={true}
+                
                 size="small"
                 name="name"
                 type="file"

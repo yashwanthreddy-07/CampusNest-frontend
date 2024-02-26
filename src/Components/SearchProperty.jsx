@@ -23,7 +23,7 @@ function SearchProperty() {
   useEffect(() => {
     getRooms();
     Aos.init();
-  });
+  },[]);
   return (
     <Layouts>
       <div className="md:mx-24 mx-3 my-10">
@@ -107,31 +107,29 @@ function SearchProperty() {
             className="md:w-1/2 lg:w-1/3 2xl:w-1/4 flex flex-col gap-y-3 font-medium text-[20px] p-3 mb-10"
           >
             <img src={home1} className="w-full" />
-            <p>Room Title</p>
+            <p>{room.name}</p>
             <p className="font-normal text-sm text-gray-600 line-clamp-3 h-[63px]">
-              Room description Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Laboriosam eos temporibus omnis animi quas
-              provident nemo dicta sed. Aperiam eligendi magnam accusantium
-              labore maiores. Reiciendis.
+              {room.description}
             </p>
             <p className="text-gray-600 text-lg">Distance</p>
             <div className="flex flex-shrink justify-between items-center">
               <div>
                 <p>Address</p>
                 <div className="text-sm flex  gap-5 text-gray-600">
-                  <p>Area</p>
-                  <p>state</p>
-                  <p>country</p>
+                  <p>{room.address}</p>
+                  <p>{room.pincode}</p>
+                  <p>{room.state}</p>
+                  <p>{room.country}</p>
                 </div>
               </div>
               <div>
                 <p>Price</p>
-                <p className="text-sm  text-gray-600">$100</p>
+                    <p className="text-sm  text-gray-600">${room.price}</p>
               </div>
             </div>
             <button
               onClick={() => {
-                navigate("/property");
+                navigate(`/property/${room.id}`);
               }}
               className="border-2 w-[75%] mx-auto rounded-md bg-gray-100 shadow-lg text-dblue mt-3 hover:scale-110 transition-transform duration-300"
             >

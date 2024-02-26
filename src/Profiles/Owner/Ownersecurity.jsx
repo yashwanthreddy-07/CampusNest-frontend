@@ -116,7 +116,7 @@ function OwnerSecurity() {
               Personal
             </Link>
             <NavLink
-              to="/updateprofile"
+              to="/update-profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
@@ -146,7 +146,7 @@ function OwnerSecurity() {
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/updateprofile"
+              to="/update-profile"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update

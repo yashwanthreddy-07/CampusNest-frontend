@@ -17,7 +17,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     Aos.init();
   });
   const [open, setOpen] = useState(true);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
   // const [loading, setLoading]=useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -48,8 +48,9 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
+    formDataToSend.append("password", formData.password);
     formDataToSend.append("dob", formData.dob);
-    formDataToSend.append("phno", formData.phnno);
+    formDataToSend.append("phno", formData.phno);
     formDataToSend.append("gender", formData.gender);
     formDataToSend.append("state", formData.state);
     formDataToSend.append("address", formData.address);
@@ -65,20 +66,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     });
     const data = await response.json();
     if (data.success) {
-      toast.success("Registration successfull", {
-        autoClose: 2000,
-        closeOnClick: true,
-        theme: "dark",
-        transition: Bounce,
-      });
-      Navigate("/");
-    } else {
-      toast.error(data.error);
-      console.log(data.error);
-    }
-
-    if (response.success) {
-      localStorage.setItem("owner-token", response.authToken);
+      localStorage.setItem("owner-token", data.authToken);
       toast.success("Registered succesfully", {
         position: "top-right",
         autoClose: 2000,
@@ -87,14 +75,18 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
         transition: Bounce,
       });
       setIsLoggedIn(true);
-      setOpen(false);
+      setDialogs((prev) => { 
+        return { ...prev, or: false}
+      })
     } else {
-      toast.error(response.errors[0].msg, {
+      
+      toast.error(data.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
         transition: Bounce,
       });
+      console.error("Error:", data);
     }
   };
 
@@ -239,12 +231,12 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
             <TextField
               required={true}
               size="small"
-              name="area"
+              name="address"
               variant="outlined"
               type="text"
-              label="Area"
+              label="address"
               onChange={handleChange}
-              value={formData.area}
+              value={formData.address}
             />
             <TextField
               required={true}
@@ -285,7 +277,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
               type="file"
               variant="standard"
               className="flex items-center"
-              onChange={() => {
+              onChange={(e) => {
                 setImage(e.target.files[0]);
               }}
             />

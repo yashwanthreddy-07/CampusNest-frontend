@@ -12,7 +12,7 @@ import { Bounce, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
-function StudentRegistration({ setDialogs }) {
+function StudentRegistration({ setDialogs, setIsLoggedIn }) {
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -65,18 +65,9 @@ function StudentRegistration({ setDialogs }) {
       body: formDataToSend,
     });
     const data = await response.json();
+    console.log(data, "lklk")
     if (data.success) {
-      toast.success("Registration Successfully");
-
-      navigate("/");
-      setShow("properties");
-    } else {
-      toast.error(data.errors);
-      console.error("Error:", data);
-    }
-
-    if (response.success) {
-      localStorage.setItem("user-token", response.authToken);
+      localStorage.setItem("user-token", data.authToken);
       toast.success("Registered succesfully", {
         position: "top-right",
         autoClose: 2000,
@@ -85,14 +76,18 @@ function StudentRegistration({ setDialogs }) {
         transition: Bounce,
       });
       setIsLoggedIn(true);
-      setOpen(false);
+      setDialogs((prev) => { 
+        return {...prev, sr: false}
+      })
     } else {
-      toast.error(response.errors[0].msg, {
+      
+      toast.error(data.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
         transition: Bounce,
       });
+      console.error("Error:", data);
     }
   };
   const [open, setOpen] = useState(true);

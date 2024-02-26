@@ -66,7 +66,7 @@ function OwnerProfile() {
               Personal
             </Link>
             <NavLink
-              to="/owner/updateprofile"
+              to="/owner/update-profile"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
@@ -96,7 +96,7 @@ function OwnerProfile() {
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/owner/updateprofile"
+              to="/owner/update-profile"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
@@ -154,7 +154,7 @@ function OwnerProfile() {
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Ownership Type</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
-              {ownerData.owner}
+              {ownerData.ownership}
             </p>
           </div>
           <div className="flex flex-col gap-y-1 ">
@@ -169,13 +169,7 @@ function OwnerProfile() {
               <p className="font-medium text-md text-gray-800 ">{ownerData.country}</p>
             </div>
           </div>
-          <div className="flex flex-col gap-y-1 ">
-            <p className="font-serif font-semibold text-lg">Documents</p>
-            <div>
-              <p>doc1</p>
-              <p>doc2</p>
-            </div>
-          </div>
+          
         </div>
       </div>
     </Layouts>

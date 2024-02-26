@@ -6,7 +6,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { getAllRooms } from "../Apis/apicalls";
+import { getAllRooms, getRoomDetails } from "../Apis/apicalls";
 import { useNavigate } from "react-router-dom";
 function Property() {
    const { id } = useParams();
@@ -27,20 +27,14 @@ function Property() {
       Aos.init();
     });
     
-  const getRooms = async () => {
-    const res = await getAllRooms();
-    setAllRooms(res.rooms);
-    const initialIndices = res.rooms.reduce((acc, room, index) => {
-      acc[index] = 0;
-      return acc;
-    }, {});
-    setCurrentImageIndices(initialIndices);
+  const getRoom = async () => {
+    const room = await getRoomDetails({ roomId: id });
+    setRoom(room?.room);
   };
-
   useEffect(() => {
-    getRooms();
+    getRoom();
   }, []);
-
+ 
   return (
     <Layouts>
       <div className="md:mx-24 md:my-10 m-5 2xl:mx-56">
@@ -79,23 +73,21 @@ function Property() {
       </div>
       <div className="my-10 flex flex-wrap md:mx-24 mx-5">
         <div className="flex-shrink md:w-1/2">
-          <p className="font-medium text-2xl">Room Title</p>
+          <p className="font-medium text-2xl">{room?.name}</p>
           <div className="text-gray-800 flex gap-5">
-            <p>No of bedrooms:1</p>
-            <p>No of bathrooms:1</p>
-            <p>People allowed to stay :2</p>
+            <p>No of bedrooms:{room?.bedrooms}</p>
+            <p>No of bathrooms:{room?.bathrooms}</p>
+            <p>People allowed to stay :{room?.slots}</p>
           </div>
           <p className="h-[100px] my-5 border-2 p-2 text-justify  text-wrap">
-            Description : Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. A voluptates beatae amet in sit eaque ab facilis cum, aliquid
-            ex!
+            {room?.description}
           </p>
           <p className="font-medium text-xl">Address:</p>
           <div className="flex flex-col gap-2 text-gray-800">
-            <p>Area</p>
-            <p>State</p>
-            <p>Country</p>
-            <p>Pincode</p>
+            <p>{room?.address}</p>
+            <p>{room?.state}</p>
+            <p>{room?.country}</p>
+            <p>{room?.pincode}</p>
           </div>
         </div>
         <div className="flex flex-col gap-5 text-xl font-medium mt-10 md:ml-10">
@@ -106,7 +98,7 @@ function Property() {
               Link
             </NavLink>
           </div>
-          <p className="ml-2">Owned by : owner Name</p>
+          <p className="ml-2">Owned by : {room?.owner?.name}</p>
           <div className="ml-2 flex items-center">
             Request to book Your Room
             <span className="material-symbols-outlined">arrow_forward</span>

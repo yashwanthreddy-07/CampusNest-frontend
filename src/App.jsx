@@ -26,6 +26,7 @@ import AdminLayout from "./Dashboards/Admin/AdminLayout";
 import OwnerRequest from "./Dashboards/Admin/OwnerRequest";
 import StudentRequest from "./Dashboards/Admin/StudentRequest";
 import AdminNotification from "./Dashboards/Admin/AdminNotification";
+import Property from "./Components/Property";
 function App() {
   return (
     <>
@@ -74,6 +75,7 @@ function App() {
 
           <Route path="/" element={<Home />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/property/:id" element={<Property />} />
           <Route path="/searchproperty" element={<SearchProperty />} />
         </Routes>
         <ToastContainer />

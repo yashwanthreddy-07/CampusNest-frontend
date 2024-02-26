@@ -70,7 +70,7 @@ function StudentDetails() {
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
-            <NavLink to="/user/updateprofile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink to="/user/update-profile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
