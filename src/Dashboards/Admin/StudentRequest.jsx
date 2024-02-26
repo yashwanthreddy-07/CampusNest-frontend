@@ -113,7 +113,7 @@ function StudentRequest() {
           <p className="text-xl font-medium">Student Requests</p>
           <div className="flex flex-col gap-y-2 text-lg text-gray-800">
             {allPendingUserRequests.map((slots) => {
-              <>
+              return <>
                 {" "}
                 <p className="text-lg font-semibold text-gray-700 text-center">
                   Request Made for room {slots.id} - {slots.room.name}

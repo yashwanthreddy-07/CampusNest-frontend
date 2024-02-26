@@ -81,7 +81,7 @@ function OwnerChat() {
         <div className="w-1/3  lg:w-1/4 border-r-2 bg-white overflow-y-auto ">
           <div className="border-b-2 pl-2 items-center flex gap-5 py-2">
             <img
-              src={userlogo}
+              src={userData?.profile_image}
               className="w-10 h-10 border-gray-300 border-2 rounded-full"
             ></img>
             <p className="text-md">{userData.name}</p>
@@ -95,7 +95,7 @@ function OwnerChat() {
                 }}
               >
                 <img
-                  src={userlogo}
+                  src={user.user?.profile_image}
                   className="w-10 h-10  mt-1 border-gray-300 border-2 rounded-full"
                 ></img>
                 <div className="">
@@ -120,7 +120,7 @@ function OwnerChat() {
         <div className="w-full flex flex-col  h-[screen]">
           <div className="flex items-center border-b-2 pl-3 gap-5 py-2">
             <img
-              src={userlogo}
+              src={selectedUser?.profile_image}
               className="w-10 h-10 border-gray-300 border-2 rounded-full"
             />
             <div className="font-body">
@@ -133,6 +133,7 @@ function OwnerChat() {
             <div className="flex-1 overflow-y-auto px-4 py-2 bg-gray-100">
               {/* Chat messages go here */}
               {/* Example message: */}
+              {!selectedUser && 'no user is eligible for chat'}
               {messages?.map((msg) => {
                 return (
                   <div
@@ -162,6 +163,7 @@ function OwnerChat() {
                 type="text"
                 value={message}
                 onChange={handleMessageChange}
+                disabled={!selectedUser}
                 placeholder="Type your message..."
                 className="flex-1 px-4 py-2 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-gray-600"
               />

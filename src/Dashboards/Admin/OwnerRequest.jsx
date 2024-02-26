@@ -135,6 +135,7 @@ function OwnerRequest() {
           <p className="text-xl  font-medium ">Owner Requests</p>
           {allPendingRooms.map((room) => {
             const images = room?.images;
+            return(
             <div>
               <div className="xl:flex">
                 <p className="text-lg font-semibold text-gray-700 text-center">
@@ -217,7 +218,8 @@ function OwnerRequest() {
                   Reject
                 </button>
               </div>
-            </div>;
+              </div>
+            )
           })}
         </div>
       </div>

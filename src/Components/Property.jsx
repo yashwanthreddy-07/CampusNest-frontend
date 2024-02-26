@@ -6,35 +6,83 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { getAllRooms, getRoomDetails } from "../Apis/apicalls";
+import { getAllRooms, getRoomDetails, getUserDetails } from "../Apis/apicalls";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 function Property() {
-   const { id } = useParams();
+    const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const getUser = async () => {
+    const userdetails = await getUserDetails();
+    setUserData(userdetails.user);
+  }
+  const { id } = useParams();
   const [room, setRoom] = useState({});
   const [open, setOpen] = useState(false);
   const [allRooms, setAllRooms] = useState([]);
   const [requestOpen, setRequestOpen] = useState(false);
+  const [doj, setDoj] = useState();
+  const [docs, setDocs] = useState();
+  const [collegeLetter, setcollegeLetter] = useState();
+  const [idProof, setIdProof] = useState();
+  const [visa, setVasa] = useState();
   const handleclose = () => {
     setOpen(false);
   };
-  const handlesubmit = () => {
-    setRequestOpen(false);
+  const handlesubmit = async () => {
+
+    try {
+      
+      const formDataToSend = new FormData();
+      formDataToSend.append("doj", doj);
+      formDataToSend.append("college_letter", collegeLetter);
+      formDataToSend.append("id_proof", idProof);
+      formDataToSend.append("visa", visa);
+      formDataToSend.append("docs", docs);
+
+      formDataToSend.append("roomId", id);
+      console.log(doj, docs, "dlfkg", formDataToSend);
+      const response = await fetch("http://localhost:5000/request-room", {
+        method: "POST",
+        headers: {
+          "x-auth-token": localStorage.getItem("user-token"),
+        },
+        body: formDataToSend,
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success("Room Requested Successfully");
+
+        navigate("/user/dashboard/bookings");
+        setRequestOpen(false);
+
+      } else {
+        // setOpen(false);
+        toast.error(data.error);
+        console.error("Error:", data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
   };
   const handlerequestClose = () => {
     setRequestOpen(false);
   };
-    useEffect(() => {
-      Aos.init();
-    });
-    
+  useEffect(() => {
+    Aos.init();
+  });
+
   const getRoom = async () => {
     const room = await getRoomDetails({ roomId: id });
     setRoom(room?.room);
   };
   useEffect(() => {
     getRoom();
+    getUser()
   }, []);
- 
+
   return (
     <Layouts>
       <div className="md:mx-24 md:my-10 m-5 2xl:mx-56">
@@ -160,13 +208,13 @@ function Property() {
         </DialogTitle>
         <DialogContent className="text-lg  text-justify font-medium   ">
           <p className="flex gap-2">
-            Student Name: &nbsp; <p>Name</p>
+            Student Name: &nbsp; <p>{userData.name}</p>
           </p>
           <p className="flex gap-2">
-            College Name: &nbsp; <p>College_Name</p>
+            College Name: &nbsp; <p>{userData.college_name}</p>
           </p>
           <p className="flex gap-16">
-            Course: &nbsp; <p>Course_Name</p>
+            Course: &nbsp; <p>{userData.course}</p>&emsp;
           </p>
           <div className="flex text-[14px]  mt-5">
             <p className="flex items-center w-1/2 gap-1">
@@ -174,7 +222,7 @@ function Property() {
               <span className="material-symbols-outlined ">attach_file</span>
               College Admission letter:
             </p>
-            <input type="file" className="ml-5" />
+            <input type="file" onChange={(e)=>setcollegeLetter(e.target.files[0])} className="ml-5" />
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
@@ -184,13 +232,13 @@ function Property() {
               </span>
               ID Proof:
             </p>
-            <input type="file" className="ml-5" />
+            <input type="file" className="ml-5" onChange={(e)=>setIdProof(e.target.files[0])} />
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
               <span className="material-symbols-outlined ">flight</span>Visa
             </p>
-            <input type="file" className="ml-5" />
+            <input type="file" className="ml-5" onChange={(e)=>setVasa(e.target.files[0])}/>
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
@@ -199,11 +247,11 @@ function Property() {
               </span>
               Other documents
             </p>
-            <input type="file" className="ml-5" />
+            <input type="file" className="ml-5" onChange={(e)=>setDocs(e.target.files[0])}/>
           </div>
           <div className="flex items-center mt-5 gap-x-4">
             Expected to Join:
-            <input type="date" className=" outline-none" />
+            <input type="date" className=" outline-none" onChange={(e)=>setDoj(e.target.value)} />
           </div>
         </DialogContent>
         <button

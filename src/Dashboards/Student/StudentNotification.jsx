@@ -81,7 +81,7 @@ function StudentNotification() {
               payments
             </Link>
             <Link
-              to="/chat"
+              to="/user/chat"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">chat</span>Chat
