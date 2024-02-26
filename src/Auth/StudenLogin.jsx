@@ -30,7 +30,7 @@ function StudenLogin({ setDialogs, setIsLoggedIn }) {
   };
   const handleSubmit = async (e) => {
     setLoading(true);
-    
+    console.log("login")
     e.preventDefault();
     const response = await  loginStudent(formData);
    

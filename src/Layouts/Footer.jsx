@@ -122,7 +122,7 @@ function Footer() {
             </Link>
             <div
               id="contactsm"
-              className="hidden -mt-28 ml-[70px] absolute max-w-[200px]  bg-gray-200 p-2 text-[16px] text-gray-600 border-2 rounded-md"
+              className="hidden  -mt-36 md:-mt-28  md:ml-[70px]  absolute max-w-[200px]  bg-gray-200 p-2 text-[16px] text-gray-600 border-2 rounded-md"
             >
               <p>
                 Contact us at : <br />

@@ -61,7 +61,7 @@ function StudentNotification() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
-              to="/user/dashboard/notification"
+              to="/user/dashboard/notifications"
               className="text-dblue flex font-bold  items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
@@ -92,7 +92,7 @@ function StudentNotification() {
       <div className="mx-10 md:ml-24 flex h-[70vh] 2xl:justify-center gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
-            to="/user/dashboard/notification"
+            to="/user/dashboard/notifications"
             className="text-dblue flex font-bold  items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
@@ -111,7 +111,7 @@ function StudentNotification() {
             <span className="material-symbols-outlined">payments</span>payments
           </Link>
           <Link
-            to="/chat"
+            to="/user/chat"
             className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">chat</span>Chat
