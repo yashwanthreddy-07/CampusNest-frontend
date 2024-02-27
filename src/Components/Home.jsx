@@ -12,8 +12,10 @@ import {
   TextField,
   TextareaAutosize,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
   useEffect(() => {
     Aos.init();
   });
@@ -32,6 +34,7 @@ function Home() {
   const handlefeedback = () => {
     setOpen(false);
   };
+
   return (
     <Layouts>
       <div className="">
@@ -46,6 +49,9 @@ function Home() {
               type="search"
               placeholder="Search location/College name"
               className="w-[350px] md:w-[650px] border-none outline-none focus:border-dblue"
+              onKeyDown={(e) => {
+                e.key === "Enter" && navigate("/searchproperty", {state: {searchQuery: e.target.value}});
+              }}
             />
           </div>
         </div>

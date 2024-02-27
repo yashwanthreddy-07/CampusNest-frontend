@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Layouts from "../Layouts/Layouts";
 import home1 from "../assets/home1.jpeg";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getAllRooms } from "../Apis/apicalls";
 import Aos from "aos";
 import "aos/dist/aos.css";
 function SearchProperty() {
- const [allRooms, setAllRooms] = useState([]);
+  const [allRooms, setAllRooms] = useState([]);
+  const { state } = useLocation();
+  
   const [filteredRooms, setFilteredRooms] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(state.searchQuery);
   const navigate = useNavigate();
   const [filteroption, seFilterOption] = useState("");
   const getRooms = async () => {
