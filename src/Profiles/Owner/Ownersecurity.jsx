@@ -89,7 +89,7 @@ function OwnerSecurity() {
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px] "
+          className="mt-[50px] md:hidden"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">
@@ -108,22 +108,26 @@ function OwnerSecurity() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
+            <div className="font-bold text-dblue text-xl flex flex-col items-center">
+              <img src={userlogo} className="w-[100px]" />
+              <p>OwnerName</p>
+            </div>
             <Link
-              to="/profile"
+              to="/owner/profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
             <NavLink
-              to="/update-profile"
+              to="/owner/update-profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/owner/security"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -132,28 +136,28 @@ function OwnerSecurity() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 2xl:justify-center flex flex-shrink">
+      <div className="md:mx-20 mx-2 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={userlogo} className="w-[100px]" />
-            <p>Student Name</p>
+            <p>Owner Name</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
             <NavLink
-              to="/profile"
+              to="/owner/profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
             <NavLink
-              to="/update-profile"
+              to="/owner/update-profile"
               className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
             <NavLink
-              to="/security"
+              to="/owner/security"
               className="flex gap-2 font-semibold text-dblue  items-center hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">lock</span>
@@ -162,7 +166,7 @@ function OwnerSecurity() {
           </div>
         </div>
 
-        <div className="flex flex-wrap mt-24 justify-between items-center w-[750px]">
+        <div className="flex flex-wrap md:mt-24 justify-between items-center w-[750px]">
           <form
             // onSubmit={handleSubmit}
             className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] md:w-1/2 w-full font-medium"

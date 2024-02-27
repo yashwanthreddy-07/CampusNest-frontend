@@ -42,7 +42,7 @@ function Property() {
 
       formDataToSend.append("roomId", id);
       console.log(doj, docs, "dlfkg", formDataToSend);
-      const response = await fetch("http://localhost:5000/request-room", {
+      const response = await fetch("https://campusnest-jwlf.onrender.com/request-room", {
         method: "POST",
         headers: {
           "x-auth-token": localStorage.getItem("user-token"),

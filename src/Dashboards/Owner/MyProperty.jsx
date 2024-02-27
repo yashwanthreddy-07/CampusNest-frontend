@@ -78,7 +78,7 @@ function MyProperty() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/update-room", {
+      const response = await fetch("https://campusnest-jwlf.onrender.com/update-room", {
         method: "PUT",
         headers: {
           "x-auth-token": localStorage.getItem("owner-token"),
@@ -143,7 +143,7 @@ function MyProperty() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
-              to="/owner/dashboard/notification"
+              to="/owner/dashboard/notifications"
               className=" flex  items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
@@ -166,7 +166,7 @@ function MyProperty() {
               Create Property
             </Link>
             <Link
-              to="/owner/chat"
+              to="/owner/dashboard/payments"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
@@ -184,7 +184,7 @@ function MyProperty() {
       <div className="mx-10 md:ml-24 2xl:justify-center flex   gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
-            to="/owner/dashboard/notification"
+            to="/owner/dashboard/notifications"
             className=" flex   items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
@@ -205,7 +205,7 @@ function MyProperty() {
             Property
           </Link>
           <Link
-            to="/owner/dashboard/createproperty"
+            to="/owner/dashboard/payments"
             className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>
@@ -226,18 +226,18 @@ function MyProperty() {
                 <div
                   data-aos="fade-up"
                   data-aos-duration="700"
-                  className="md:w-1/2 lg:w-1/3 2xl:w-1/4  flex flex-col gap-y-3 font-medium text-[20px] p-3 mb-10"
+                  className="md:w-1/2 lg:w-1/4   flex flex-col gap-y-3 font-medium text-[20px] p-3 mb-10"
                 >
                   <img src={property.images[0]} className="w-full" />
                   <p>{property.name}</p>
-                  <p className="font-normal text-sm text-gray-600 line-clamp-3 h-[63px]">
+                  <p className="font-normal text-sm text-gray-600 line-clamp-2  h-[36px]">
                     {property.description}
                   </p>
-                  <p className="text-lg">People allowed :{property.slots}</p>
+                  <p className="text-md">People allowed :{property.slots}</p>
                   <div className="flex flex-shrink justify-between items-center">
                     <div>
                       <p>Address</p>
-                      <div className="text-sm flex  gap-5 text-gray-600">
+                      <div className="text-sm text-gray-600">
                         <p>{property.address}</p>
                         <p>{property.state}</p>
                         <p>{property.pincode}</p>
@@ -285,7 +285,7 @@ function MyProperty() {
         onClose={handleCloseUpdate}
         hideBackdrop
         fullScreen
-        className="my-16 w-[800px] mx-auto "
+        className="my-16 md:w-[800px] mx-auto"
       >
         <form onSubmit={handleUpdateSubmit}>
           <DialogTitle className="flex items-center">
@@ -460,7 +460,7 @@ function MyProperty() {
           </DialogContent>
           <button
             type="submit"
-            className="px-4  py-2 font-medium rounded-md  border-2 mb-3 mx-auto border-gray-400 hover:scale-105 transition-transform duration-300"
+            className="px-4  py-2 font-medium rounded-md  border-2  mx-auto flex  border-gray-400 hover:scale-105 transition-transform duration-300"
           >
             Update
           </button>

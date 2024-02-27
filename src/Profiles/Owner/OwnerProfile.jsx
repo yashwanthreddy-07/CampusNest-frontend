@@ -39,7 +39,7 @@ function OwnerProfile() {
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px] "
+          className="mt-[50px] md:hidden"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">
@@ -58,6 +58,11 @@ function OwnerProfile() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
+          <div className="font-bold text-dblue text-xl flex flex-col items-center">
+            <img src={ownerData.profile_image} className="w-[100px]" />
+            <p>{ownerData.name}</p>
+          </div>
+
             <Link
               to="/owner/profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
@@ -82,7 +87,7 @@ function OwnerProfile() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 2xl:justify-center flex">
+      <div className="md:mx-20 mx-2 2xl:justify-center flex ">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50  items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={ownerData.profile_image} className="w-[100px]" />
@@ -112,7 +117,7 @@ function OwnerProfile() {
           </div>
         </div>
 
-        <div className=" ml-10   md:ml-24  flex-col gap-y-3 w-[750px]">
+        <div className="md:ml-24 mb-10 flex-col gap-y-3 w md:w-[750px]">
           <p className="font-bold text-xl my-5 ">Personal Details</p>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Owner Name</p>
@@ -150,7 +155,7 @@ function OwnerProfile() {
               {ownerData.gender}
             </p>
           </div>
-          
+
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Ownership Type</p>
             <p className="font-medium text-md text-gray-800 border-2 p-1 border-gray-300 ">
@@ -159,17 +164,27 @@ function OwnerProfile() {
           </div>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Unique ID</p>
-            <p className="font-medium text-md text-gray-800 ">{ownerData.uin}</p>
+            <p className="font-medium text-md text-gray-800 ">
+              {ownerData.uin}
+            </p>
           </div>
-          <div className="flex flex-col gap-y-1 ">
+          <div className="flex flex-col  gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Address</p>
-            <div className="flex gap-5 border-2 p-1 border-gray-300">
-              <p className="font-medium text-md text-gray-800 ">{ownerData.address}</p>
-              <p className="font-medium text-md text-gray-800 ">{ownerData.state}</p>
-              <p className="font-medium text-md text-gray-800 ">{ownerData.country}</p>
+            <div className=" border-2 p-1 border-gray-300">
+              <p className="font-medium text-md text-gray-800 ">
+                {ownerData.address}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {ownerData.state}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {ownerData.country}
+              </p>
+              <p className="font-medium text-md text-gray-800 ">
+                {ownerData.pincode}
+              </p>
             </div>
           </div>
-          
         </div>
       </div>
     </Layouts>

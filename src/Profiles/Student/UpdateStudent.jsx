@@ -83,7 +83,7 @@ function UpdateStudent() {
     formDataToSend.append("interests", formData.interests);
     formDataToSend.append("image", image);
 
-    const response = await fetch("http://localhost:5000/get/update-profile", {
+    const response = await fetch("https://campusnest-jwlf.onrender.com/get/update-profile", {
       headers: {
         "x-auth-token": localStorage.getItem("user-token"),
       },
@@ -135,7 +135,7 @@ function UpdateStudent() {
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px] "
+          className="mt-[50px] md:hidden"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">
@@ -154,6 +154,10 @@ function UpdateStudent() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
+          <div className="font-bold text-dblue text-xl flex flex-col items-center">
+            <img src={formData.profile_image} className="w-[100px]" />
+            <p>{formData.name}</p>
+          </div>
             <Link
               to="/user/profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
@@ -178,7 +182,7 @@ function UpdateStudent() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 2xl:justify-center flex flex-shrink">
+      <div className="md:mx-20 mx-2 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={formData.image} className="w-[100px]" />

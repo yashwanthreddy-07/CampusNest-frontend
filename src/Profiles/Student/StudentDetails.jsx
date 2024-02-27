@@ -44,7 +44,7 @@ function StudentDetails() {
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px]"
+          className="mt-[50px] md:hidden"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">

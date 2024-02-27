@@ -14,7 +14,7 @@ const callApi = async (endpoint, method, body, token) => {
       method: method,
       headers: headers,
     };
-
+    
     if (body !== null) {
       requestOptions.body = JSON.stringify(body);
     }

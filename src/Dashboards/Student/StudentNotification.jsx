@@ -117,7 +117,7 @@ function StudentNotification() {
             <span className="material-symbols-outlined">chat</span>Chat
           </Link>
         </div>
-        <div className="mt-10 flex flex-col gap-y-3 w-[700px]">
+        <div className="mt-10 flex flex-col gap-y-3 w-full">
           <p className="text-xl font-medium">Notifications</p>
           <p className="p-1 text-lg text-gray-700 line-clamp-1">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate

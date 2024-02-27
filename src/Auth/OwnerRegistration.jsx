@@ -60,7 +60,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     formDataToSend.append("ownership", formData.ownership);
     formDataToSend.append("image", image);
 
-    const response = await fetch("http://localhost:5000/auth/owner-signup", {
+    const response = await fetch("https://campusnest-jwlf.onrender.com/auth/owner-signup", {
       method: "POST",
       body: formDataToSend,
     });
@@ -79,7 +79,6 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
         return { ...prev, or: false}
       })
     } else {
-      
       toast.error(data.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,

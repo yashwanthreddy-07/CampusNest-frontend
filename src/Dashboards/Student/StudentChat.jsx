@@ -42,7 +42,7 @@ function StudentChat() {
 
   useEffect(() => {
     getChatMessagesForUser();
-    socket = io("http://localhost:5000", { transports: ["websocket"] });
+    socket = io("https://campusnest-jwlf.onrender.com", { transports: ["websocket"] });
     socket.on("chat message", (msg) => {
       console.log(
         msg.to,

@@ -83,7 +83,7 @@ function StudentSecurity() {
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px] "
+          className="mt-[50px] md:hidden"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">
@@ -120,7 +120,7 @@ function StudentSecurity() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 2xl:justify-center flex flex-shrink">
+      <div className="md:mx-20 mx-2 2xl:justify-center flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={userlogo} className="w-[100px]" />
@@ -144,7 +144,7 @@ function StudentSecurity() {
           </div>
         </div>
 
-        <div className="flex flex-wrap mt-24 justify-between items-center w-[750px]">
+        <div className="flex flex-wrap md:mt-24 justify-between items-center w-[750px]">
           <form
             // onSubmit={handleSubmit}
             className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] w-full md:w-1/2 font-medium"

@@ -60,7 +60,7 @@ function StudentRegistration({ setDialogs, setIsLoggedIn }) {
     formDataToSend.append("interests", formData.interests);
     formDataToSend.append("image", image);
 
-    const response = await fetch("http://localhost:5000/auth/student-signup", {
+    const response = await fetch("https://campusnest-jwlf.onrender.com/auth/student-signup", {
       method: "POST",
       body: formDataToSend,
     });

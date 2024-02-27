@@ -65,7 +65,7 @@ function CreateProperty() {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/create-room", {
+      const response = await fetch("https://campusnest-jwlf.onrender.com/create-room", {
         method: "POST",
         headers: {
           "x-auth-token": localStorage.getItem("owner-token"),
@@ -123,7 +123,7 @@ function CreateProperty() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
-              to="/owner/dashboard/notification"
+              to="/owner/dashboard/notifications"
               className=" flex  items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
@@ -146,7 +146,7 @@ function CreateProperty() {
               Create Property
             </Link>
             <Link
-              to="/payments"
+              to="/owner/dashboard/payments"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
@@ -161,10 +161,10 @@ function CreateProperty() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-10 md:ml-24  2xl:justify-center flex   gap-x-10">
+      <div className="mx-10 md:ml-24   2xl:justify-center flex   gap-x-10">
         <div className="hidden md:flex md:flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
-            to="/owner/dashboard/notification"
+            to="/owner/dashboard/notifications"
             className=" flex   items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
@@ -200,9 +200,9 @@ function CreateProperty() {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="mt-10 h-[70vh] flex items- flex-col w-full"
+          className="mt-10  flex  flex-col w-full"
         >
-          <div className="flex-wrap flex  gap-5 ">
+          <div className="flex-wrap  flex  gap-5 ">
             <div className="flex flex-col md:w-1/3 ">
               <p className="font-medium text-lg">Title</p>
 
@@ -363,7 +363,7 @@ function CreateProperty() {
           </div>
           <button
             type="submit"
-            className="border-2 mx-auto p-2 rounded-md text-md font-medium border-gray-400 hover:scale-105 transition-transform duration-300 "
+            className="border-2 mb-5 md mx-auto p-2 rounded-md text-md font-medium border-gray-400 hover:scale-105 transition-transform duration-300 "
           >
             Create Property
           </button>

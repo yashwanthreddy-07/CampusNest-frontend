@@ -47,7 +47,7 @@ function OwnerPayments() {
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-5 mt-7 text-xl">
             <Link
-              to="/owner/dashboard/notification"
+              to="/owner/dashboard/notifications"
               className="flex   items-center gap-2 hover:scale-110 transition-transform duration-300 "
             >
               <span className="material-symbols-outlined">notifications</span>
@@ -70,7 +70,7 @@ function OwnerPayments() {
               Create Property
             </Link>
             <Link
-              to="/payments"
+              to="/owner/dashboard/payments"
               className="flex items-center text-dblue  font-bold  gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
@@ -88,7 +88,7 @@ function OwnerPayments() {
       <div className="mx-10 md:ml-24 2xl:justify-center flex h-[70vh]  gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
-            to="/owner/dashboard/notification"
+            to="/owner/dashboard/notifications"
             className=" items-center gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">notifications</span>
@@ -122,7 +122,7 @@ function OwnerPayments() {
             <span className="material-symbols-outlined">chat</span>Chat
           </Link>
         </div>
-        <div className="mt-14 flex flex-col gap-y-3 w-[700px] h-screen">
+        <div className="mt-14 flex flex-col gap-y-3 w-full h-screen">
           <p className="font-bold text-xl">Payments Information</p>
         </div>
       </div>

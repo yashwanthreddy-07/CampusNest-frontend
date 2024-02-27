@@ -8,7 +8,7 @@ import { Bounce, toast } from "react-toastify";
 // import { appendFile } from "fs";
 function UpdateOwner() {
   const [ownerData, setOwnerData] = useState({});
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const getOwner = async () => {
     const ownerdetails = await getOwnerDetails();
     setOwnerData(ownerdetails.owner);
@@ -27,7 +27,7 @@ function UpdateOwner() {
       pincode: ownerdetails.owner.pincode,
       image: ownerdetails.owner.profile_image,
     });
-    setImage(ownerdetails.owner.profile_image)
+    setImage(ownerdetails.owner.profile_image);
   };
   useEffect(() => {
     getOwner();
@@ -73,14 +73,17 @@ function UpdateOwner() {
     formDataToSend.append("uin", formData.uin);
     formDataToSend.append("ownership", formData.ownership);
     formDataToSend.append("image", image);
-console.log(localStorage.getItem("owner-token"), "slddf")
-    const response = await fetch("http://localhost:5000/get/update-owner-profile", {
-      headers: {
-        "x-auth-token": localStorage.getItem("owner-token"),
-      },
-      method: "PUT",
-      body: formDataToSend,
-    });
+    console.log(localStorage.getItem("owner-token"), "slddf");
+    const response = await fetch(
+      "https://campusnest-jwlf.onrender.com/get/update-owner-profile",
+      {
+        headers: {
+          "x-auth-token": localStorage.getItem("owner-token"),
+        },
+        method: "PUT",
+        body: formDataToSend,
+      }
+    );
 
     const data = await response.json();
     console.log(response);
@@ -127,7 +130,7 @@ console.log(localStorage.getItem("owner-token"), "slddf")
           data-aos="fade-left"
           data-aos-duration="500"
           fullScreen
-          className="mt-[50px] "
+          className="mt-[50px] md:hidden"
           hideBackdrop
         >
           <DialogTitle className="flex items-center ">
@@ -146,6 +149,11 @@ console.log(localStorage.getItem("owner-token"), "slddf")
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
+            <div className="font-bold text-dblue text-xl flex flex-col items-center">
+              <img src={ownerData.profile_image} className="w-[100px]" />
+              <p>{ownerData.name}</p>
+            </div>
+
             <Link
               to="/owner/profile"
               className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
@@ -170,7 +178,7 @@ console.log(localStorage.getItem("owner-token"), "slddf")
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-20 2xl:justify-center flex flex-shrink">
+      <div className="md:mx-20 mx-2 2xl:justify-center mb-10   flex flex-shrink">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50 shadow-xl items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={image} className="w-[100px]" />
@@ -200,7 +208,7 @@ console.log(localStorage.getItem("owner-token"), "slddf")
           </div>
         </div>
 
-        <div className="flex flex-wrap mt-20 w-[750px]">
+        <div className="flex flex-wrap  w-[750px]">
           <form
             onSubmit={handleSubmit}
             className="flex flex-wrap pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] font-medium"
@@ -290,7 +298,6 @@ console.log(localStorage.getItem("owner-token"), "slddf")
                 value={formData.address}
               />
               <TextField
-                
                 size="small"
                 name="state"
                 variant="outlined"
@@ -322,7 +329,6 @@ console.log(localStorage.getItem("owner-token"), "slddf")
               <p>Profile Photo</p>
               <TextField
                 required={true}
-                
                 size="small"
                 name="name"
                 type="file"
