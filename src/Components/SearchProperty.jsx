@@ -6,24 +6,58 @@ import { getAllRooms } from "../Apis/apicalls";
 import Aos from "aos";
 import "aos/dist/aos.css";
 function SearchProperty() {
-  const [allRooms, setAllRooms] = useState([]);
-  const handlesubmit = () => {};
+ const [allRooms, setAllRooms] = useState([]);
+  const [filteredRooms, setFilteredRooms] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const [filteroption, seFilterOption] = useState("");
   const getRooms = async () => {
     const res = await getAllRooms();
     setAllRooms(res.rooms);
-    // const initialIndices = res.rooms.reduce((acc, room, index) => {
-    //   acc[index] = 0;
-    //   return acc;
-    // }, {});
-    // setCurrentImageIndices(initialIndices);
+    setFilteredRooms(res.rooms); 
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    
   };
 
   useEffect(() => {
     getRooms();
     Aos.init();
   }, []);
+  const handleSort = (option) => {
+
+    let sortedRooms = [...filteredRooms];
+
+    if (option === "lowToHigh") {
+      sortedRooms.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    } else if (option === "highToLow") {
+      sortedRooms.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    }
+    else {
+      sortedRooms.sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+    }
+
+    setFilteredRooms(sortedRooms);
+  };
+  useEffect(() => {
+    
+    const filtered = allRooms.filter((room) => {
+      const { name, description, address, state, country } = room;
+      const searchRegex = new RegExp(searchQuery, "i"); 
+      return (
+        searchRegex.test(name) ||
+        searchRegex.test(address) ||
+        searchRegex.test(state) ||
+        searchRegex.test(country)
+      );
+    });
+    console.log(filtered, "sdsd", searchQuery)
+    setFilteredRooms(filtered);
+  }, [searchQuery, allRooms]);
   return (
     <Layouts>
       <div className="md:mx-24 mx-3 my-10">
@@ -35,8 +69,9 @@ function SearchProperty() {
             <span className="material-symbols-outlined ">search</span>
             <input
               type="search"
-              onSubmit={handlesubmit}
-              className="outline-none w-full "
+              value={searchQuery}
+              onChange={handleSearch}
+              className="outline-none w-full"
             />
           </div>
           <span
@@ -65,6 +100,7 @@ function SearchProperty() {
               onClick={() => {
                 document.getElementById("filter").classList.add("hidden");
                 seFilterOption("Sort by price:low to high");
+                handleSort("lowToHigh");
               }}
             >
               Sort by price:low to high
@@ -73,6 +109,7 @@ function SearchProperty() {
               onClick={() => {
                 document.getElementById("filter").classList.add("hidden");
                 seFilterOption("Sort by price:low to high");
+                handleSort("highToLow");
               }}
               className="cursor-pointer hover:underline"
             >
@@ -82,6 +119,7 @@ function SearchProperty() {
               onClick={() => {
                 document.getElementById("filter").classList.add("hidden");
                 seFilterOption("Newly posted");
+                handleSort("newest");
               }}
               className="cursor-pointer hover:underline"
             >
@@ -99,7 +137,7 @@ function SearchProperty() {
           </div>
         </div>
         <div className="flex flex-wrap flex-shrink mt-10  mx-10">
-          {allRooms?.map((room, index) => {
+          {filteredRooms?.map((room, index) => {
             return (
               <div
                 data-aos="fade-up"
