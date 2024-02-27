@@ -60,12 +60,15 @@ function StudentRegistration({ setDialogs, setIsLoggedIn }) {
     formDataToSend.append("interests", formData.interests);
     formDataToSend.append("image", image);
 
-    const response = await fetch("https://campusnest-jwlf.onrender.com/auth/student-signup", {
-      method: "POST",
-      body: formDataToSend,
-    });
+    const response = await fetch(
+      "https://campusnest-jwlf.onrender.com/auth/student-signup",
+      {
+        method: "POST",
+        body: formDataToSend,
+      }
+    );
     const data = await response.json();
-    console.log(data, "lklk")
+    console.log(data, "lklk");
     if (data.success) {
       localStorage.setItem("user-token", data.authToken);
       toast.success("Registered succesfully", {
@@ -76,11 +79,10 @@ function StudentRegistration({ setDialogs, setIsLoggedIn }) {
         transition: Bounce,
       });
       setIsLoggedIn(true);
-      setDialogs((prev) => { 
-        return {...prev, sr: false}
-      })
+      setDialogs((prev) => {
+        return { ...prev, sr: false };
+      });
     } else {
-      
       toast.error(data.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
@@ -315,6 +317,7 @@ function StudentRegistration({ setDialogs, setIsLoggedIn }) {
           <div className="flex flex-col ">
             <p>Profile Photo</p>
             <TextField
+              required={true}
               size="small"
               name="photo"
               type="file"

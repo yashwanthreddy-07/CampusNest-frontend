@@ -79,6 +79,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
         return { ...prev, or: false}
       })
     } else {
+      
       toast.error(data.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
@@ -271,6 +272,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
           <div className="flex flex-col ">
             <p>Profile Photo</p>
             <TextField
+            required={true}
               size="small"
               name="photo"
               type="file"

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layouts from "../Layouts/Layouts";
 import home1 from "../assets/home1.jpeg";
 import home2 from "../assets/home2.jpeg";
+import owner2 from "../assets/owner2.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import {
@@ -184,14 +185,14 @@ function Home() {
               className="w-[75%] ml-auto "
             />
             <img
-              src={home2}
+              src={owner2}
               data-aos="flip-left"
               data-aos-duration="1500"
-              className="w-[75%] mr-auto"
+              className="w-[75%] mr-auto border-4"
             />
           </div>
           <div
-            id="forstudents"
+            id="forowners"
             className="text-xl mt-10 flex flex-col gap-8 md:w-1/2 md:pl-10"
           >
             <span className="mr-auto font-medium  -rotate-6  p-2 w-36 rounded-[25px] text-center  text-orange-700 bg-gray-200">

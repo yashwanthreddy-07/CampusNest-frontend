@@ -107,7 +107,7 @@ function OwnerRequest() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-10 md:ml-24 flex  h-[100vh]  2xl:justify-center gap-10">
+      <div className="mx-10 md:ml-24 flex     2xl:justify-center gap-10">
         <div className="hidden md:flex flex-col w-[400px] text-center p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
             to="/admin/dashboard/notification"
@@ -135,91 +135,91 @@ function OwnerRequest() {
           <p className="text-xl  font-medium ">Owner Requests</p>
           {allPendingRooms.map((room) => {
             const images = room?.images;
-            return(
-            <div>
-              <div className="xl:flex">
+            return (
+              <div>
                 <p className="text-lg font-semibold text-gray-700 text-center">
                   Request Made for room {room.id} - {room.name}
                 </p>
-                <div className="flex  flex-wrap xl:w-[300px]">
-                  <div className="flex flex-wrap xl:flex-col gap-x-10 mt-16 ">
-                    <div className="flex flex-col gap-y-1 ">
-                      <p className="text-lg font-bold">Owner Name</p>
-                      <p className="text-lg text-gray-700 font-medium">
-                        {room.owner.name}
-                      </p>
+                <div className="xl:flex">
+                  <div className="flex  flex-wrap xl:w-[300px]">
+                    <div className="flex flex-wrap xl:flex-col gap-x-10 mt-16 ">
+                      <div className="flex flex-col gap-y-1 ">
+                        <p className="text-lg font-bold">Owner Name</p>
+                        <p className="text-lg text-gray-700 font-medium">
+                          {room.owner.name}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-y-1 ">
+                        <p className="text-lg font-bold">Phone Number</p>
+                        <p className="text-lg text-gray-700 font-medium">
+                          {room.owner.phno}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-y-1">
+                        <p className="text-lg font-bold">Age</p>
+                        <p className="text-lg text-gray-700 font-medium">
+                          {room.owner.age}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-y-1">
+                        <p className="text-lg font-bold">Slots</p>
+                        <p className="text-lg text-gray-700 font-medium">
+                          {room.slots}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-y-1">
+                        <p className="text-lg font-bold">Idproof</p>
+                        <p className="text-lg text-gray-700">Doc1</p>
+                      </div>
                     </div>
-                    <div className="flex flex-col gap-y-1 ">
-                      <p className="text-lg font-bold">Phone Number</p>
-                      <p className="text-lg text-gray-700 font-medium">
-                        {room.owner.phno}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-lg font-bold">Age</p>
-                      <p className="text-lg text-gray-700 font-medium">
-                        {room.owner.age}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-lg font-bold">Slots</p>
-                      <p className="text-lg text-gray-700 font-medium">
-                        {room.slots}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-y-1">
-                      <p className="text-lg font-bold">Idproof</p>
-                      <p className="text-lg text-gray-700">Doc1</p>
+                  </div>
+                  <div className="my-10  lg:w-[500px] md:w-[400px]  relative flex justify-center">
+                    <div
+                      id="images"
+                      className="rounded-xl flex md:w-[400px] lg:w-[500px] overflow-auto scrollbar-hide"
+                    >
+                      <span
+                        id="rightbutton"
+                        onClick={prevImage}
+                        className="cursor-pointer hidden md:inline-flex md:-ml-9  material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
+                      >
+                        chevron_left
+                      </span>
+                      {images?.map((img) => (
+                        <img src={img} className="md:h-[250px] md:w-full" />
+                      ))}
+                      <span
+                        id="rightbutton"
+                        onClick={nextImage}
+                        className="cursor-pointer hidden md:inline-flex  right-0 md:-mr-9  material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
+                      >
+                        chevron_right
+                      </span>
                     </div>
                   </div>
                 </div>
-                <div className="my-10  lg:w-[500px] md:w-[400px]  relative flex justify-center">
-                  <div
-                    id="images"
-                    className="rounded-xl flex md:w-[400px] lg:w-[500px] overflow-auto scrollbar-hide"
+                <div className="flex items-center justify-center gap-10">
+                  <button
+                    onClick={async () => {
+                      await ApproveRoom({ roomId: room.id });
+                      getAllPendingRooms();
+                    }}
+                    className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg  py-1 px-3 w-24"
                   >
-                    <span
-                      id="rightbutton"
-                      onClick={prevImage}
-                      className="cursor-pointer hidden md:inline-flex md:-ml-9  material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
-                    >
-                      chevron_left
-                    </span>
-                    {images.map((img) => (
-                      <img src={img} className=" md:w-full" />
-                    ))}
-                    <span
-                      id="rightbutton"
-                      onClick={nextImage}
-                      className="cursor-pointer hidden md:inline-flex  right-0 md:-mr-9  material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
-                    >
-                      chevron_right
-                    </span>
-                  </div>
+                    Accept
+                  </button>
+                  <button
+                    onClick={async () => {
+                      await RejectRoom({ roomId: room.id });
+                      getAllPendingRooms();
+                    }}
+                    className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg  py-1 px-3 w-24"
+                  >
+                    Reject
+                  </button>
                 </div>
               </div>
-              <div className="flex items-center justify-center gap-10">
-                <button
-                  onClick={async () => {
-                    await ApproveRoom({ roomId: room.id });
-                    getAllPendingRooms();
-                  }}
-                  className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg  py-1 px-3 w-24"
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={async () => {
-                    await RejectRoom({ roomId: room.id });
-                    getAllPendingRooms();
-                  }}
-                  className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg  py-1 px-3 w-24"
-                >
-                  Reject
-                </button>
-              </div>
-              </div>
-            )
+            );
           })}
         </div>
       </div>

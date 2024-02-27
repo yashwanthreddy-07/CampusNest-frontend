@@ -85,7 +85,7 @@ function StudentRequest() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="mx-10 md:ml-24 flex h-[70vh] 2xl:justify-center gap-10">
+      <div className="mx-10 md:ml-24 flex  2xl:justify-center gap-10">
         <div className="hidden md:flex flex-col w-[300px] p-3 text-xl  items-center font-medium text-gray-700 gap-5 mt-32">
           <Link
             to="/admin/dashboard/notification"

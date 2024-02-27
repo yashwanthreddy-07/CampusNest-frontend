@@ -10,12 +10,13 @@ import { getAllRooms, getRoomDetails, getUserDetails } from "../Apis/apicalls";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 function Property() {
-    const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({});
+  const [images, setImages] = useState([]);
   const navigate = useNavigate();
   const getUser = async () => {
     const userdetails = await getUserDetails();
     setUserData(userdetails.user);
-  }
+  };
   const { id } = useParams();
   const [room, setRoom] = useState({});
   const [open, setOpen] = useState(false);
@@ -30,9 +31,7 @@ function Property() {
     setOpen(false);
   };
   const handlesubmit = async () => {
-
     try {
-      
       const formDataToSend = new FormData();
       formDataToSend.append("doj", doj);
       formDataToSend.append("college_letter", collegeLetter);
@@ -42,20 +41,22 @@ function Property() {
 
       formDataToSend.append("roomId", id);
       console.log(doj, docs, "dlfkg", formDataToSend);
-      const response = await fetch("https://campusnest-jwlf.onrender.com/request-room", {
-        method: "POST",
-        headers: {
-          "x-auth-token": localStorage.getItem("user-token"),
-        },
-        body: formDataToSend,
-      });
+      const response = await fetch(
+        "https://campusnest-jwlf.onrender.com/request-room",
+        {
+          method: "POST",
+          headers: {
+            "x-auth-token": localStorage.getItem("user-token"),
+          },
+          body: formDataToSend,
+        }
+      );
       const data = await response.json();
       if (data.success) {
         toast.success("Room Requested Successfully");
 
         navigate("/user/dashboard/bookings");
         setRequestOpen(false);
-
       } else {
         // setOpen(false);
         toast.error(data.error);
@@ -77,46 +78,26 @@ function Property() {
   const getRoom = async () => {
     const room = await getRoomDetails({ roomId: id });
     setRoom(room?.room);
+    setImages(room?.room.images);
   };
   useEffect(() => {
     getRoom();
-    getUser()
+    getUser();
   }, []);
 
   return (
     <Layouts>
       <div className="md:mx-24 md:my-10 m-5 2xl:mx-56">
-        <div className="flex gap-x-2 max-h-[450px] max-w-[1490px] flex-shrink">
-          <img
-            src={home1}
-            className="md:w-1/2 lg:rounded-l-xl md:rounded-l-xl brightness-110 hover:brightness-100"
-          />
-          <div className="flex flex-col gap-y-2 flex-shrink">
-            <img
-              src={home1}
-              className="w-full brightness-110 hover:brightness-100"
-            />
-            <img
-              src={home2}
-              className=" w-full brightness-110 hover:brightness-100"
-            />
+        <div className="flex gap-x-2 flex-shrink max-h-[450px] w-full">
+          <div className="md:w-1/2 w-full ">
+            <img src={images[0]} className="w-full h-full" />
           </div>
-          <div className="flex flex-col gap-y-2 flex-shrink ">
-            <img
-              src={home2}
-              className="w-full brightness-110 hover:brightness-100"
-            />
-            <img
-              src={home1}
-              className="w-full brightness-110 hover:brightness-100"
-            />
+          <div className="md:w-1/2 md:flex flex-wrap hidden  ">
+            <img src={images[1]} className="w-1/2 p-[2px] h-1/2 " />
+            <img src={images[2]} className="w-1/2 h-1/2 p-[2px]" />
+            <img src={images[3]} className="w-1/2 h-1/2 p-[2px]" />
+            <img src={images[4]} className="w-1/2 h-1/2 p-[2px]" />
           </div>
-          <button
-            onClick={() => setOpen(true)}
-            className="absolute right-32 bottom-[200px] border-2 text-dblue font-medium rounded-md hover:scale-105 transition-transform duration-300 hover bg-gray-100 w-40 px-2 py-1"
-          >
-            Show more images
-          </button>
         </div>
       </div>
       <div className="my-10 flex flex-wrap md:mx-24 mx-5">
@@ -142,10 +123,19 @@ function Property() {
           <div className="flex items-center  ">
             <span className="material-symbols-outlined">location_on</span>
             See On Maps{" "}
-            <NavLink className="underline text-lg  ml-5 text-dblue">
+            <Link
+              to={room.locationurl}
+              className="cursor-pointer underline text-lg  ml-5 text-dblue"
+            >
               Link
-            </NavLink>
+            </Link>
           </div>
+          <button
+            onClick={() => setOpen(true)}
+            className="  border-2 text-dblue font-medium rounded-md hover:scale-105 transition-transform duration-300 hover bg-gray-100 w-52 px-2 py-1"
+          >
+            Show more images
+          </button>
           <p className="ml-2">Owned by : {room?.owner?.name}</p>
           <div className="ml-2 flex items-center">
             Request to book Your Room
@@ -178,16 +168,9 @@ function Property() {
           </span>
         </DialogTitle>
         <DialogContent className="flex flex-shrink gap-2 flex-wrap">
-          <img src={home1} className="w-[32%] h-[250px]" />
-          <img src={home2} className="w-[32%] h-[300px]" />
-          <img src={home1} className="w-1/3 h-[300px]" />
-          <img src={home2} className="w-[32%] h-[300px]" />
-          <img src={home2} className="w-1/3 h-[300px]" />
-          <img src={home1} className="w-[32%] h-[300px]" />
-          <img src={home2} className="w-1/3 h-[300px]" />
-          <img src={home1} className="w-[32%] h-[300px]" />
-          <img src={home2} className="w-1/3 h-[300px]" />
-          <img src={home1} className="w-1/3 h-[300px]" />
+          {images.map((img) => {
+            return <img src={img} className="w-[450px]" />;
+          })}
         </DialogContent>
       </Dialog>
       <Dialog
@@ -208,13 +191,13 @@ function Property() {
         </DialogTitle>
         <DialogContent className="text-lg  text-justify font-medium   ">
           <p className="flex gap-2">
-            Student Name: &nbsp; <p>{userData.name}</p>
+            Student Name: &nbsp; <p>{userData?.name}</p>
           </p>
           <p className="flex gap-2">
-            College Name: &nbsp; <p>{userData.college_name}</p>
+            College Name: &nbsp; <p>{userData?.college_name}</p>
           </p>
           <p className="flex gap-16">
-            Course: &nbsp; <p>{userData.course}</p>&emsp;
+            Course: &nbsp; <p>{userData?.course}</p>&emsp;
           </p>
           <div className="flex text-[14px]  mt-5">
             <p className="flex items-center w-1/2 gap-1">
@@ -222,7 +205,11 @@ function Property() {
               <span className="material-symbols-outlined ">attach_file</span>
               College Admission letter:
             </p>
-            <input type="file" onChange={(e)=>setcollegeLetter(e.target.files[0])} className="ml-5" />
+            <input
+              type="file"
+              onChange={(e) => setcollegeLetter(e.target.files[0])}
+              className="ml-5"
+            />
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
@@ -232,13 +219,21 @@ function Property() {
               </span>
               ID Proof:
             </p>
-            <input type="file" className="ml-5" onChange={(e)=>setIdProof(e.target.files[0])} />
+            <input
+              type="file"
+              className="ml-5"
+              onChange={(e) => setIdProof(e.target.files[0])}
+            />
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
               <span className="material-symbols-outlined ">flight</span>Visa
             </p>
-            <input type="file" className="ml-5" onChange={(e)=>setVasa(e.target.files[0])}/>
+            <input
+              type="file"
+              className="ml-5"
+              onChange={(e) => setVasa(e.target.files[0])}
+            />
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
@@ -247,11 +242,19 @@ function Property() {
               </span>
               Other documents
             </p>
-            <input type="file" className="ml-5" onChange={(e)=>setDocs(e.target.files[0])}/>
+            <input
+              type="file"
+              className="ml-5"
+              onChange={(e) => setDocs(e.target.files[0])}
+            />
           </div>
           <div className="flex items-center mt-5 gap-x-4">
             Expected to Join:
-            <input type="date" className=" outline-none" onChange={(e)=>setDoj(e.target.value)} />
+            <input
+              type="date"
+              className=" outline-none"
+              onChange={(e) => setDoj(e.target.value)}
+            />
           </div>
         </DialogContent>
         <button

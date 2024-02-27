@@ -47,6 +47,7 @@ function CreateProperty() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("address", formData.address);
@@ -63,15 +64,19 @@ function CreateProperty() {
     for (let i = 0; i < selectedPhotos.length; i++) {
       formDataToSend.append("images", selectedPhotos[i]);
     }
+    console.log(formDataToSend);
 
     try {
-      const response = await fetch("https://campusnest-jwlf.onrender.com/create-room", {
-        method: "POST",
-        headers: {
-          "x-auth-token": localStorage.getItem("owner-token"),
-        },
-        body: formDataToSend,
-      });
+      const response = await fetch(
+        "https://campusnest-jwlf.onrender.com/create-room",
+        {
+          method: "POST",
+          headers: {
+            "x-auth-token": localStorage.getItem("owner-token"),
+          },
+          body: formDataToSend,
+        }
+      );
       const data = await response.json();
 
       if (data.success) {
@@ -198,10 +203,7 @@ function CreateProperty() {
             <span className="material-symbols-outlined">chat</span>Chat
           </Link>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="mt-10  flex  flex-col w-full"
-        >
+        <form onSubmit={handleSubmit} className="mt-10  flex  flex-col w-full">
           <div className="flex-wrap  flex  gap-5 ">
             <div className="flex flex-col md:w-1/3 ">
               <p className="font-medium text-lg">Title</p>

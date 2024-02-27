@@ -78,13 +78,16 @@ function MyProperty() {
     }
 
     try {
-      const response = await fetch("https://campusnest-jwlf.onrender.com/update-room", {
-        method: "PUT",
-        headers: {
-          "x-auth-token": localStorage.getItem("owner-token"),
-        },
-        body: updateFormDataToSend,
-      });
+      const response = await fetch(
+        "https://campusnest-jwlf.onrender.com/update-room",
+        {
+          method: "PUT",
+          headers: {
+            "x-auth-token": localStorage.getItem("owner-token"),
+          },
+          body: updateFormDataToSend,
+        }
+      );
       const data = await response.json();
 
       if (data.success) {
@@ -228,7 +231,7 @@ function MyProperty() {
                   data-aos-duration="700"
                   className="md:w-1/2 lg:w-1/4   flex flex-col gap-y-3 font-medium text-[20px] p-3 mb-10"
                 >
-                  <img src={property.images[0]} className="w-full" />
+                  <img src={property?.images[0]} className="w-full h-[200px]" />
                   <p>{property.name}</p>
                   <p className="font-normal text-sm text-gray-600 line-clamp-2  h-[36px]">
                     {property.description}
@@ -246,9 +249,7 @@ function MyProperty() {
                     </div>
                     <div>
                       <p>Price</p>
-                      <p className="text-sm  text-gray-600">
-                        ${property.price}
-                      </p>
+                      <p className="text-sm  text-gray-600">{property.price}</p>
                     </div>
                   </div>
                   <div className="flex gap-5">
