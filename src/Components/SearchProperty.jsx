@@ -6,7 +6,7 @@ import { getAllRooms } from "../Apis/apicalls";
 import Aos from "aos";
 import "aos/dist/aos.css";
 function SearchProperty() {
- const [allRooms, setAllRooms] = useState([]);
+  const [allRooms, setAllRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -14,12 +14,11 @@ function SearchProperty() {
   const getRooms = async () => {
     const res = await getAllRooms();
     setAllRooms(res.rooms);
-    setFilteredRooms(res.rooms); 
+    setFilteredRooms(res.rooms);
   };
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-    
   };
 
   useEffect(() => {
@@ -27,15 +26,13 @@ function SearchProperty() {
     Aos.init();
   }, []);
   const handleSort = (option) => {
-
     let sortedRooms = [...filteredRooms];
 
     if (option === "lowToHigh") {
       sortedRooms.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
     } else if (option === "highToLow") {
       sortedRooms.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-    }
-    else {
+    } else {
       sortedRooms.sort((a, b) => {
         return new Date(b.created_at) - new Date(a.created_at);
       });
@@ -44,10 +41,9 @@ function SearchProperty() {
     setFilteredRooms(sortedRooms);
   };
   useEffect(() => {
-    
     const filtered = allRooms.filter((room) => {
       const { name, description, address, state, country } = room;
-      const searchRegex = new RegExp(searchQuery, "i"); 
+      const searchRegex = new RegExp(searchQuery, "i");
       return (
         searchRegex.test(name) ||
         searchRegex.test(address) ||
@@ -55,7 +51,7 @@ function SearchProperty() {
         searchRegex.test(country)
       );
     });
-    console.log(filtered, "sdsd", searchQuery)
+    console.log(filtered, "sdsd", searchQuery);
     setFilteredRooms(filtered);
   }, [searchQuery, allRooms]);
   return (
@@ -93,7 +89,7 @@ function SearchProperty() {
             onMouseLeave={() => {
               document.getElementById("filter").classList.add("hidden");
             }}
-            className="hidden  absolute md:right-44 right-12 top-28  flex  flex-col gap-y-2 bg-gray-100 p-2 rounded-md hover:scale-110 transition-transform duration-300x"
+            className="hidden z-10 absolute md:right-44 right-12 top-28  flex  flex-col gap-y-2 bg-gray-100 p-2 rounded-md hover:scale-110 transition-transform duration-300x"
           >
             <p
               className="cursor-pointer hover:underline"

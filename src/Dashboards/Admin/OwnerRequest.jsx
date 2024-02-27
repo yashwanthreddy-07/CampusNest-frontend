@@ -26,15 +26,6 @@ function OwnerRequest() {
     setOpen(false);
   };
 
-  const prevImage = () => {
-    const images = document.getElementById("images");
-    images.scrollLeft = images.scrollLeft - 500;
-  };
-
-  const nextImage = () => {
-    const images = document.getElementById("images");
-    images.scrollLeft = images.scrollLeft + 500;
-  };
   // const image1 = [
   //   "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
 
@@ -173,28 +164,14 @@ function OwnerRequest() {
                       </div>
                     </div>
                   </div>
-                  <div className="my-10  lg:w-[500px] md:w-[400px]  relative flex justify-center">
+                  <div className="my-10 h-[300px] lg:w-[500px] md:w-[400px]  relative flex  justify-center">
                     <div
                       id="images"
-                      className="rounded-xl flex md:w-[400px] lg:w-[500px] overflow-auto scrollbar-hide"
+                      className=" flex md:w-[400px] lg:w-[500px] overflow-auto scrollbar-hide md:scrollbar-default md:scrollbar"
                     >
-                      <span
-                        id="rightbutton"
-                        onClick={prevImage}
-                        className="cursor-pointer hidden md:inline-flex md:-ml-9  material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
-                      >
-                        chevron_left
-                      </span>
                       {images?.map((img) => (
-                        <img src={img} className="md:h-[250px] md:w-full" />
+                        <img src={img} className=" md:w-full mr-2" />
                       ))}
-                      <span
-                        id="rightbutton"
-                        onClick={nextImage}
-                        className="cursor-pointer hidden md:inline-flex  right-0 md:-mr-9  material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
-                      >
-                        chevron_right
-                      </span>
                     </div>
                   </div>
                 </div>
