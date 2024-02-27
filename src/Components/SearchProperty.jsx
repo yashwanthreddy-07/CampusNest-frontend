@@ -10,7 +10,7 @@ function SearchProperty() {
   const { state } = useLocation();
   
   const [filteredRooms, setFilteredRooms] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(state.searchQuery);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const [filteroption, seFilterOption] = useState("");
   const getRooms = async () => {
@@ -53,7 +53,7 @@ function SearchProperty() {
         searchRegex.test(country)
       );
     });
-    console.log(filtered, "sdsd", searchQuery);
+    // console.log(filtered, "sdsd", searchQuery);
     setFilteredRooms(filtered);
   }, [searchQuery, allRooms]);
   return (
