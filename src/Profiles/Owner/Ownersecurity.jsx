@@ -5,20 +5,29 @@ import userlogo from "../../assets/userlogo.jpg";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { getOwnerDetails, updateOwnerSecurity } from "../../Apis/apicalls";
+import { Bounce, toast } from "react-toastify";
 // import { owner } from "../Apis/apicalls";
 function OwnerSecurity() {
+  const [userData, setUserData] = useState({});
+
+  const getUser = async () => {
+    const userdetails = await getOwnerDetails();
+    setUserData(userdetails.owner);
+    setFormData({
+      email: userdetails.owner.email,
+    });
+  };
+
+  useEffect(() => {
+    getUser();
+    Aos.init();
+  }, []);
   const [formData, setFormData] = useState({
-    name: "",
     password: "",
     email: "",
-    dob: "",
-    phno: "",
-    gender: "",
-    uin: "",
-    state: "",
-    country: "",
-    pincode: "",
-    ownership: "",
+    newPassword: "",
+    enteredPassword: "",
   });
 
   const handleChange = (e) => {
@@ -31,16 +40,12 @@ function OwnerSecurity() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //   setLoading(true)
-    toast.success("Registration successfull", {
-      autoClose: 2000,
-      closeOnClick: true,
-      theme: "dark",
-      transition: Bounce,
+    const response = await updateOwnerSecurity({
+      ...formData,
+      password: userData.password,
     });
-    const response = await signupOwner(formData);
+    console.log(response);
     if (response.success) {
-      localStorage.setItem("owner-token", response.authToken);
       toast.success("Registered succesfully", {
         position: "top-right",
         autoClose: 2000,
@@ -48,10 +53,7 @@ function OwnerSecurity() {
         theme: "dark",
         transition: Bounce,
       });
-      setIsLoggedIn(true);
-      setOpen(false);
     } else {
-      setLoading(false);
       toast.error(response.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
@@ -60,11 +62,6 @@ function OwnerSecurity() {
       });
     }
   };
-
-  useEffect(() => {
-    Aos.init();
-  });
-
   const [profile, setProfile] = useState(false);
   const handleprofile = () => {
     console.log("clicked");
@@ -168,8 +165,8 @@ function OwnerSecurity() {
 
         <div className="flex flex-wrap md:mt-24 justify-between items-center w-[750px]">
           <form
-            // onSubmit={handleSubmit}
-            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] md:w-1/2 w-full font-medium"
+            onSubmit={handleSubmit}
+            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] w-full md:w-1/2 font-medium"
           >
             <p>Want to change email?</p>
             <div className="flex flex-col ">
@@ -190,25 +187,25 @@ function OwnerSecurity() {
               <TextField
                 required={true}
                 size="small"
-                name="password"
+                name="enteredPassword"
                 variant="outlined"
                 type="password"
                 label="Password"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.enteredPassword}
               />
             </div>
 
             <button
               type="submit"
-              className="w-36 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105  transition-transform duration-300"
+              className="w-36 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105 transition-transform duration-300"
             >
               Update Email
             </button>
           </form>
           <form
-            // onSubmit={handleSubmit}
-            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 md:w-1/2 w-full text-[18px] font-medium"
+            onSubmit={handleSubmit}
+            className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 w-full md:w-1/2 text-[18px] font-medium"
           >
             <p>Want to change Password?</p>
             <div className="flex flex-col">
@@ -216,12 +213,12 @@ function OwnerSecurity() {
               <TextField
                 required={true}
                 size="small"
-                name="password"
+                name="enteredPassword"
                 variant="outlined"
                 type="password"
                 label="Enter old password"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.enteredPassword}
               />
             </div>
             <div className="flex flex-col">
@@ -229,18 +226,18 @@ function OwnerSecurity() {
               <TextField
                 required={true}
                 size="small"
-                name="password"
+                name="newPassword"
                 variant="outlined"
                 type="password"
                 label="enter new password"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.newPassword}
               />
             </div>
 
             <button
               type="submit"
-              className="w-40 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105 transition-transform duration-300"
+              className="w-40 mb-20 mx-auto border-2 py-1 rounded-md border-gray-600  text-gray-800 font-semibold text-lg hover:scale-105  transition-transform duration-300"
             >
               Update Password
             </button>

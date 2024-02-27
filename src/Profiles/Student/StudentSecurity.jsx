@@ -5,26 +5,29 @@ import userlogo from "../../assets/userlogo.jpg";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { getUserDetails, updateSecurity } from "../../Apis/apicalls";
+import { Bounce, toast } from "react-toastify";
 // import { signupStudent } from "../Apis/apicalls";
 function StudentSecurity() {
+  const [userData, setUserData] = useState({});
+
+  const getUser = async () => {
+    const userdetails = await getUserDetails();
+    setUserData(userdetails.user);
+    setFormData({
+      email: userdetails.user.email,
+    });
+  };
+
+  useEffect(() => {
+    getUser();
+    Aos.init();
+  }, []);
   const [formData, setFormData] = useState({
-    name: "",
     password: "",
     email: "",
-    dob: "",
-    phno: "",
-    gender: "",
-    college_name: "",
-    course: "",
-    degree: "",
-    state: "",
-    country: "",
-    pincode: "",
-    hobbies: "",
-    interests: "",
-  });
-  useEffect(() => {
-    Aos.init();
+    newPassword: "",
+    enteredPassword: "",
   });
 
   const handleChange = (e) => {
@@ -37,10 +40,12 @@ function StudentSecurity() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await signupStudent(formData);
+    const response = await updateSecurity({
+      ...formData,
+      password: userData.password,
+    });
     console.log(response);
     if (response.success) {
-      localStorage.setItem("user-token", response.authToken);
       toast.success("Registered succesfully", {
         position: "top-right",
         autoClose: 2000,
@@ -48,8 +53,6 @@ function StudentSecurity() {
         theme: "dark",
         transition: Bounce,
       });
-      setIsLoggedIn(true);
-      setOpen(false);
     } else {
       toast.error(response.errors[0].msg, {
         autoClose: 2000,
@@ -102,11 +105,17 @@ function StudentSecurity() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-            <Link to="/user/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <Link
+              to="/user/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>
               Personal
             </Link>
-            <NavLink to="/user/update-profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/update-profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
@@ -127,10 +136,16 @@ function StudentSecurity() {
             <p>Student Name</p>
           </div>
           <div className="flex flex-col gap-y-3 mt-5 text-gray-700 text-xl ">
-            <NavLink to="/user/profile" className="flex gap-2  items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/profile"
+              className="flex gap-2  items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined ">person</span>Personal
             </NavLink>
-            <NavLink to="/user/update-profile" className="flex gap-2 items-center hover:scale-110 transition-transform duration-300">
+            <NavLink
+              to="/user/update-profile"
+              className="flex gap-2 items-center hover:scale-110 transition-transform duration-300"
+            >
               <span className="material-symbols-outlined">update</span>Update
               Details
             </NavLink>
@@ -146,7 +161,7 @@ function StudentSecurity() {
 
         <div className="flex flex-wrap md:mt-24 justify-between items-center w-[750px]">
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 text-[18px] w-full md:w-1/2 font-medium"
           >
             <p>Want to change email?</p>
@@ -168,12 +183,12 @@ function StudentSecurity() {
               <TextField
                 required={true}
                 size="small"
-                name="password"
+                name="enteredPassword"
                 variant="outlined"
                 type="password"
                 label="Password"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.enteredPassword}
               />
             </div>
 
@@ -185,7 +200,7 @@ function StudentSecurity() {
             </button>
           </form>
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className="flex flex-col md:pl-5 pt-2 gap-x-10 gap-y-8 w-full md:w-1/2 text-[18px] font-medium"
           >
             <p>Want to change Password?</p>
@@ -194,12 +209,12 @@ function StudentSecurity() {
               <TextField
                 required={true}
                 size="small"
-                name="password"
+                name="enteredPassword"
                 variant="outlined"
                 type="password"
                 label="Enter old password"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.enteredPassword}
               />
             </div>
             <div className="flex flex-col">
@@ -207,12 +222,12 @@ function StudentSecurity() {
               <TextField
                 required={true}
                 size="small"
-                name="password"
+                name="newPassword"
                 variant="outlined"
                 type="password"
                 label="enter new password"
                 onChange={handleChange}
-                value={formData.password}
+                value={formData.newPassword}
               />
             </div>
 
