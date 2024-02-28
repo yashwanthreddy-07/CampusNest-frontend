@@ -294,7 +294,7 @@ function Home() {
         </div>
         <div
           id="reviews"
-          className="xl:mx-24  mx-auto  md:mx-14 w-[340px] md:w-[720px] lg:w-[900px] xl:w-[1280px]   mt-2 mb-2 scrollbar scrollbar-default xl:scrollbar-hide flex items-center justify-between overflow-x-auto"
+          className="xl:mx-24  mx-auto  md:mx-14 w-[340px] md:w-[800px] lg:w-[1000px] xl:w-[1280px]   mt-2 mb-5 scrollbar scrollbar-default xl:scrollbar-hide flex items-center justify-between overflow-x-auto"
         >
           <span
             onClick={handleleft}
@@ -338,14 +338,12 @@ function Home() {
           </div>
           <span
             onClick={handleright}
-            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[110px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[115px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_right
           </span>
         </div>
-        <span className="flex justify-center mb-14 material-symbols-outlined md:hidden">
-          steppers
-        </span>
+
         <div className="flex  items-center  justify-center md:justify-end mb-10 md:mr-24">
           <p>Your feedback means a lot</p>
           <span className="material-symbols-outlined mr-5">
