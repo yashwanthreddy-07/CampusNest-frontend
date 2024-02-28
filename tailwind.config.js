@@ -18,6 +18,7 @@ export default {
       },
       screens: {
         "2xl": "1685px", // Add your custom breakpoint here
+        
       },
     },
   },

@@ -89,7 +89,7 @@ function Home() {
             />
           </div>
         </div>
-        <div className=" font-bold  bg-gray-100 text-dblue border-2 mt-20 mx-10  md:mx-72 rounded-3xl border-dblue">
+        <div className=" font-bold  bg-gray-100 text-dblue border-2 mt-20 mx-10  xl:mx-72 rounded-3xl border-dblue">
           <div className=" flex p-10 flex-col  items-center justify-center">
             <p className="text-orange-600 md:text-[44px] text-[20px]">
               you got options from us
@@ -128,7 +128,7 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="flex   md:mx-32 mt-10 flex-wrap p-10">
+        <div className="flex  md:mx-14 xl:mx-32 mt-10 flex-wrap p-10">
           <div
             id="forstudents"
             className="text-xl flex flex-col gap-8 md:w-1/2 md:pr-10 md:border-r-2"
@@ -190,19 +190,19 @@ function Home() {
           </div>
           <div
             id="forstudentsimg"
-            className="flex flex-col gap-10 flex-1 mt-20 md:mt-14  "
+            className="flex flex-col xl:gap-10 gap-44 flex-1 mt-20 md:mt-14  "
           >
             <img
               src={home1}
               data-aos="flip-right"
               data-aos-duration="1500"
-              className="w-[75%] ml-10 "
+              className="xl:w-[75%] w-[500px] ml-10 "
             />
             <img
               src={home2}
               data-aos="flip-left"
               data-aos-duration="1500"
-              className="w-[75%] ml-auto"
+              className="xl:w-[75%] w-[500px] xl:ml-auto ml-10"
             />
           </div>
         </div>
@@ -213,22 +213,22 @@ function Home() {
         >
           From Campus Hustle to Room Bliss: Your Ideal Space Awaits Here!
         </p>
-        <div className="flex   md:mx-32  flex-wrap p-10">
+        <div className="flex  md:mx-14 xl:mx-32  flex-wrap p-10">
           <div
             id="forstudentsimg"
-            className="flex flex-col gap-10 flex-1  md:mt-14 md:pr-10 md:border-r-2 "
+            className="flex flex-col md:gap-44 xl:gap-10 flex-1  md:mt-14 md:pr-10 md:border-r-2 "
           >
             <img
               src={home1}
               data-aos="flip-right"
               data-aos-duration="1500"
-              className="w-[75%] ml-auto "
+              className="xl:w-[75%] w-[500px] mr-8"
             />
             <img
               src={owner2}
               data-aos="flip-left"
               data-aos-duration="1500"
-              className="w-[75%] mr-auto border-4"
+              className="xl:w-[75%] w-[500px] mr-24"
             />
           </div>
           <div
@@ -294,18 +294,18 @@ function Home() {
         </div>
         <div
           id="reviews"
-          className="mx-24 w-[1300px] mt-2 mb-2 scrollbar scrollbar-default md:scrollbar-hide flex items-center justify-between overflow-x-auto"
+          className="xl:mx-24  mx-auto  md:mx-14 w-[340px] md:w-[720px] lg:w-[900px] xl:w-[1280px]   mt-2 mb-2 scrollbar scrollbar-default xl:scrollbar-hide flex items-center justify-between overflow-x-auto"
         >
           <span
             onClick={handleleft}
-            className="cursor-pointer -ml-8   material-symbols-outlined absolute flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer hidden xl:flex -ml-8   material-symbols-outlined absolute  border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_left
           </span>
           <div className=" flex gap-5 items-center justify-center ">
             {reviews?.map((review, key) => {
               return (
-                <div className="w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
+                <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
                   <div className="flex p-3 items-center justify-between border-b-2">
                     <img
                       src={review.user.profile_image}
@@ -338,7 +338,7 @@ function Home() {
           </div>
           <span
             onClick={handleright}
-            className="cursor-pointer material-symbols-outlined right-24 absolute flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[110px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_right
           </span>
