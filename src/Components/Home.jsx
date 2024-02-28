@@ -5,35 +5,66 @@ import home2 from "../assets/home2.jpeg";
 import owner2 from "../assets/owner2.jpg";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  TextField,
-  TextareaAutosize,
-} from "@mui/material";
+import { sendfeedback, getreviews } from "../Apis/apicalls";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Bounce, toast } from "react-toastify";
 
 function Home() {
   const navigate = useNavigate();
+  const [feedback, setFeedback] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(5);
   useEffect(() => {
     Aos.init();
   });
   const handleleft = () => {
     const reviews = document.getElementById("reviews");
-    reviews.scrollLeft = reviews.scrollLeft - 440;
+    reviews.scrollLeft = reviews.scrollLeft - 500;
   };
   const handleright = () => {
     const reviews = document.getElementById("reviews");
-    reviews.scrollLeft = reviews.scrollLeft + 440;
+    reviews.scrollLeft = reviews.scrollLeft + 500;
   };
   const [open, setOpen] = useState(false);
   const handleclose = () => {
     setOpen(false);
   };
-  const handlefeedback = () => {
-    setOpen(false);
+
+  const handlefeedbackchange = (e) => {
+    setFeedback(e.target.value);
   };
+  const handlefeedback = async () => {
+    setOpen(false);
+
+    const response = await sendfeedback({ feedback, rating });
+    console.log(response);
+    if (response.success) {
+      setOpen(false);
+
+      toast.success("Feedback sent", {
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+    } else {
+      toast.error(response.message, {
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
+
+  const getReview = async () => {
+    const review = await getreviews();
+    setReviews(review);
+  };
+  useEffect(() => {
+    getReview();
+  }, []);
 
   return (
     <Layouts>
@@ -50,7 +81,10 @@ function Home() {
               placeholder="Search location/College name"
               className="w-[350px] md:w-[650px] border-none outline-none focus:border-dblue"
               onKeyDown={(e) => {
-                e.key === "Enter" && navigate("/searchproperty", {state: {searchQuery: e.target.value}});
+                e.key === "Enter" &&
+                  navigate("/searchproperty", {
+                    state: { searchQuery: e.target.value },
+                  });
               }}
             />
           </div>
@@ -258,108 +292,53 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="relative mt-14  md:w-full">
-          <p
-            id="leftbutton"
+        <div
+          id="reviews"
+          className="mx-24 w-[1300px] mt-2 mb-2 scrollbar scrollbar-default md:scrollbar-hide flex items-center justify-between overflow-x-auto"
+        >
+          <span
             onClick={handleleft}
-            className="cursor-pointer hidden md:inline-flex  ml-16 material-symbols-outlined absolute top-1/2  opacity-50 hover:opacity-100 text-[28px] hover:text-[36px]  "
+            className="cursor-pointer -ml-8   material-symbols-outlined absolute flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_left
-          </p>
-          <div
-            id="reviews"
-            className="flex overflow-auto mx-2 md:mx-20  scroll-smooth scrollbar-hide "
-          >
-            <div className="flex gap-x-10 md:mx-10 md:ml-5">
-              <div className="border-2 text-[18px] w-[390px] md:w-[400px] py-3 rounded-xl bg-gray-50">
-                <div className="flex items-center font-medium  gap-3 border-b-2 px-10 py-2">
-                  <img src={home1} className="w-14 h-14 rounded-full" />
-                  <p>Username</p>
-                  <p className="ml-auto">Posted Date</p>
+          </span>
+          <div className=" flex gap-5 items-center justify-center ">
+            {reviews?.map((review, key) => {
+              return (
+                <div className="w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
+                  <div className="flex p-3 items-center justify-between border-b-2">
+                    <img
+                      src={review.user.profile_image}
+                      className="w-12 rounded-full"
+                    />
+                    <div className="">
+                      <p className="font-semibold text-dblue text-[16px]">
+                        {review.user.name}
+                      </p>
+                      <p className="font-semibold text-dblue text-[14px]">
+                        {" "}
+                        Posted On : 22-02-2024
+                      </p>
+                    </div>
+                  </div>
+                  <p className="line-clamp-5 text-[16px] h-[130px] font-medium p-[5px] text-justify">
+                    {review.feedback}
+                  </p>
+                  <div className="font-bold p-[5px]">
+                    Rating :{" "}
+                    <span className="text-dblue ">{review.rating}</span>
+                  </div>
+                  <div className="font-semibold p-[5px] ">
+                    Stayed At:
+                    <span className="text-dblue ml-5">ABHK Villas</span>
+                  </div>
                 </div>
-                <p className="px-10 text-justify pt-4 text-[18px] line-clamp-5 ">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea
-                  molestiae cum recusandae non dolorum velit saepe veniam porro
-                  similique illo facilis omnis perspiciatis praesentium tenetur
-                  quam adipisci, ipsa nemo nisi. Lorem ipsum, dolor sit amet
-                  consectetur adipisicing elit. Aut qui tenetur rerum porro
-                  officia magnam iure fugiat ea, blanditiis aspernatur.
-                </p>
-                <p className="mx-10 mt-2">Rating &nbsp; 5</p>
-              </div>
-              {/*dupliacate
-               */}
-              {/* duplicate */}
-              <div className="border-2 text-[18px] w-[400px]  py-3 rounded-xl bg-gray-50">
-                <div className="flex items-center font-medium  gap-3 border-b-2 px-10 py-2">
-                  <img src={home1} className="w-14 h-14 rounded-full" />
-                  <p>Username</p>
-                  <p className="ml-auto">Posted Date</p>
-                </div>
-                <p className="px-10 pt-4 text-[18px] line-clamp-5">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea
-                  molestiae cum recusandae non dolorum velit saepe veniam porro
-                  similique illo facilis omnis perspiciatis praesentium tenetur
-                  quam adipisci, ipsa nemo nisi. Lorem ipsum, dolor sit amet
-                  consectetur adipisicing elit. Aut qui tenetur rerum porro
-                  officia magnam iure fugiat ea, blanditiis aspernatur.
-                </p>
-                <p className="mx-10 mt-2">Rating &nbsp; 5</p>
-              </div>
-              <div className="border-2 text-[18px]  w-[400px] py-3 rounded-xl bg-gray-50">
-                <div className="flex items-center font-medium  gap-3 border-b-2 px-10 py-2">
-                  <img src={home1} className="w-14 h-14 rounded-full" />
-                  <p>Username</p>
-                  <p className="ml-auto">Posted Date</p>
-                </div>
-                <p className="px-10 pt-4 text-[18px] line-clamp-5  ">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea
-                  molestiae cum recusandae non dolorum velit saepe veniam porro
-                  similique illo facilis omnis perspiciatis praesentium tenetur
-                  quam adipisci, ipsa nemo nisi. Lorem ipsum, dolor sit amet
-                  consectetur adipisicing elit. Aut qui tenetur rerum porro
-                  officia magnam iure fugiat ea, blanditiis aspernatur.
-                </p>
-                <p className="mx-10 mt-2">Rating &nbsp; 5</p>
-              </div>
-              <div className="border-2 text-[18px] w-[400px] py-3 rounded-xl bg-gray-50">
-                <div className="flex items-center font-medium  gap-3 border-b-2 px-10 py-2">
-                  <img src={home1} className="w-14 h-14 rounded-full" />
-                  <p>Username</p>
-                  <p className="ml-auto">Posted Date</p>
-                </div>
-                <p className="px-10 pt-4 text-[18px] line-clamp-5  ">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea
-                  molestiae cum recusandae non dolorum velit saepe veniam porro
-                  similique illo facilis omnis perspiciatis praesentium tenetur
-                  quam adipisci, ipsa nemo nisi. Lorem ipsum, dolor sit amet
-                  consectetur adipisicing elit. Aut qui tenetur rerum porro
-                  officia magnam iure fugiat ea, blanditiis aspernatur.
-                </p>
-                <p className="mx-10 mt-2">Rating &nbsp; 5</p>
-              </div>
-              <div className="border-2 text-[18px] w-[400px] py-3 rounded-xl bg-gray-50">
-                <div className="flex items-center font-medium  gap-3 border-b-2 px-10 py-2">
-                  <img src={home1} className="w-14 h-14 rounded-full" />
-                  <p>Username</p>
-                  <p className="ml-auto">Posted Date</p>
-                </div>
-                <p className="px-10 pt-4 text-[18px] line-clamp-5  ">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea
-                  molestiae cum recusandae non dolorum velit saepe veniam porro
-                  similique illo facilis omnis perspiciatis praesentium tenetur
-                  quam adipisci, ipsa nemo nisi. Lorem ipsum, dolor sit amet
-                  consectetur adipisicing elit. Aut qui tenetur rerum porro
-                  officia magnam iure fugiat ea, blanditiis aspernatur.
-                </p>
-                <p className="mx-10 mt-2">Rating &nbsp; 5</p>
-              </div>
-            </div>
+              );
+            })}
           </div>
           <span
-            id="rightbutton"
             onClick={handleright}
-            className="cursor-pointer hidden md:inline-flex ml-[370px] md:mr-16  material-symbols-outlined absolute top-1/2 md:right-0 opacity-50 hover:opacity-100 text-[28px] hover:text-[36px] "
+            className="cursor-pointer material-symbols-outlined right-24 absolute flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_right
           </span>
@@ -393,8 +372,26 @@ function Home() {
         <DialogContent>
           <textarea
             placeholder="your feedback"
-            className="h-[150px] p-4 w-[300px] focus:scale-110 focus:font-semibold outline-none resize-none"
+            onChange={handlefeedbackchange}
+            className="h-[150px] p-4 w-[300px] mb-1 focus:scale-110 focus:font-semibold outline-none resize-none"
           />
+          <div className="flex items-center gap-2">
+            <label className="text-dblue font-semibold">
+              Giver your rating from on scale of 5
+            </label>
+            <input
+              required={true}
+              type="number"
+              min="0"
+              className="w-12 border-gray-400 border-2 focus:scale-110 focus:font-semibold outline-none"
+              max="5"
+              step="0"
+              onChange={(e) => {
+                if (e.target.value >= 5) e.target.value = 5;
+                setRating(e.target.value);
+              }}
+            />
+          </div>
         </DialogContent>
         <button
           onClick={handlefeedback}

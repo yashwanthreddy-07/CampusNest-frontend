@@ -1,5 +1,5 @@
+const BASE_URL = "http://localhost:5000";
 // const BASE_URL = "https://campusnest-jwlf.onrender.com";
-const BASE_URL = "https://campusnest-jwlf.onrender.com";
 const callApi = async (endpoint, method, body, token) => {
   try {
     const headers = {
@@ -8,13 +8,13 @@ const callApi = async (endpoint, method, body, token) => {
 
     if (token) {
       headers["x-auth-token"] = token;
-    }
+    } 
 
     const requestOptions = {
       method: method,
       headers: headers,
     };
-    
+
     if (body !== null) {
       requestOptions.body = JSON.stringify(body);
     }
@@ -186,8 +186,38 @@ export const getUserChatMessages = async (body) => {
   return callApi("get-user-chat-messages", "POST", body);
 };
 export const updateSecurity = async (body) => {
-  return callApi("get/update-security", "PUT", body, localStorage.getItem("user-token"));
+  return callApi(
+    "get/update-security",
+    "PUT",
+    body,
+    localStorage.getItem("user-token")
+  );
 };
 export const updateOwnerSecurity = async (body) => {
-  return callApi("get/update-owner-security", "PUT", body, localStorage.getItem("owner-token"));
+  return callApi(
+    "get/update-owner-security",
+    "PUT",
+    body,
+    localStorage.getItem("owner-token")
+  );
 };
+
+export const sendfeedback = async (body) => {
+  return callApi(
+    "sendreview",
+    "POST",
+    body,
+    localStorage.getItem("user-token")
+  );
+};
+
+
+export const getreviews = async ()=>{
+  return callApi(
+    "getreviews",
+    "GET",
+    null,
+    null,
+  )
+}
+

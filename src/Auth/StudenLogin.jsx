@@ -30,31 +30,30 @@ function StudenLogin({ setDialogs, setIsLoggedIn }) {
   };
   const handleSubmit = async (e) => {
     setLoading(true);
-    console.log("login")
+    console.log("login");
     e.preventDefault();
-    const response = await  loginStudent(formData);
-   
+
+    const response = await loginStudent(formData);
+
     if (response.success) {
       setOpen(false);
       localStorage.setItem("user-token", response.authToken);
-      toast.success("login successfull",
-      {
+      toast.success("login successfull", {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
         transition: Bounce,
-      })
+      });
       setIsLoggedIn(true);
     } else {
-      toast.error(response.errors[0].msg,{
+      toast.error(response.errors[0].msg, {
         autoClose: 2000,
         closeOnClick: true,
         theme: "dark",
         transition: Bounce,
-      })
-      setLoading(false);  
+      });
+      setLoading(false);
     }
-    
   };
   return (
     <Dialog
