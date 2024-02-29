@@ -1,4 +1,4 @@
-// const BASE_URL = "http://localhost:5000";
+// const BASE_URL = "https://campusnest-jwlf.onrender.com";
 const BASE_URL = "https://campusnest-jwlf.onrender.com";
 const callApi = async (endpoint, method, body, token) => {
   try {
@@ -8,7 +8,7 @@ const callApi = async (endpoint, method, body, token) => {
 
     if (token) {
       headers["x-auth-token"] = token;
-    } 
+    }
 
     const requestOptions = {
       method: method,
@@ -211,13 +211,10 @@ export const sendfeedback = async (body) => {
   );
 };
 
+export const getreviews = async () => {
+  return callApi("getreviews", "GET", null, null);
+};
 
-export const getreviews = async ()=>{
-  return callApi(
-    "getreviews",
-    "GET",
-    null,
-    null,
-  )
-}
-
+export const showRecomendRooms = async (body) => {
+  return callApi("matchUsers", "POST", body);
+};

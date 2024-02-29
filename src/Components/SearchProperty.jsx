@@ -2,10 +2,20 @@ import React, { useEffect, useState } from "react";
 import Layouts from "../Layouts/Layouts";
 import home1 from "../assets/home1.jpeg";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getAllRooms } from "../Apis/apicalls";
+import {
+  getAllRooms,
+  getUserDetails,
+  showRecomendRooms,
+} from "../Apis/apicalls";
 import Aos from "aos";
 import "aos/dist/aos.css";
 function SearchProperty() {
+  const [userData, setUserData] = useState({});
+
+  const getUser = async () => {
+    const userdetails = await getUserDetails();
+    setUserData(userdetails.user);
+  };
   const [allRooms, setAllRooms] = useState([]);
   const { state } = useLocation();
   
@@ -25,10 +35,11 @@ function SearchProperty() {
 
   useEffect(() => {
     getRooms();
+    getUser();
     Aos.init();
   }, []);
   const handleSort = (option) => {
-    let sortedRooms = [...filteredRooms];
+    let sortedRooms = [...allRooms];
 
     if (option === "lowToHigh") {
       sortedRooms.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
@@ -56,13 +67,35 @@ function SearchProperty() {
     // console.log(filtered, "sdsd", searchQuery);
     setFilteredRooms(filtered);
   }, [searchQuery, allRooms]);
+
+  const showRecomendation = async () => {
+    const res = await showRecomendRooms({
+      id: userData.id,
+      name: userData.name,
+      age: userData.age,
+      gender: userData.gender,
+      college_name: userData.college_name,
+      course: userData.course,
+      interests: userData.interests,
+      hobbies: userData.hobbies,
+      degree: userData.degree,
+      state: userData.state,
+      country: userData.country,
+    });
+
+    setFilteredRooms(res.rooms);
+    console.log(res);
+  };
   return (
     <Layouts>
       <div className="md:mx-24 mx-3 my-10">
         <div className="flex justify-center items-center  md:gap-x-10 gap-x-5 flex-shrink ">
-          <p className=" hidden   md:inline-flex font-medium underline cursor-pointer">
+          <button
+            className=" hidden   md:inline-flex font-medium underline cursor-pointer"
+            onClick={showRecomendation}
+          >
             See our Recommendations
-          </p>
+          </button>
           <div className="flex  py-2 px-2 rounded-lg  items-center border-2 w-[500px]  gap-3 text-lg font-normal">
             <span className="material-symbols-outlined ">search</span>
             <input
