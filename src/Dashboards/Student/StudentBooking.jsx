@@ -138,7 +138,7 @@ function StudentBooking() {
                 <p>Amount to be Paid</p>
                 <p className="text-sm  text-gray-600">{slot.room.price}</p>
                 <p className="font-medium text-[20px]">
-                  Date of Joining {slot.doj}
+                  Date of Joining {slot.doj.split("T")[0]}
                 </p>
                 <p className="font-medium text-[20px]">Status {slot.status}</p>
               </div>

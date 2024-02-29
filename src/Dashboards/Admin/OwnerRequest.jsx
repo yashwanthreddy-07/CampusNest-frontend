@@ -158,10 +158,7 @@ function OwnerRequest() {
                           {room.slots}
                         </p>
                       </div>
-                      <div className="flex flex-col gap-y-1">
-                        <p className="text-lg font-bold">Idproof</p>
-                        <p className="text-lg text-gray-700">Doc1</p>
-                      </div>
+                    
                     </div>
                   </div>
                   <div className="my-10 h-[300px] lg:w-[500px] md:w-[400px]  relative flex  justify-center">

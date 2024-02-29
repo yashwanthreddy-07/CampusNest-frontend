@@ -22,6 +22,11 @@ function StudentRequest() {
   const handleClose = () => {
     setOpen(false);
   };
+  const [fileopen, setFileOpen] = useState(false);
+  const [file, setFile] = useState("");
+  const handleclosefile = () => {
+    setFileOpen(false);
+  };
   return (
     <Layouts>
       <div className="md:hidden">
@@ -113,62 +118,119 @@ function StudentRequest() {
           <p className="text-xl font-medium">Student Requests</p>
           <div className="flex flex-col gap-y-2 text-lg text-gray-800">
             {allPendingUserRequests.map((slots) => {
-              return <>
-                {" "}
-                <p className="text-lg font-semibold text-gray-700 text-center">
-                  Request Made for room {slots.id} - {slots.room.name}
-                </p>
-                <div className="flex flex-col gap-3 text-lg text-gray-800">
-                  <div className="flex items-center gap-10">
-                    <p className="font-medium">Phone Number</p>
-                    <p>{slots.user.phno}</p>
+              console.log(slots);
+              return (
+                <>
+                  {" "}
+                  <p className="text-lg font-semibold text-gray-700 text-center">
+                    Request Made for room {slots.id} - {slots.room.name}
+                  </p>
+                  <div className="flex flex-col gap-3 text-lg text-gray-800">
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">Student Name</p>
+                      <p>{slots.user.name}</p>
+                    </div>
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">Phone Number</p>
+                      <p>{slots.user.phno}</p>
+                    </div>
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">Age</p>
+                      <p>{slots.user.age}</p>
+                    </div>
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">Admission Letter</p>
+                      <p
+                        onClick={() => {
+                          setFile(slots.college_letter);
+                          setFileOpen(true);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        Link
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">Visa</p>
+                      <p
+                        onClick={() => {
+                          setFile(slots.visa);
+                          setFileOpen(true);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        Link
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">StudentId</p>
+                      <p
+                        onClick={() => {
+                          setFile(slots.id_proof);
+                          setFileOpen(true);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        Link
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-10">
+                      <p className="font-medium">Doc 4</p>
+                      <p
+                        onClick={() => {
+                          setFile(slots.id_proof);
+                          setFileOpen(true);
+                        }}
+                        className="cursor-pointer"
+                      >
+                        Link
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-10">
-                    <p className="font-medium">Age</p>
-                    <p>{slots.user.age}</p>
+                  <div className="flex ">
+                    <button
+                      onClick={() => {
+                        ApproveRequestedSlot({ slotId: slots.id });
+                        getAllPendingUserRequests();
+                      }}
+                      className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg mx-auto py-1 px-3"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => {
+                        RejectRequestedSlot({ slotId: slots.id });
+                        getAllPendingUserRequests();
+                      }}
+                      className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg mx-auto py-1 px-3"
+                    >
+                      Reject
+                    </button>
                   </div>
-                  <div className="flex items-center gap-10">
-                    <p className="font-medium">Admission Letter</p>
-                    <p></p>
-                  </div>
-                  <div className="flex items-center gap-10">
-                    <p className="font-medium">Visa</p>
-                    <p></p>
-                  </div>
-                  <div className="flex items-center gap-10">
-                    <p className="font-medium">StudentId</p>
-                    <p></p>
-                  </div>
-                  <div className="flex items-center gap-10">
-                    <p className="font-medium">Doc 4</p>
-                    <p></p>
-                  </div>
-                </div>
-                <div className="flex ">
-                  <button
-                    onClick={() => {
-                      ApproveRequestedSlot({ slotId: slots.id });
-                      getAllPendingUserRequests();
-                    }}
-                    className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg mx-auto py-1 px-3"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={() => {
-                      RejectRequestedSlot({ slotId: slots.id });
-                      getAllPendingUserRequests();
-                    }}
-                    className="border-2 rounded-md hover:scale-110 transition-transform duration-300 font-semibold text-orange-700 border-gray-400 text-lg mx-auto py-1 px-3"
-                  >
-                    Reject
-                  </button>
-                </div>
-              </>;
+                </>
+              );
             })}
           </div>
         </div>
       </div>
+      <Dialog
+        open={fileopen}
+        onClose={handleclosefile}
+        className="h-full w-full"
+      >
+        <DialogTitle>
+          <span
+            className="material-symbols-outlined cursor-pointer"
+            onClick={handleclosefile}
+          >
+            close
+          </span>
+        </DialogTitle>
+        <DialogContent>
+          <img src={file} />
+        </DialogContent>
+      </Dialog>
     </Layouts>
   );
 }

@@ -3,7 +3,7 @@ import Layouts from "../Layouts/Layouts";
 import home1 from "../assets/home1.jpeg";
 import home2 from "../assets/home2.jpeg";
 import { Link, NavLink, useParams } from "react-router-dom";
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { getAllRooms, getRoomDetails, getUserDetails } from "../Apis/apicalls";
@@ -65,7 +65,6 @@ function Property() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setLoading(false);
     }
   };
   const handlerequestClose = () => {
@@ -199,14 +198,16 @@ function Property() {
           <p className="flex gap-16">
             Course: &nbsp; <p>{userData?.course}</p>&emsp;
           </p>
+          <p className="text-[12px]">Note: File formats-jpeg,png</p>
           <div className="flex text-[14px]  mt-5">
             <p className="flex items-center w-1/2 gap-1">
               {" "}
               <span className="material-symbols-outlined ">attach_file</span>
-              College Admission letter:
+              College Admission letter:*
             </p>
             <input
               type="file"
+              required={true}
               onChange={(e) => setcollegeLetter(e.target.files[0])}
               className="ml-5"
             />
@@ -217,20 +218,22 @@ function Property() {
               <span className="material-symbols-outlined ">
                 branding_watermark
               </span>
-              ID Proof:
+              ID Proof:*
             </p>
             <input
               type="file"
+              required={true}
               className="ml-5"
               onChange={(e) => setIdProof(e.target.files[0])}
             />
           </div>
           <div className="flex text-[14px] mt-5">
             <p className="flex items-center w-1/2 gap-1">
-              <span className="material-symbols-outlined ">flight</span>Visa
+              <span className="material-symbols-outlined ">flight</span>Visa*
             </p>
             <input
               type="file"
+              required={true}
               className="ml-5"
               onChange={(e) => setVasa(e.target.files[0])}
             />
