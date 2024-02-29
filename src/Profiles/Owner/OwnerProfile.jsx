@@ -58,10 +58,10 @@ function OwnerProfile() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-          <div className="font-bold text-dblue text-xl flex flex-col items-center">
-            <img src={ownerData.profile_image} className="w-[100px]" />
-            <p>{ownerData.name}</p>
-          </div>
+            <div className="font-bold text-dblue text-xl flex flex-col items-center">
+              <img src={ownerData.profile_image} className="w-[100px]" />
+              <p>{ownerData.name}</p>
+            </div>
 
             <Link
               to="/owner/profile"
@@ -87,7 +87,7 @@ function OwnerProfile() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="md:mx-20 mx-2 2xl:justify-center flex ">
+      <div className="md:mx-14 mx-2 2xl:justify-center flex ">
         <div className="hidden w-[300px] mt-24 md:flex flex-col  bg-gray-50  items-center">
           <div className="font-bold text-dblue text-xl flex flex-col items-center">
             <img src={ownerData.profile_image} className="w-[100px]" />
@@ -117,7 +117,7 @@ function OwnerProfile() {
           </div>
         </div>
 
-        <div className="md:ml-24 mb-10 flex-col gap-y-3 w md:w-[750px]">
+        <div className="md:ml-24 mb-10 flex-col gap-y-3 w-full md:w-[750px]">
           <p className="font-bold text-xl my-5 ">Personal Details</p>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Owner Name</p>

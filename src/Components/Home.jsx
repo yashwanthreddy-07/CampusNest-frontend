@@ -216,19 +216,19 @@ function Home() {
         <div className="flex  md:mx-14 xl:mx-32  flex-wrap p-10">
           <div
             id="forstudentsimg"
-            className="flex flex-col md:gap-44 xl:gap-10 flex-1  md:mt-14 md:pr-10 md:border-r-2 "
+            className="flex flex-col gap-44 xl:gap-10 flex-1  md:mt-14 md:pr-10 md:border-r-2 "
           >
             <img
               src={home1}
               data-aos="flip-right"
               data-aos-duration="1500"
-              className="xl:w-[75%] w-[500px] mr-8"
+              className="xl:w-[75%] w-[500px] xl:ml-32"
             />
             <img
               src={owner2}
               data-aos="flip-left"
               data-aos-duration="1500"
-              className="xl:w-[75%] w-[500px] mr-24"
+              className="xl:w-[75%] w-[500px] "
             />
           </div>
           <div
@@ -304,6 +304,7 @@ function Home() {
           </span>
           <div className=" flex gap-5 items-center justify-center ">
             {reviews?.map((review, key) => {
+              console.log(review);
               return (
                 <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
                   <div className="flex p-3 items-center justify-between border-b-2">
@@ -315,9 +316,9 @@ function Home() {
                       <p className="font-semibold text-dblue text-[16px]">
                         {review.user.name}
                       </p>
-                      <p className="font-semibold text-dblue text-[14px]">
+                      <p className="font-semibold text-end text-dblue text-[14px]">
                         {" "}
-                        Posted On : 22-02-2024
+                        {review.created_at.split("T")[0]}
                       </p>
                     </div>
                   </div>

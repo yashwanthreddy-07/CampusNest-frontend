@@ -134,7 +134,7 @@ function SearchProperty() {
             </p>
           </div>
         </div>
-        <div className="flex flex-wrap flex-shrink mt-10  mx-10">
+        <div className="flex flex-wrap flex-shrink mt-10  md:mx-10">
           {filteredRooms?.map((room, index) => {
             return (
               <div

@@ -63,10 +63,10 @@ function StudentDetails() {
             </div>
           </DialogTitle>
           <DialogContent className="flex flex-col items-center gap-7 font-medium text-xl">
-          <div className="font-bold text-dblue text-xl flex flex-col items-center">
-            <img src={userData.profile_image} className="w-[100px]" />
-            <p>{userData.name}</p>
-          </div>
+            <div className="font-bold text-dblue text-xl flex flex-col items-center">
+              <img src={userData.profile_image} className="w-[100px]" />
+              <p>{userData.name}</p>
+            </div>
             <Link
               to="/user/profile"
               className="flex gap-2 font-semibold text-dblue items-center hover:scale-110 transition-transform duration-300"
@@ -121,7 +121,7 @@ function StudentDetails() {
           </div>
         </div>
 
-        <div className="md:ml-24 mb-10 flex-col gap-y-3 w md:w-[750px]">
+        <div className="md:ml-24 mb-10 flex-col gap-y-3 w-full md:w-[750px]">
           <p className="font-bold text-xl my-5 ">Personal Details</p>
           <div className="flex flex-col gap-y-1 ">
             <p className="font-serif font-semibold text-lg">Name</p>
