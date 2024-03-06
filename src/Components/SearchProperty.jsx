@@ -18,7 +18,7 @@ function SearchProperty() {
   };
   const [allRooms, setAllRooms] = useState([]);
   const { state } = useLocation();
-  
+
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -91,10 +91,10 @@ function SearchProperty() {
       <div className="md:mx-24 mx-3 my-10">
         <div className="flex justify-center items-center  md:gap-x-10 gap-x-5 flex-shrink ">
           <button
-            className=" hidden   md:inline-flex font-medium underline cursor-pointer"
+            className="font-medium border-2 w-24  py-1 rounded-md bg-gray-300   text-dblue hover:scale-110 cursor-pointer"
             onClick={showRecomendation}
           >
-            See our Recommendations
+            Featured
           </button>
           <div className="flex  py-2 px-2 rounded-lg  items-center border-2 w-[500px]  gap-3 text-lg font-normal">
             <span className="material-symbols-outlined ">search</span>
@@ -183,7 +183,7 @@ function SearchProperty() {
                 <p className="font-normal text-sm text-gray-600 line-clamp-2 h-[45px]">
                   {room.description}
                 </p>
-                <p className="text-gray-600 text-lg">Distance</p>
+
                 <div className="flex flex-shrink justify-between items-center">
                   <div>
                     <p>Address</p>
