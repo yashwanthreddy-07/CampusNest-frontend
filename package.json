@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.10",
     "aos": "^2.3.4",
     "autoprefixer": "^10.4.17",
+    "firebase": "^10.8.1",
     "postcss": "^8.4.35",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

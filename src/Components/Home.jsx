@@ -304,7 +304,6 @@ function Home() {
           </span>
           <div className=" flex gap-5 items-center justify-center ">
             {reviews?.map((review, key) => {
-              console.log(review);
               return (
                 <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
                   <div className="flex p-3 items-center justify-between border-b-2">

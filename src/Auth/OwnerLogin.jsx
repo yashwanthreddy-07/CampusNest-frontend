@@ -4,7 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { loginOwner } from "../Apis/apicalls";
 import { Bounce, toast } from "react-toastify";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../firebase/firebaseconfig";
 function OwnerLogin({ setDialogs, setIsLoggedIn }) {
+  const handlegoogle = async (e) => {
+    const provider = await new GoogleAuthProvider();
+    setIsLoggedIn(true)
+    return signInWithPopup(auth, provider);
+  };
   const [open, setOpen] = useState(true);
   const handleClose = () => {
     setOpen(false);
@@ -116,7 +123,10 @@ function OwnerLogin({ setDialogs, setIsLoggedIn }) {
           Forgot Password?
         </Link>
         <p className="text-center text-lg ">Or</p>
-        <button className="flex mt-3 items-center  border-2 px-5 py-3 w-full rounded-md border-gray-600 hover:ring-2 hover:ring-gray-600">
+        <button
+          onClick={handlegoogle}
+          className="flex mt-3 items-center  border-2 px-5 py-3 w-full rounded-md border-gray-600 hover:ring-2 hover:ring-gray-600"
+        >
           <FcGoogle className="w-6 h-6" />
           <p className="flex mx-auto font-semibold">Continue With Google</p>
         </button>
