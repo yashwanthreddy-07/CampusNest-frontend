@@ -120,18 +120,18 @@ function StudenLogin({ setDialogs, setIsLoggedIn }) {
         >
           Submit
         </button>
-
+{/* 
         <Link className="flex justify-end underline text-md text-gray-600 hover:text-dblue">
           Forgot Password?
-        </Link>
-        <p className="text-center text-lg ">Or</p>
-        <button
+        </Link> */}
+        {/* <p className="text-center text-lg ">Or</p> */}
+        {/* <button
           onClick={handlegoogle}
           className="flex mt-3 items-center  border-2 px-5 py-3 w-full rounded-md border-gray-600 hover:ring-2 hover:ring-gray-600"
         >
           <FcGoogle className="w-6 h-6" />
           <p className="flex mx-auto font-semibold">Continue With Google</p>
-        </button>
+        </button> */}
       </DialogContent>
     </Dialog>
   );

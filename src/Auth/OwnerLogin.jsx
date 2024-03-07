@@ -119,7 +119,7 @@ function OwnerLogin({ setDialogs, setIsLoggedIn }) {
           Submit
         </button>
 
-        <Link className="flex justify-end underline text-md text-gray-600 hover:text-dblue">
+        {/* <Link className="flex justify-end underline text-md text-gray-600 hover:text-dblue">
           Forgot Password?
         </Link>
         <p className="text-center text-lg ">Or</p>
@@ -129,7 +129,7 @@ function OwnerLogin({ setDialogs, setIsLoggedIn }) {
         >
           <FcGoogle className="w-6 h-6" />
           <p className="flex mx-auto font-semibold">Continue With Google</p>
-        </button>
+        </button> */}
       </DialogContent>
     </Dialog>
   );
