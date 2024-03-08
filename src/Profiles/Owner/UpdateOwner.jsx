@@ -75,7 +75,7 @@ function UpdateOwner() {
     formDataToSend.append("image", image);
     console.log(localStorage.getItem("owner-token"), "slddf");
     const response = await fetch(
-      "https://campusnest-jwlf.onrender.com/get/update-owner-profile",
+      "https://campusnest-backend-1.onrender.com/get/update-owner-profile",
       {
         headers: {
           "x-auth-token": localStorage.getItem("owner-token"),

@@ -56,6 +56,8 @@ function Home() {
         transition: Bounce,
       });
     }
+    getReview();
+
   };
 
   const getReview = async () => {

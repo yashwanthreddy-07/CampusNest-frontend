@@ -6,9 +6,16 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import { Dialog, DialogContent, DialogTitle, TextField } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { getAllRooms, getRoomDetails, getUserDetails } from "../Apis/apicalls";
+import {
+  canUserGiveFeedback,
+  getAllRooms,
+  getRoomDetails,
+  getUserDetails,
+  getreviewsByRoom,
+  sendfeedback,
+} from "../Apis/apicalls";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 function Property() {
   const [userData, setUserData] = useState({});
   const [images, setImages] = useState([]);
@@ -27,9 +34,46 @@ function Property() {
   const [collegeLetter, setcollegeLetter] = useState();
   const [idProof, setIdProof] = useState();
   const [visa, setVasa] = useState();
+  const [reviews, setReviews] = useState([]);
+  const [canFeedback, setCanFeedback] = useState(false);
+
   const handleclose = () => {
     setOpen(false);
   };
+
+  const [feedbackdialog, setFeedbackDialog] = useState(false);
+  const [rating, setRating] = useState(5);
+  const [feedback, setFeedback] = useState("");
+
+  const handlefeedbackchange = (e) => {
+    setFeedback(e.target.value);
+  };
+  const handlefeedback = async () => {
+    setFeedbackDialog(false);
+
+    const response = await sendfeedback({ feedback, rating, roomid: id });
+    console.log(response);
+    if (response.success) {
+      setFeedbackDialog(false);
+
+      toast.success("Feedback sent", {
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+    } else {
+      toast.error(response.message, {
+        autoClose: 2000,
+        closeOnClick: true,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+      getReview();
+
+  };
+
   const handlesubmit = async () => {
     try {
       const formDataToSend = new FormData();
@@ -41,16 +85,13 @@ function Property() {
 
       formDataToSend.append("roomId", id);
       console.log(doj, docs, "dlfkg", formDataToSend);
-      const response = await fetch(
-        "https://campusnest-jwlf.onrender.com/request-room",
-        {
-          method: "POST",
-          headers: {
-            "x-auth-token": localStorage.getItem("user-token"),
-          },
-          body: formDataToSend,
-        }
-      );
+      const response = await fetch("https://campusnest-backend-1.onrender.com/request-room", {
+        method: "POST",
+        headers: {
+          "x-auth-token": localStorage.getItem("user-token"),
+        },
+        body: formDataToSend,
+      });
       const data = await response.json();
       if (data.success) {
         toast.success("Room Requested Successfully");
@@ -62,6 +103,7 @@ function Property() {
         toast.error(data.error);
         console.error("Error:", data);
       }
+      
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -79,9 +121,20 @@ function Property() {
     setRoom(room?.room);
     setImages(room?.room.images);
   };
+  const getReview = async () => {
+    const review = await getreviewsByRoom({ roomid: id });
+    setReviews(review);
+  };
+
+  const canGiveFeedback = async () => {
+    const res = await canUserGiveFeedback({ roomid: id });
+    setCanFeedback(res.success);
+  };
   useEffect(() => {
     getRoom();
     getUser();
+    getReview();
+    canGiveFeedback();
   }, []);
 
   return (
@@ -150,6 +203,100 @@ function Property() {
           </div>
         </div>
       </div>
+
+      <div className=" flex gap-5 items-center justify-center ">
+        {reviews?.map((review, key) => {
+          return (
+            <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
+              <div className="flex p-3 items-center justify-between border-b-2">
+                <img
+                  src={review.user.profile_image}
+                  className="w-12 rounded-full"
+                />
+                <div className="">
+                  <p className="font-semibold text-dblue text-[16px]">
+                    {review.user.name}
+                  </p>
+                  <p className="font-semibold text-end text-dblue text-[14px]">
+                    {" "}
+                    {review.created_at.split("T")[0]}
+                  </p>
+                </div>
+              </div>
+              <p className="line-clamp-5 text-[16px] h-[130px] font-medium p-[5px] text-justify">
+                {review.feedback}
+              </p>
+              <div className="font-bold p-[5px]">
+                Rating : <span className="text-dblue ">{review.rating}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {canFeedback && (
+        <>
+          <div className="flex  items-center  justify-center md:justify-end mb-10 md:mr-24">
+            <p>Your feedback means a lot</p>
+            <span className="material-symbols-outlined mr-5">
+              arrow_right_alt
+            </span>
+            <button
+              onClick={() => setFeedbackDialog(true)}
+              className="border-2 rounde-md px-2 py-1 border-dblue text-orange-700 font-bold hover:scale-110 transition-transform duration-300 hover"
+            >
+              Feedback
+            </button>
+          </div>
+
+          <Dialog
+            open={feedbackdialog}
+            onClose={() => setFeedbackDialog(false)}
+            disa
+          >
+            <DialogTitle className="flex items-center gap-5">
+              <span
+                onClick={() => setFeedbackDialog(false)}
+                className="cursor-pointer material-symbols-outlined "
+              >
+                close
+              </span>
+              <p>Write your feedback</p>
+            </DialogTitle>
+            <DialogContent>
+              <textarea
+                placeholder="your feedback"
+                onChange={handlefeedbackchange}
+                className="h-[150px] p-4 w-[300px] mb-1 focus:scale-110 focus:font-semibold outline-none resize-none"
+              />
+              <div className="flex items-center gap-2">
+                <label className="text-dblue font-semibold">
+                  Giver your rating from on scale of 5
+                </label>
+                <input
+                  required={true}
+                  type="number"
+                  min="0"
+                  className="w-12 border-gray-400 border-2 focus:scale-110 focus:font-semibold outline-none"
+                  max="5"
+                  step="0"
+                  onChange={(e) => {
+                    if (e.target.value >= 5) e.target.value = 5;
+                    setRating(e.target.value);
+                  }}
+                />
+              </div>
+            </DialogContent>
+            <button
+              onClick={handlefeedback}
+              className="flex items-center gap-3 border-2 w-24 ml-auto mr-5 mb-5  px-2 py-1 bg-dblue text-white hover:scale-110 rounded-md transition-transform duration-300 hover"
+            >
+              {" "}
+              Send{" "}
+              <span className="text-md material-symbols-outlined">send</span>
+            </button>
+          </Dialog>
+        </>
+      )}
       <Dialog
         open={open}
         onClose={handleclose}

@@ -79,7 +79,7 @@ function MyProperty() {
 
     try {
       const response = await fetch(
-        "https://campusnest-jwlf.onrender.com/update-room",
+        "https://campusnest-backend-1.onrender.com/update-room",
         {
           method: "PUT",
           headers: {

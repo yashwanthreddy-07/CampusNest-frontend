@@ -60,7 +60,7 @@ function OwnerRegistration({ setDialogs, setIsLoggedIn }) {
     formDataToSend.append("ownership", formData.ownership);
     formDataToSend.append("image", image);
 
-    const response = await fetch("https://campusnest-jwlf.onrender.com/auth/owner-signup", {
+    const response = await fetch("https://campusnest-backend-1.onrender.com/auth/owner-signup", {
       method: "POST",
       body: formDataToSend,
     });
