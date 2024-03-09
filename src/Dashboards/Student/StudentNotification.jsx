@@ -119,12 +119,7 @@ function StudentNotification() {
         </div>
         <div className="mt-10 flex flex-col gap-y-3 w-full">
           <p className="text-xl font-medium">Notifications</p>
-          <p className="p-1 text-lg text-gray-700 line-clamp-1">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate
-            totam perspiciatis quia unde molestiae fugiat consequatur nisi ad,
-            voluptates molestias architecto necessitatibus harum sapiente
-            accusantium?
-          </p>
+          
           {notifications.map((notif) => {
             return (
               <>
