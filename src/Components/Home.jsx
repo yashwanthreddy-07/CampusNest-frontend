@@ -300,7 +300,7 @@ function Home() {
         >
           <span
             onClick={handleleft}
-            className="cursor-pointer hidden xl:flex -ml-8   material-symbols-outlined absolute  border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer hidden xl:flex -ml-10   material-symbols-outlined absolute  border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_left
           </span>
@@ -324,7 +324,7 @@ function Home() {
                     </div>
                   </div>
 
-                  <p className="line-clamp-5 hover:line-clamp-none hover:h-auto text-[16px] h-[130px] font-medium p-[5px]  text-justify">
+                  <p className="line-clamp-5  hover:line-clamp-none hover:h-auto text-[16px] h-[130px] font-medium p-[5px]  text-justify">
                     {review.feedback}
                   </p>
 
@@ -338,7 +338,7 @@ function Home() {
           </div>
           <span
             onClick={handleright}
-            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[115px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[105px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_right
           </span>

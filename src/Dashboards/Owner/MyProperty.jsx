@@ -168,13 +168,13 @@ function MyProperty() {
               <span className="material-symbols-outlined">edit</span>
               Create Property
             </Link>
-            <Link
+            {/* <Link
               to="/owner/dashboard/payments"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
               Payments
-            </Link>
+            </Link> */}
             <Link
               to="/owner/chat"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
@@ -207,13 +207,13 @@ function MyProperty() {
             <span className="material-symbols-outlined">edit</span>Create
             Property
           </Link>
-          <Link
+          {/* <Link
             to="/owner/dashboard/payments"
             className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>
             Payments
-          </Link>
+          </Link> */}
           <Link
             to="/owner/chat"
             className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
