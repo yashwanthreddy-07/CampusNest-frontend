@@ -70,8 +70,7 @@ function Property() {
         transition: Bounce,
       });
     }
-      getReview();
-
+    getReview();
   };
 
   const handlesubmit = async () => {
@@ -85,13 +84,16 @@ function Property() {
 
       formDataToSend.append("roomId", id);
       console.log(doj, docs, "dlfkg", formDataToSend);
-      const response = await fetch("https://campusnest-backend-1.onrender.com/request-room", {
-        method: "POST",
-        headers: {
-          "x-auth-token": localStorage.getItem("user-token"),
-        },
-        body: formDataToSend,
-      });
+      const response = await fetch(
+        "https://campusnest-backend-1.onrender.com/request-room",
+        {
+          method: "POST",
+          headers: {
+            "x-auth-token": localStorage.getItem("user-token"),
+          },
+          body: formDataToSend,
+        }
+      );
       const data = await response.json();
       if (data.success) {
         toast.success("Room Requested Successfully");
@@ -103,7 +105,6 @@ function Property() {
         toast.error(data.error);
         console.error("Error:", data);
       }
-      
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -207,7 +208,7 @@ function Property() {
       <div className=" flex gap-5 items-center justify-center ">
         {reviews?.map((review, key) => {
           return (
-            <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
+            <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 hover:h-auto h-[250px] rounded-xl ">
               <div className="flex p-3 items-center justify-between border-b-2">
                 <img
                   src={review.user.profile_image}
@@ -223,11 +224,11 @@ function Property() {
                   </p>
                 </div>
               </div>
-              <p className="line-clamp-5 text-[16px] h-[130px] font-medium p-[5px] text-justify">
+              <p className="line-clamp-5 hover:line-clamp-none hover:h-auto text-[16px] h-[130px] font-medium p-[5px] text-justify">
                 {review.feedback}
               </p>
               <div className="font-bold p-[5px]">
-                Rating : <span className="text-dblue ">{review.rating}</span>
+                Rating : <span className="text-dblue">{review.rating}</span>
               </div>
             </div>
           );

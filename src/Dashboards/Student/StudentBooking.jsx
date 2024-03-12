@@ -75,13 +75,13 @@ function StudentBooking() {
             >
               <span className="material-symbols-outlined">bed</span>Bookings
             </Link>
-            <Link
+            {/* <Link
               to="/user/dashboard/payments"
               className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
             >
               <span className="material-symbols-outlined">payments</span>
               payments
-            </Link>
+            </Link> */}
             <Link
               to="/user/chat"
               className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"
@@ -106,12 +106,12 @@ function StudentBooking() {
           >
             <span className="material-symbols-outlined">bed</span>Bookings
           </Link>
-          <Link
+          {/* <Link
             to="/user/dashboard/payments"
             className="items-center flex gap-2 hover:scale-110 transition-transform duration-300"
           >
             <span className="material-symbols-outlined">payments</span>payments
-          </Link>
+          </Link> */}
           <Link
             to="/user/chat"
             className="flex items-center gap-2 hover:scale-110 transition-transform duration-300"

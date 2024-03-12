@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import Layouts from "../Layouts/Layouts";
 import home1 from "../assets/home1.jpeg";
 import home2 from "../assets/home2.jpeg";
-import owner2 from "../assets/owner2.jpg";
+import student1 from "../assets/student1.png";
+import owner2 from "../assets/owner2.png";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { sendfeedback, getreviews } from "../Apis/apicalls";
@@ -57,7 +58,6 @@ function Home() {
       });
     }
     getReview();
-
   };
 
   const getReview = async () => {
@@ -195,7 +195,7 @@ function Home() {
             className="flex flex-col xl:gap-10 gap-44 flex-1 mt-20 md:mt-14  "
           >
             <img
-              src={home1}
+              src={student1}
               data-aos="flip-right"
               data-aos-duration="1500"
               className="xl:w-[75%] w-[500px] ml-10 "
@@ -300,14 +300,14 @@ function Home() {
         >
           <span
             onClick={handleleft}
-            className="cursor-pointer hidden xl:flex -ml-8   material-symbols-outlined absolute  border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer hidden xl:flex -ml-10   material-symbols-outlined absolute  border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_left
           </span>
           <div className=" flex gap-5 items-center justify-center ">
             {reviews?.map((review, key) => {
               return (
-                <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[300px] rounded-xl ">
+                <div className="w-[340px]  lg:w-[300px] border-orange-400  border-2 h-[250px] hover:h-auto rounded-xl ">
                   <div className="flex p-3 items-center justify-between border-b-2">
                     <img
                       src={review.user.profile_image}
@@ -323,16 +323,14 @@ function Home() {
                       </p>
                     </div>
                   </div>
-                  <p className="line-clamp-5 text-[16px] h-[130px] font-medium p-[5px] text-justify">
+
+                  <p className="line-clamp-5  hover:line-clamp-none hover:h-auto text-[16px] h-[130px] font-medium p-[5px]  text-justify">
                     {review.feedback}
                   </p>
+
                   <div className="font-bold p-[5px]">
                     Rating :{" "}
                     <span className="text-dblue ">{review.rating}</span>
-                  </div>
-                  <div className="font-semibold p-[5px] ">
-                    Stayed At:
-                    <span className="text-dblue ml-5">ABHK Villas</span>
                   </div>
                 </div>
               );
@@ -340,7 +338,7 @@ function Home() {
           </div>
           <span
             onClick={handleright}
-            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[115px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
+            className="cursor-pointer  material-symbols-outlined md:right-12 xl:right-[105px] absolute hidden  xl:flex border-2 rounded-full  w-7 opacity-75 bg-gray-400 hover:opacity-100 hover:text-[28px] hover:w-8  "
           >
             chevron_right
           </span>
