@@ -41,7 +41,7 @@ function OwnerChat() {
 
   useEffect(() => {
     getChatMessagesForUser();
-    socket = io("https://campusnest-backend-1.onrender.com", { transports: ["websocket"] });
+    socket = io("https://campusnest-backend-uzto.onrender.com", { transports: ["websocket"] });
     socket.on("chat message", (msg) => {
       if (msg.to == userData.id && msg.to_role == "owner") {
         setMessages((prevMessages) => [...prevMessages, msg]);

@@ -68,7 +68,7 @@ function CreateProperty() {
 
     try {
       const response = await fetch(
-        "https://campusnest-backend-1.onrender.com/create-room",
+        "https://campusnest-backend-uzto.onrender.com/create-room",
         {
           method: "POST",
           headers: {
