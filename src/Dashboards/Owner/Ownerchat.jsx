@@ -102,13 +102,13 @@ function OwnerChat() {
                   <p className="font-bold md:text-[14px] lg:text-[16px]">
                     {user.room.name} - {user.user?.name}
                   </p>
-                  <p className="mt-1 md:text-[10px] lg:text-[12px]">
+                  </div>
+                  {/* <p className="mt-1 md:text-[10px] lg:text-[12px]">
                     Last message
                   </p>
-                </div>
                 <p className="ml-auto mt-1 mr-5 font-semibold md:text-[10px] lg:text-[12px]">
                   Time
-                </p>
+                </p> */}
               </div>
             );
           })}
