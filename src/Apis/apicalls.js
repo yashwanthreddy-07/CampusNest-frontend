@@ -1,5 +1,5 @@
 const BASE_URL = "https://campusnest-backend-uzto.onrender.com"
-// const BASE_URL = "https://campusnest-backend-1.onrender.com"
+// const BASE_URL = "https://campusnest-backend-uzto.onrender.com"
 const callApi = async (endpoint, method, body, token) => {
   try {
     const headers = {

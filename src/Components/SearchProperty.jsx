@@ -20,7 +20,7 @@ function SearchProperty() {
   const { state } = useLocation();
 
   const [filteredRooms, setFilteredRooms] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(state?.searchQuery);
   const navigate = useNavigate();
   const [filteroption, seFilterOption] = useState("");
   const getRooms = async () => {

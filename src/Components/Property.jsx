@@ -85,7 +85,7 @@ function Property() {
       formDataToSend.append("roomId", id);
       console.log(doj, docs, "dlfkg", formDataToSend);
       const response = await fetch(
-        "https://campusnest-backend-1.onrender.com/request-room",
+        "https://campusnest-backend-uzto.onrender.com/request-room",
         {
           method: "POST",
           headers: {

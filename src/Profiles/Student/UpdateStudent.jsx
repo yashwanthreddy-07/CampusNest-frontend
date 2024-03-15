@@ -83,7 +83,7 @@ function UpdateStudent() {
     formDataToSend.append("interests", formData.interests);
     formDataToSend.append("image", image);
 
-    const response = await fetch("https://campusnest-backend-1.onrender.com/get/update-profile", {
+    const response = await fetch("https://campusnest-backend-uzto.onrender.com/get/update-profile", {
       headers: {
         "x-auth-token": localStorage.getItem("user-token"),
       },

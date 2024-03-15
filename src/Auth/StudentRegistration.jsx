@@ -61,7 +61,7 @@ function StudentRegistration({ setDialogs, setIsLoggedIn }) {
     formDataToSend.append("image", image);
 
     const response = await fetch(
-      "https://campusnest-backend-1.onrender.com/auth/student-signup",
+      "https://campusnest-backend-uzto.onrender.com/auth/student-signup",
       {
         method: "POST",
         body: formDataToSend,
