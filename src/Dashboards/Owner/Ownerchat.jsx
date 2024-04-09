@@ -125,7 +125,7 @@ function OwnerChat() {
             />
             <div className="font-body">
               <p className="text-md">{selectedUser?.name}</p>
-              <p className="text-[10px]">Last seen</p>
+              
             </div>
           </div>
 

@@ -42,7 +42,9 @@ function StudentChat() {
 
   useEffect(() => {
     getChatMessagesForUser();
-    socket = io("https://campusnest-backend-uzto.onrender.com", { transports: ["websocket"] });
+    socket = io("https://campusnest-backend-uzto.onrender.com", {
+      transports: ["websocket"],
+    });
     socket.on("chat message", (msg) => {
       console.log(
         msg.to,
@@ -110,8 +112,8 @@ function StudentChat() {
                   <p className="font-bold md:text-[14px] lg:text-[16px]">
                     {user.room.name} - {user.owner?.name}
                   </p>
-                  </div>
-                  {/* <p className="mt-1 md:text-[10px] lg:text-[12px]">
+                </div>
+                {/* <p className="mt-1 md:text-[10px] lg:text-[12px]">
                     Last message
                   </p>
                 <p className="ml-auto mt-1 mr-5 font-semibold md:text-[10px] lg:text-[12px]">
@@ -133,7 +135,6 @@ function StudentChat() {
             />
             <div className="font-body">
               <p className="text-md">{selectedUser?.name}</p>
-              <p className="text-[10px]">Last seen</p>
             </div>
           </div>
 
